@@ -1,3 +1,6 @@
+#ifndef B_H
+#define B_H
+
 #include <stdio.h>
 #include "fssimplewindow.h"
 #include "ysglfontdata.h"
@@ -69,3 +72,4 @@ public:
 
 void SwapFlashCard(FlashCard &F1,FlashCard &F2);
 void Shuffle(int nCard,FlashCard card[]);
+#endif
