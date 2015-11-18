@@ -48,7 +48,7 @@ TextString UserIntro<number>::GetUser(){
 // main function for Intro
 
 void Intro(TextString * UserName1, TextString * UserName2){
-    FsOpenWindow(16,16,800,600,1);
+    //FsOpenWindow(16,16,800,600,1);
     UserIntro1 user1;
     UserIntro2 user2;
     user1.Run();

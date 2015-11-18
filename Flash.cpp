@@ -68,7 +68,7 @@ void Flash::Display(){
     char temp[10];
     char money_dis[100], gc_dis[100];
     
-    FsOpenWindow(16,16,800,600,1);
+    //FsOpenWindow(16,16,800,600,1);
     TextInput t;
     
     while(terminate == 1){
