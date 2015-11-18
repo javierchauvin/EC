@@ -1,4 +1,4 @@
-#include "FlashSup.hpp"
+#include "SupIntroFlash.hpp"
 
 class Flash{
 public:
@@ -96,7 +96,7 @@ void Flash::Display(){
         ans=card[j].a*card[j].b; // record answer
         t.SetCaption(text[j].GetPointer());
         t.SetDefaultText("");
-        terminate = t.Input(); // input test: if FSKEY_END, terminate becomes 0
+        terminate = t.FlashInput(); // input test: if FSKEY_END, terminate becomes 0
         if(0!=terminate){
             if(ans==atoi(t.GetString())){
                 state = 1; // "state" for prolong fssleep

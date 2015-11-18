@@ -11,7 +11,16 @@
 using namespace std;
 
 // ==================
-void BackGround()
+void BackGroundIntro()
+{
+    YsRawPngDecoder decoder;
+    decoder.Decode("blackboard_final.png");
+    decoder.Flip();
+    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glRasterPos2d(0,decoder.hei-1);
+    glDrawPixels(decoder.wid,decoder.hei,GL_RGBA,GL_UNSIGNED_BYTE,decoder.rgba);
+}
+void BackGroundFlash()
 {
     YsRawPngDecoder decoder;
     decoder.Decode("blackboard_final.png");
@@ -236,8 +245,10 @@ public:
     void SetCaption(const char newCaption[]);
     void SetDefaultText(const char defTxt[]);
     const char *GetString(void) const;
-    int Input(void);
-    void Draw(void);
+    int IntroInput(void);
+    int FlashInput(void);
+    void DrawIntro(void);
+    void DrawFlash(void);
 };
 
 void TextInput::SetCaption(const char newCaption[]){
@@ -252,8 +263,8 @@ const char *TextInput::GetString(void) const{
     return str.GetPointer();
 }
 
-void TextInput::Draw(void){
-    BackGround();
+void TextInput::DrawIntro(void){
+    BackGroundIntro();
     glColor3ub(230,230,230);
     glRasterPos2d(150,150);
     YsGlDrawFontBitmap20x32(caption.GetPointer());
@@ -262,16 +273,28 @@ void TextInput::Draw(void){
     YsGlDrawFontBitmap20x32(str.GetPointer());
     switch(time(NULL)%2)
     {
-//        case 0:
-//            YsGlDrawFontBitmap20x32("_");
-//            break;
+        case 1:
+            YsGlDrawFontBitmap20x32("|");
+            break;
+    }
+}
+void TextInput::DrawFlash(void){
+    BackGroundIntro();
+    glColor3ub(230,230,230);
+    glRasterPos2d(150,150);
+    YsGlDrawFontBitmap20x32(caption.GetPointer());
+    glColor3ub(230,230,230);
+    glRasterPos2d(150,225);
+    YsGlDrawFontBitmap20x32(str.GetPointer());
+    switch(time(NULL)%2)
+    {
         case 1:
             YsGlDrawFontBitmap20x32("|");
             break;
     }
 }
 
-int TextInput::Input(void){
+int TextInput::IntroInput(void){
     FsPollDevice();
     while(FSKEY_NULL!=FsInkey() || 0!=FsInkeyChar())
     {
@@ -302,13 +325,52 @@ int TextInput::Input(void){
         }
         
         glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
-        Draw();
+        DrawIntro();
         FsSwapBuffers();
         
         FsSleep(20);
     }
     return 0;
 }
+int TextInput::FlashInput(void){
+    FsPollDevice();
+    while(FSKEY_NULL!=FsInkey() || 0!=FsInkeyChar())
+    {
+        FsPollDevice();
+    }
+    
+    for(;;)
+    {
+        FsPollDevice();
+        
+        int key=FsInkey();
+        
+        switch(key)
+        {
+            case FSKEY_ESC:
+                return 0;
+            case FSKEY_ENTER:
+                return 1;
+            case FSKEY_BS:
+                str.BackSpace();
+                break;
+        }
+        
+        const char c=FsInkeyChar();
+        if(0!=c && 0!=isprint(c))
+        {
+            str.Add(c);
+        }
+        
+        glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
+        DrawFlash();
+        FsSwapBuffers();
+        
+        FsSleep(20);
+    }
+    return 0;
+}
+
 
 // ===================
 

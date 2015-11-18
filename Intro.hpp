@@ -1,4 +1,4 @@
-#include "IntroSup.hpp"
+#include "SupIntroFlash.hpp"
 
 template <int number>
 class UserIntro{
@@ -42,7 +42,7 @@ void UserIntro<number>::Run(){
         
         t.SetCaption(output.GetPointer());
         t.SetDefaultText("");
-        terminate = t.Input(); // input test: if FSKEY_END, terminate becomes 0
+        terminate = t.IntroInput(); // input test: if FSKEY_END, terminate becomes 0
         if(0!=terminate){
             // printf("%s\n", t.GetString());
             user.Set(t.GetString());
