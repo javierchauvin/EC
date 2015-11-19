@@ -1,7 +1,6 @@
 #ifndef SHOOT_3_CLASS_H_IS_INCLUDED
 #define SHOOT_3_CLASS_H_IS_INCLUDED
 #include "fssimplewindow.h"
-#include "shoot-4-class.h"
 #include "yspng.h"
 #include "yspngenc.h"
 #include "Weapons.h"
