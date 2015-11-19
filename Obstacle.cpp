@@ -1,4 +1,16 @@
 #include "Obstacle.h"
+void Obstacle::Initial()
+{
+    read();
+    x=200;
+    y=30;
+    size=150;
+    direction=1;
+    speed=1;
+    state=0;
+    countdown=0;
+}
+
 
 void Obstacle::read()
 {
@@ -152,8 +164,12 @@ void Obstacle::CheckCollision(double tx,double ty)
         state=1;
     }
 }
-void Obstacle::Run(double x,double y,double px,double py)
+void Obstacle::Run(Bullet bullet,Player player)
 {
+    double x=bullet.X();
+    double y=bullet.Y();
+    int px=player.getX();
+    int py=player.getY();
     Draw(px,py);
     Move();
     CheckCollision(x,y);
