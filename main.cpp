@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <vector>
+
 /**********************************  above function header****/
 /**********************************  following page header****/
 
@@ -20,8 +21,9 @@
 
 #include "Intro.h"
 #include "Flash.h"
-//#include "character.h"
-
+#include "player.h"
+#include "character.h"
+#include "Shop.hpp"
 /***
  
  author: santok@andrew.cmu.edu
@@ -128,10 +130,11 @@ void MenuBackGround()
 
 int main()
 {
+    Player one;
+    Player two;
+
     /**
-    player one;
-    player two;
-    IntroPage intropage;
+        IntroPage intropage;
     Menu menu;
     Shop shop;
     Flash flash;
@@ -158,19 +161,26 @@ int main()
     
     double postext[2]={200,300};
     double coltext[3]={0,1,256};
-    char texttext[20]="player1";
+    char texttext[20]="Player1";
+    char Shopstring[20]="Shop";
+    char gamestring[]="Start a game";
+    char flashstring[]="enter flash";
+
     int statetext=1;
     text.GetPro(postext, coltext, texttext, statetext);
     
     int status =1;
+    int switchplayer=1;
     int gamebuttonstat=0;
-    int flashbuttonstat=0;
+    int flashbuttonplayer1stat=0;
+    int flashbuttonplayer2stat=0;
+    int shopbuttonplayer1stat=0;
+    int shopbuttonplayer2stat=0;
+    int money = 100;
     while(FSKEY_ESC!=FsInkey())
     {
         FsPollDevice();
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-        char gamestring[]="Start a game";
-        char flashstring[]="enter flash";
         
 
         switch (status)
@@ -180,24 +190,60 @@ int main()
                 //circle.DrawCircle();
                 //text.DrawText();
                 
-                flashbuttonstat=DrawButton(1, 0, 100, 100, 200, 0, 150,flashstring);
+                flashbuttonplayer1stat=DrawButton(1, 0, 100, 100, 200, 0, 150,flashstring);
+                flashbuttonplayer2stat=DrawButton(1, 700, 100, 800, 200, 700, 150, flashstring);
+                shopbuttonplayer1stat=DrawButton(1, 0, 300, 100, 400, 0, 350,Shopstring);
+                shopbuttonplayer2stat=DrawButton(1, 700, 300, 800, 400, 700, 350, Shopstring);
                 gamebuttonstat=DrawButton(1, 300, 250,500,350,320,300,gamestring);
-                if (flashbuttonstat==1)
+                if (shopbuttonplayer1stat==1)
+                {
+                    status=2;
+                    switchplayer=1;
+                    
+                }
+                if (shopbuttonplayer2stat==1)
+                {
+                    status=2;
+                    switchplayer=2;
+                    
+                }
+
+                if (flashbuttonplayer1stat==1)
                 {
                     status=3;
+                    switchplayer=1;
+                    
                 }
-                                break;
+                if (flashbuttonplayer1stat==1)
+                {
+                    status=3;
+                    switchplayer=2;
+                    
+                }
+                break;
+                
+                
                 
              
             case 2://shop
-                //Shop.Display();//
+                Player player1;
+                player1.setMoney(100);
+                Shop shop;
+                shop.AssignWeaponCheck(player1); // Assign weapon list from player to shop
+            
+                shop.Run(player1, status); // should input money
+                status=1;
+                break;
+
               
-                
+            
             case 3://flashcard
                 Flash test;
                 test.Set(5, 10);
-                test.Display();
+                test.Display(status);
+                
                 break;
+             
                 
                 /**
             case 4://game
@@ -217,27 +263,5 @@ int main()
     }
     
 
-    /**
-    while(ESC!=fsinkey())
-    {
-        int status=1;
-        switch (status)
-        {
-            case 1://menu
-                Menu.Display();//you can initialize your data and information in this func if you want to initialize everytime we come back to this page
-            case 2://shop
-                Shop.Display();//
-                
-            case 3://flashcard
-                fFlash test;
-                test.Set(5, 10);
-                test.Display();
-     
-            case 4://game
-                Game.game();
-            case 5://
-        }
-    }
-     **/
-
+    
 }
