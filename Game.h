@@ -6,7 +6,8 @@ class Game
 {
 public:
     Background bacground;
-    Obstacle obstacle;
+    Obstacle obstacle1;
+    Obstacle obstacle2;
     Weapon weapon;
     Bullet bullet
     Player player;
