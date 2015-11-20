@@ -22,6 +22,7 @@ public:
     int getX();
     int getY();
     void ReadProperties();
+    void SaveProperties();
     void setMyCharacter(int character);
     int getMyCharacter();
     int *getWeaponList();

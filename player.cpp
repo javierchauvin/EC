@@ -237,4 +237,19 @@ void Player::ReadProperties()
 	}
 }
 
-
+void Player::SaveProperties(){
+    FILE *fp = fopen(userfile,"w");
+    
+    if(fp==NULL)
+    {
+        printf("Error! Could not open file.\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    fprintf(fp,"%d\n", money);
+    for (int i = 0; i < 6; i++) {
+        fprintf(fp,"%d %d\n", i, weaponList[i]);
+    }
+    fclose(fp);
+    
+}
