@@ -6,7 +6,7 @@
 #include "player.h"
 #include "character.h"
 
-#define TYPESOFWEAPONS 3
+#define TYPESOFWEAPONS 6
 #define TANK 0
 #define UNICORN 1
 #define EINSTEIN 2
@@ -37,6 +37,12 @@ void Player::playerSet(int initX, int initY){
     X = initX;
     Y = initY;
 }
+
+void Player::Initial(){
+    X = 0;
+    Y = 0;
+}
+
 void Player::movePlayer(int key){
     switch(key)
     {
@@ -47,6 +53,13 @@ void Player::movePlayer(int key){
             X = X + 5;
             break;
     }
+}
+
+int Player::getX(){
+    return X;
+}
+int Player::getY(){
+    return Y;
 }
 
 /*
@@ -69,9 +82,19 @@ int Player::getMoney(){
     return money;
 }
 
+/* setMoney - Call this function to set user's money to newmoney*/
+void Player::setMoney(int newmoney){
+    money = newmoney;
+}
+
 /* getWeaponList - Call this function to get weapon list */
 int* Player::getWeaponList(){
     return weaponList;
+}
+
+/* setWeaponList - Call this function to set weapon list */
+void Player::setWeaponList(int index, int level){
+    weaponList[index] = level;
 }
 
 /*
@@ -95,12 +118,7 @@ void Player::drawPlayer(){
     }
     a->drawCharacter(X, Y);
 }
-int Player::getX(){
-    return X;
-}
-int Player::getY(){
-    return Y;
-}
+
 
 int Parse(int wordTop[],int wordLength[],int maxNumWord,char str[])
 {
@@ -165,7 +183,7 @@ void GetWord(char wd[],char str[],int wordTop,int wordLength,int bufSize)
 void Player::ReadProperties()
 {
     printf("Enter file name> "); //this will be replaced by Santo's menu
-    char userfile[50];
+    //char userfile[50];
     fgets(userfile, 50, stdin);
     //take off control code
     if (userfile[strlen(userfile) - 1] == '\n')

@@ -1,14 +1,17 @@
 #ifndef PLAYER_CLASS_H_IS_INCLUDED
 #define PLAYER_CLASS_H_IS_INCLUDED
 
-#define TYPESOFWEAPONS 3
+#define TYPESOFWEAPONS 6
 
 class Player{
 private:
     int X, Y;
     int money;
+    /* weaponList[weapon#] = level 
+     * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
     int myCharacter;
+    char userfile[50];
 public:
     Player();
     Player(int initX, int initY);
@@ -22,7 +25,10 @@ public:
     void setMyCharacter(int character);
     int getMyCharacter();
     int *getWeaponList();
+    void setWeaponList(int index, int level);
     int getMoney();
+    void setMoney(int newMoney);
+    void Initial();
 };
 
 #endif
