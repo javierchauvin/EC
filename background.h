@@ -19,31 +19,39 @@
 
 class MountainCube
 {
-public:
+protected:
     double x,y;
-    double boundaryX,boundaryY;
+    
+public:
     int state;
     MountainCube();
+    double GetX();
+    double GetY();
     void draw();
     void MakeFromString(char str[]);
 };
 
 class background
 {
+protected:
+    double boundaryX1=200;
+    double boundaryX2=600;
 public:
     int nCube;
     int w,h;
+    double GetBoundaryX1();
+    double GetBoundaryX2();
     MountainCube* CubePtr;
     void cleanup();
     void DrawMountain(void);
     void initial(void);
-    void Run(double bx,double by,int level);
+    void Run(weapon* gun);
     bool checkcollision();
     void DrawBackground(void);
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(double bx,double by,int level);
+    void checkcollision(weapon* gun);
     YsRawPngDecoder decoder;
     background();
     ~background();

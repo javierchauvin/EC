@@ -45,6 +45,18 @@ LOOPOUT:
     return nw;
 }
 
+
+double MountainCube::GetX()
+{
+    return x;
+}
+
+double MountainCube::GetY()
+{
+    return y;
+}
+
+
 void MountainCube::MakeFromString(char str[])
 {
     int wordTop[2],wordLength[2],nWord;
@@ -128,9 +140,9 @@ void background::initial()
     ReadFile();
 }
 
-void background::Run(double bx,double by,int level)
+void background::Run(weapon* gun)
 {
-    checkcollision(bx,by,level);
+    checkcollision(gun);
     DrawBackground();
     DrawMountain();
 }
@@ -157,6 +169,16 @@ void background::ReadBackground()
     decoder.Flip();
 }
 
+double background::GetBoundaryX1()
+{
+    return boundaryX1;
+}
+
+double background::GetBoundaryX2()
+{
+    return boundaryX2;
+}
+
 
 void background::DrawMountain(void)
 {
@@ -169,14 +191,15 @@ void background::DrawMountain(void)
     }
 }
 
-void background::checkcollision(double bx, double by, int level)
+void background::checkcollision(weapon* gun)
 {
     for (int i=0;i<nCube;i++)
     {
-        if (bx>CubePtr[i].x && bx< CubePtr[i].x+w && by<CubePtr[i].y && by>CubePtr[i].y-h && CubePtr[i].state==1)
+        if (gun.Bulls.x()>CubePtr[i].GetX() && gun.Bulls.x()< CubePtr[i].GetX()+w && gun.Bulls.y()<CubePtr[i].GetY() && gun.Bulls.y()>CubePtr[i].GetY()-h && CubePtr[i].state==1 && gun.Bulls.GetLife>0)
         {
-            //bullet.state=bullet.state-CubePtr[i].state;
             CubePtr[i].state=0;
+            gun.Bulls.ChangeLife();
+
         }
     }
 }
