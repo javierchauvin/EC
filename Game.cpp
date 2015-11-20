@@ -7,8 +7,8 @@ void Game::Initial(void)
     obstacle2.Initial(100, 150, 100, 0, 2);
     weapon.Initial();
     bullet.Initial();
-    player.Initial();
-    character.Initial();
+    player1.Initial();
+    player2.Initial();
 }
 void Game::Run(void)
 {
@@ -18,7 +18,7 @@ void Game::Run(void)
     obstacle1.Run(const Bullet &bullet,const Player &player);
     obstacle2.Run(const Bullet &bullet,const Player &player);
     bullet.Run();
-    player.Run();
-    character.Run();
+    player1.Run();
+    player2.Run();
 }
 
