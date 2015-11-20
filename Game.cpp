@@ -12,6 +12,8 @@ void Game::Initial(void)
 }
 void Game::Run(void)
 {
+    FsPollDevice();
+    auto key=FsInkey();
     bacground.Run();
     obstacle1.Run(const Bullet &bullet,const Player &player);
     obstacle2.Run(const Bullet &bullet,const Player &player);
