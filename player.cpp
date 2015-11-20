@@ -41,7 +41,7 @@ void Player::playerSet(int initX, int initY){
     Y = initY;
 }
 
-void Player::Initial(int initX, int initY, int direction){
+void Player::Initial(){
     X = 0;
     Y = 0;
     direction = 0; /* 0: face right, 1: face left */

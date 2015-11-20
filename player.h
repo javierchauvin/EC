@@ -31,7 +31,7 @@ public:
     void setWeaponList(int index, int level);
     int getMoney();
     void setMoney(int newMoney);
-    void Initial(int initX, int initY, int direction);
+    void Initial();
     void Run();
 };
 
