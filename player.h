@@ -5,7 +5,7 @@
 
 class Player{
 private:
-    int X, Y;
+    int X, Y, direction;
     int money;
     /* weaponList[weapon#] = level 
      * level 0 means player doesn't own that weapon yet */
@@ -17,10 +17,12 @@ public:
     Player(int initX, int initY);
     ~Player();
     void playerSet(int initX, int initY);
-    void movePlayer(int key);
+    //void movePlayer(int key);
+    void movePlayer();
     void drawPlayer();
     int getX();
     int getY();
+    int getDirection();
     void ReadProperties();
     void SaveProperties();
     void setMyCharacter(int character);
@@ -29,7 +31,8 @@ public:
     void setWeaponList(int index, int level);
     int getMoney();
     void setMoney(int newMoney);
-    void Initial();
+    void Initial(int initX, int initY, int direction);
+    void Run();
 };
 
 #endif

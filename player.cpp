@@ -18,6 +18,7 @@ Player::Player(){
     X = 0;
     Y = 0;
     money = 0;
+    direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
         weaponList[i] = 0; //default level is 0
@@ -32,18 +33,31 @@ Player::Player(int initX, int initY){
 Player::~Player(){
     X = 0;
     Y = 0;
+    direction = 0;
+    myCharacter = TANK;
 }
 void Player::playerSet(int initX, int initY){
     X = initX;
     Y = initY;
 }
 
-void Player::Initial(){
+void Player::Initial(int initX, int initY, int direction){
     X = 0;
     Y = 0;
+    direction = 0; /* 0: face right, 1: face left */
+    myCharacter = TANK;
 }
 
-void Player::movePlayer(int key){
+void Player::Run(){
+    drawPlayer();
+    
+}
+
+void Player::movePlayer(){
+    FsPollDevice();
+    int key = FsInkey();
+    //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    
     switch(key)
     {
         case FSKEY_LEFT:
@@ -53,6 +67,8 @@ void Player::movePlayer(int key){
             X = X + 5;
             break;
     }
+    //FsSwapBuffers();
+    //FsSleep(25);
 }
 
 int Player::getX(){
@@ -61,7 +77,9 @@ int Player::getX(){
 int Player::getY(){
     return Y;
 }
-
+int Player::getDirection(){
+    return direction;
+}
 /*
  * setMyCharacter - Menu calls this function after user
  * chooses his/her character
@@ -116,7 +134,7 @@ void Player::drawPlayer(){
             a = new Tank();
             break;
     }
-    a->drawCharacter(X, Y);
+    a->drawCharacter(X, Y, direction);
 }
 
 
