@@ -27,8 +27,9 @@ void WeaponText::Set(double length, double xOut, double yOut, char WeaponName[])
 // ===================
 
 Shop::Shop(){
-    char str[] = "You already have this weapon!";
-    char str2[] = "You successfully buy this weapon!";
+    char str[] = "You already have this weapon with highest level!";
+    char str2[] = "You successfully buy/upgrade this weapon!";
+    char str3[] = "You have not enough money";
     w1Check = 0;
     w2Check = 0;
     w3Check = 0;
@@ -53,32 +54,42 @@ Shop::Shop(){
     for (int i = 0; i < strlen(str2); i++){
         BuyWeaponStr[i] = str2[i];
     }
+    for (int i = 0; i < strlen(str2); i++){
+        NoMoneyStr[i] = str3[i];
+    }
 }
 
 // assign player weapon list to w?Check
-void Shop::AssignWeaponCheck(){ // add "Player player" as input
-    //int * WeaponList;
-    //WeaponList = player.getWeaponList();
-    w1Check = 1; //WeaponList[0];
-    w2Check = 0; //WeaponList[1];
-    w3Check = 0; //WeaponList[2];
-    w4Check = 0; //WeaponList[3];
-    w5Check = 0; //WeaponList[4];
-    w6Check = 0; //WeaponList[5];
+void Shop::AssignWeaponCheck(Player player){
+    int * WeaponList;
+    WeaponList = player.getWeaponList();
+    w1Check = WeaponList[0];
+    w2Check = WeaponList[1];
+    w3Check = WeaponList[2];
+    w4Check = WeaponList[3];
+    w5Check = WeaponList[4];
+    w6Check = WeaponList[5];
 };
 
 // Draw HaveWeaponStr
 void Shop::DrawHaveWeaponStr(){
     glColor3d(1,0,0);
-    glRasterPos2d(180, 550);
+    glRasterPos2d(20, 550);
     YsGlDrawFontBitmap16x20(HaveWeaponStr);
 }
 
 // Draw BuyWeaponStr
 void Shop::DrawBuyWeaponStr(){
     glColor3d(0,0,0);
-    glRasterPos2d(150, 550);
+    glRasterPos2d(80, 550);
     YsGlDrawFontBitmap16x20(BuyWeaponStr);
+}
+
+// Draw NoMoneyStr
+void Shop::DrawNoMoneyStr(){
+    glColor3d(0,0,0);
+    glRasterPos2d(180, 550);
+    YsGlDrawFontBitmap16x20(NoMoneyStr);
 }
 
 // Draw money
@@ -88,17 +99,62 @@ void Shop::DrawMoney(int money){
     strncat(moneyDisplay, temp, 10);
     
     glColor3d(0,0,0);
-    glRasterPos2d(30, 60);
+    glRasterPos2d(35, 60);
     YsGlDrawFontBitmap20x28(moneyDisplay);
 }
 
+// Draw weaponlist
+void Shop::DrawWeaponList(){
+    char w1[20] = "weapon1: ";
+    char w2[20] = "weapon2: ";
+    char w3[20] = "weapon3: ";
+    char w4[20] = "weapon4: ";
+    char w5[20] = "weapon5: ";
+    char w6[20] = "weapon6: ";
+    char temp[10];
+    sprintf(temp, "%d", w1Check);
+    strncat(w1, temp, 10);
+    sprintf(temp, "%d", w2Check);
+    strncat(w2, temp, 10);
+    sprintf(temp, "%d", w3Check);
+    strncat(w3, temp, 10);
+    sprintf(temp, "%d", w4Check);
+    strncat(w4, temp, 10);
+    sprintf(temp, "%d", w5Check);
+    strncat(w5, temp, 10);
+    sprintf(temp, "%d", w6Check);
+    strncat(w6, temp, 10);
+    
+    glColor3d(0,0,0);
+    glRasterPos2d(30, 100);
+    YsGlDrawFontBitmap10x14(w1);
+    glRasterPos2d(30, 130);
+    YsGlDrawFontBitmap10x14(w2);
+    glRasterPos2d(30, 160);
+    YsGlDrawFontBitmap10x14(w3);
+    glRasterPos2d(30, 190);
+    YsGlDrawFontBitmap10x14(w4);
+    glRasterPos2d(30, 220);
+    YsGlDrawFontBitmap10x14(w5);
+    glRasterPos2d(30, 250);
+    YsGlDrawFontBitmap10x14(w6);
+}
+
 // assign shopping result to Player
-void Shop::AssignToPlayer(){ // add "Player player" as input
+void Shop::AssignToPlayer(Player &player){
+    player.setWeaponList(0, w1Check);
+    player.setWeaponList(1, w2Check);
+    player.setWeaponList(2, w3Check);
+    player.setWeaponList(3, w4Check);
+    player.setWeaponList(4, w5Check);
+    player.setWeaponList(5, w6Check);
 };
 
-void Shop::Run(int &money){
+void Shop::Run(Player &player, int &status){
     int w1Temp, w2Temp, w3Temp, w4Temp, w5Temp, w6Temp;
     int state = 0; // determine whether to FsSleep
+    int money = player.getMoney();
+    int minMoney = 70;
     
     while (FSKEY_ESC!=FsInkey()) {
         FsPollDevice();
@@ -106,6 +162,7 @@ void Shop::Run(int &money){
  
         ShopBackGround();
         DrawMoney(money);
+        DrawWeaponList();
         
         w1Temp = DrawShopWeapon(w1);
         w2Temp = DrawShopWeapon(w2);
@@ -116,72 +173,89 @@ void Shop::Run(int &money){
         
         if (w1Temp == 1){
             state = 1;
-            if( w1Check == 1){ DrawHaveWeaponStr();}
+            if( w1Check > 4){ DrawHaveWeaponStr();}
+            else if (money < minMoney){ // not enough money
+                DrawNoMoneyStr();
+            }
             else {
-                w1Check = 1;
+                w1Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
         if (w2Temp == 1){
             state = 1;
-            if( w2Check == 1){ DrawHaveWeaponStr(); }
+            if( w2Check > 4){ DrawHaveWeaponStr(); }
+            else if (money < minMoney){
+                DrawNoMoneyStr();
+            }
             else {
-                w2Check = 1;
+                w2Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
         if (w3Temp == 1){
             state = 1;
-            if( w3Check == 1){ DrawHaveWeaponStr(); }
+            if( w3Check > 4){ DrawHaveWeaponStr(); }
+            else if (money < minMoney){
+                DrawNoMoneyStr();
+            }
             else {
-                w3Check = 1;
+                w3Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
         if (w4Temp == 1){
             state = 1;
-            if( w4Check == 1){ DrawHaveWeaponStr();}
+            if( w4Check > 4){ DrawHaveWeaponStr();}
+            else if (money < minMoney){
+                DrawNoMoneyStr();
+            }
             else {
-                w4Check = 1;
+                w4Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
         if (w5Temp == 1){
             state = 1;
-            if( w5Check == 1){ DrawHaveWeaponStr();}
+            if( w5Check > 4){ DrawHaveWeaponStr();}
+            else if (money < minMoney){
+                DrawNoMoneyStr();
+            }
             else {
-                w5Check = 1;
+                w5Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
         if (w6Temp == 1){
             state = 1;
-            if( w6Check == 1){ DrawHaveWeaponStr();}
+            if( w6Check > 4){
+                DrawHaveWeaponStr();
+            }
+            else if (money < minMoney){
+                DrawNoMoneyStr();
+            }
             else {
-                w6Check = 1;
+                w6Check ++;
                 DrawBuyWeaponStr();
                 money -= 5;
-                // AssignToPlayer(Player player)
             }
         }
 
         FsSwapBuffers();
         if (state == 1){ // prolong fssleep
-            FsSleep(1500);
+            FsSleep(1000);
             state = 0;
         }
         FsSleep(50);
     }
+    player.setMoney(money);
+    AssignToPlayer(player);
+    status = 1;
 }
 
 
