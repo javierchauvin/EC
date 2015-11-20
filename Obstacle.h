@@ -16,7 +16,7 @@ public:
     bool direction;
     GLuint thunder1;
     GLuint light;
-    void Initial(void);
+    void Initial(int X,int Y,int Size,int Direction,int Speed);
     void read(void);
     void Draw(double px,double py);
     void Move();

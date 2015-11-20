@@ -1,12 +1,12 @@
 #include "Obstacle.h"
-void Obstacle::Initial()
+void Obstacle::Initial(int X,int Y,int Size,int Direction,int Speed)
 {
     read();
-    x=200;
-    y=30;
-    size=150;
-    direction=1;
-    speed=1;
+    x=X;
+    y=Y;
+    size=Size;
+    direction=Direction;
+    speed=Speed;
     state=0;
     countdown=0;
 }
