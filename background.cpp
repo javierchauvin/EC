@@ -77,10 +77,10 @@ void MountainCube::draw()
     glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     
     glBegin(GL_QUADS);
-    glColor3ub(100,30,30);
+    glColor3ub(200,30,30);
     glVertex2i(x,y);
     
-    glColor3ub(100,30,30);
+    glColor3ub(200,30,30);
     glVertex2i(x+50,y);
     
     glColor3ub(0,0,0);
@@ -105,7 +105,7 @@ void background::ReadFile()
 {
     cleanup();
     
-    FILE *fp=fopen("pic1.txt","r");
+    FILE *fp=fopen("background.txt","r");
     if(nullptr!=fp)
     {
         char str[256];
@@ -165,7 +165,7 @@ void background::DrawBackground()
 
 void background::ReadBackground()
 {
-    decoder.Decode("picture.png");
+    decoder.Decode("background.png");
     decoder.Flip();
 }
 
