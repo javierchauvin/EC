@@ -1,4 +1,6 @@
+
 #include "Obstacle.h"
+
 void Obstacle::Initial(int X,int Y,int Size,int Direction,int Speed)
 {
     read();
@@ -164,10 +166,10 @@ void Obstacle::CheckCollision(double tx,double ty)
         state=1;
     }
 }
-void Obstacle::Run(Bullet bullet,Player player)
+void Obstacle::Run(Weapon &weapon,Player &player)
 {
-    double x=bullet.X();
-    double y=bullet.Y();
+    double x=weapon.GetBullet()->x();
+    double y=weapon.GetBullet()->y();
     int px=player.getX();
     int py=player.getY();
     Draw(px,py);

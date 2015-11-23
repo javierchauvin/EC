@@ -2,23 +2,19 @@
 
 void Game::Initial(void)
 {
-    bacground.Initial();
+    background.Initial();
+    weapon.Initial(DEFAULT);//weapon type
+    player.Initial(100, 500, 1);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
-    obstacle2.Initial(100, 150, 100, 0, 2);
-    weapon.Initial();
-    bullet.Initial();
-    player1.Initial();
-    player2.Initial();
+    obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
 }
 void Game::Run(void)
 {
-    FsPollDevice();
     auto key=FsInkey();
-    bacground.Run();
-    obstacle1.Run(const Bullet &bullet,const Player &player);
-    obstacle2.Run(const Bullet &bullet,const Player &player);
-    bullet.Run();
-    player1.Run();
-    player2.Run();
+    background.Run(weapon);
+    weapon.Run(key,player);
+    player.Run();
+    obstacle1.Run(weapon,player);
+    obstacle2.Run(weapon,player);
 }
 

@@ -101,7 +101,7 @@ MountainCube::MountainCube()
     state=1;
 }
 
-void background::ReadFile()
+void Background::ReadFile()
 {
     cleanup();
     
@@ -123,7 +123,7 @@ void background::ReadFile()
     }
 }
 
-void background::cleanup()
+void Background::cleanup()
 {
     if (nullptr!=CubePtr)
     {
@@ -133,54 +133,54 @@ void background::cleanup()
 }
 
 
-void background::initial()
+void Background::Initial()
 {
     CubePtr=nullptr;
     ReadBackground();
     ReadFile();
 }
 
-void background::Run(weapon* gun)
+void Background::Run(Weapon &gun)
 {
     checkcollision(gun);
     DrawBackground();
     DrawMountain();
 }
 
-background::background()
+Background::Background()
 {
 
 }
 
-background::~background()
+Background::~Background()
 {
     cleanup();
 }
 
-void background::DrawBackground()
+void Background::DrawBackground()
 {
     glRasterPos2d(0,decoder.hei-1);
     glDrawPixels(decoder.wid,decoder.hei,GL_RGBA,GL_UNSIGNED_BYTE,decoder.rgba);
 }
 
-void background::ReadBackground()
+void Background::ReadBackground()
 {
     decoder.Decode("background.png");
     decoder.Flip();
 }
 
-double background::GetBoundaryX1()
+double Background::GetBoundaryX1()
 {
     return boundaryX1;
 }
 
-double background::GetBoundaryX2()
+double Background::GetBoundaryX2()
 {
     return boundaryX2;
 }
 
 
-void background::DrawMountain(void)
+void Background::DrawMountain(void)
 {
     for (int i=0;i<nCube;i++)
     {
@@ -191,7 +191,7 @@ void background::DrawMountain(void)
     }
 }
 
-void background::checkcollision(weapon* gun)
+void Background::checkcollision(Weapon* gun)
 {
     for (int i=0;i<nCube;i++)
     {
