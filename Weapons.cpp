@@ -147,6 +147,10 @@ void Weapon::ReduceBullet(void)
     }
 }
 
+Bullet* Weapon::GetBullet(void){
+	return &Bulls;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Bullet Class
 
@@ -295,6 +299,8 @@ void Bullet::ChangeLife (void){
 		State = false;
 	}
 }
+
+
 
 bool Bullet::GetState(void){
 	return State;

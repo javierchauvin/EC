@@ -89,6 +89,7 @@ public:
     double x(void)const; //Return position x
     Coordinates Pos(void); // Return coordinates od position // to call Bullet.Pos.x()
     Coordinates Vel(void); // Return coordinates od position // to call Bullet.Pos.y()
+	Bullet* GetBullet(void); //Returns bulls
 };
 
 #endif
