@@ -133,14 +133,14 @@ void background::cleanup()
 }
 
 
-void background::initial()
+void background::Initial()
 {
     CubePtr=nullptr;
     ReadBackground();
     ReadFile();
 }
 
-void background::Run(weapon* gun)
+void background::Run(Weapon &gun)
 {
     checkcollision(gun);
     DrawBackground();

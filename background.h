@@ -13,7 +13,7 @@
 #include "fssimplewindow.h"
 #include "ysglfontdata.h"
 #include "yspng.h"
-
+#include "Weapons.h"
 #ifndef Header_h
 #define Header_h
 
@@ -44,14 +44,14 @@ public:
     MountainCube* CubePtr;
     void cleanup();
     void DrawMountain(void);
-    void initial(void);
-    void Run(weapon* gun);
+    void Initial(void);
+    void Run(Weapon &gun);
     bool checkcollision();
     void DrawBackground(void);
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(weapon* gun);
+    void checkcollision(Weapon &gun);
     YsRawPngDecoder decoder;
     background();
     ~background();
