@@ -14,6 +14,7 @@
 #include "ysglfontdata.h"
 #include "yspng.h"
 #include "Weapons.h"
+
 #ifndef Header_h
 #define Header_h
 
@@ -31,7 +32,7 @@ public:
     void MakeFromString(char str[]);
 };
 
-class background
+class Background
 {
 protected:
     double boundaryX1=200;
@@ -51,10 +52,10 @@ public:
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(Weapon &gun);
+    void checkcollision(Weapon* gun);
     YsRawPngDecoder decoder;
-    background();
-    ~background();
+    Background();
+    ~Background();
 };
 
 
