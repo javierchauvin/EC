@@ -35,8 +35,8 @@ public:
 class Background
 {
 protected:
-    double boundaryX1=200;
-    double boundaryX2=600;
+    double boundaryX1;
+    double boundaryX2;
 public:
     int nCube;
     int w,h;
@@ -57,6 +57,5 @@ public:
     Background();
     ~Background();
 };
-
 
 #endif /* Header_h */

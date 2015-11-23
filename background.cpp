@@ -149,7 +149,8 @@ void Background::Run(Weapon &gun)
 
 Background::Background()
 {
-
+	boundaryX1=200;
+    boundaryX2=600;
 }
 
 Background::~Background()
