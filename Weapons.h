@@ -73,7 +73,7 @@ public:
     Weapon(WeaponType Type);
 
 	//Functionality
-    void Init(WeaponType Type);
+    void Initial(WeaponType Type);
 	void Run(int key, Player P);
     void DrawWeapon(void);
     void SetAngle(int Angle);

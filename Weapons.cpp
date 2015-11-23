@@ -17,10 +17,10 @@ Weapon::~Weapon(){}
 
 Weapon::Weapon(WeaponType Type)
 {
-	Init(Type);
+	Initial(Type);
 }
 
-void Weapon::Init(WeaponType WType){
+void Weapon::Initial(WeaponType WType){
 
 	Type = WType;
     Angle = 0; 
