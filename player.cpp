@@ -2,9 +2,11 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fssimplewindow.h"
 #include "player.h"
 #include "character.h"
+#include "background.h"
 
 #define TYPESOFWEAPONS 6
 #define TANK 0
@@ -50,21 +52,45 @@ void Player::Initial(){
 
 void Player::Run(){
     drawPlayer();
+    movePlayer();
     
 }
 
 void Player::movePlayer(){
-    FsPollDevice();
+    //FsPollDevice();
     int key = FsInkey();
     //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    background bg;
+    int boundary1 = bg.GetBoundaryX1();
+    int boundary2 = bg.GetBoundaryX2();
     
     switch(key)
     {
         case FSKEY_LEFT:
-            X = X - 5;
+            if (X < 400) {
+                if (X > 5) { /* player 1 */
+                    X -= 5;
+                }
+            }
+            if (X > 400) {
+                if (X > 400) { /* player 2 */
+                    if (X > boundary2 + 5) {
+                        X -= 5;
+                    }
+                }
+            }
             break;
         case FSKEY_RIGHT:
-            X = X + 5;
+            if (X < 400) { /* player 1 */
+                if (X < boundary1 - 5) {
+                    X += 5;
+                }
+            }
+            if (X > 400) { /* player 1 */
+                if (X < 795) {
+                    X += 5;
+                }
+            }
             break;
     }
     //FsSwapBuffers();
@@ -198,11 +224,9 @@ void GetWord(char wd[],char str[],int wordTop,int wordLength,int bufSize)
  * and saves money in money and weapon levels in weaponList
  *
  */
-void Player::ReadProperties()
+void Player::ReadProperties(char *username)
 {
-    printf("Enter file name> "); //this will be replaced by Santo's menu
-    //char userfile[50];
-    fgets(userfile, 50, stdin);
+    strncpy(userfile, username, 50);
     //take off control code
     if (userfile[strlen(userfile) - 1] == '\n')
     {

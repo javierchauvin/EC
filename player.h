@@ -17,13 +17,12 @@ public:
     Player(int initX, int initY);
     ~Player();
     void playerSet(int initX, int initY);
-    //void movePlayer(int key);
     void movePlayer();
     void drawPlayer();
     int getX();
     int getY();
     int getDirection();
-    void ReadProperties();
+    void ReadProperties(char *username);
     void SaveProperties();
     void setMyCharacter(int character);
     int getMyCharacter();
