@@ -133,7 +133,7 @@ void background::cleanup()
 }
 
 
-void background::initial()
+void background::Initial()
 {
     CubePtr=nullptr;
     ReadBackground();

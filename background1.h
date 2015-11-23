@@ -44,7 +44,7 @@ public:
     MountainCube* CubePtr;
     void cleanup();
     void DrawMountain(void);
-    void initial(void);
+    void Initial(void);
     void Run(weapon* gun);
     bool checkcollision();
     void DrawBackground(void);

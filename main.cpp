@@ -33,6 +33,7 @@ int  DrawButton(int onoff, double mxl,double myl, double mxh, double myh,double 
 {
     int lb,mb,rb,mxm,mym;
     FsGetMouseEvent(lb,mb,rb,mxm,mym);
+    /**
     double dark=onoff*0.2;
     glColor3d(1, 0.5+dark, 0.5+dark);
     glBegin(GL_QUADS);
@@ -45,7 +46,7 @@ int  DrawButton(int onoff, double mxl,double myl, double mxh, double myh,double 
     glColor3d(1,1,1);
     glRasterPos2d(textx,texty);
     YsGlDrawFontBitmap12x16(str);
-    
+    **/
     if((mxm<=mxh)&&(mxm>=mxl)&&(mym>=myl)&&(mym<=myh)&&(lb==1))
     {
         return 1;
@@ -53,69 +54,6 @@ int  DrawButton(int onoff, double mxl,double myl, double mxh, double myh,double 
     return 0;
 }
 
-
-class Circle
-{
-protected:
-    double position[2];
-    double rad;
-    double color[3];
-    const double YS_PI=3.1415927;
-    int state;// on , off , dark
-public:
-    void GetPro(double pos[],double col[],double radian,int curstate)
-    {
-        position[0]=pos[0];
-        position[1]=pos[1];
-        color[0]=col[0];
-        color[1]=col[1];
-        color[2]=col[2];
-        rad=radian;
-        state=curstate;
-    }
-
-    void DrawCircle()
-    {
-        glBegin(GL_POLYGON);
-        double i;
-        
-        for (i=0;i<64;i++)
-        {
-            double anglea=(double)i*YS_PI/32.0;
-            double xy[2]={position[0]+cos(anglea)*(double)rad,position[1]+sin(anglea)*(double)rad};
-            glColor3d(color[0], color[1],color[2]);
-            glVertex2d(xy[0],xy[1]);
-        }
-        glEnd();
-    }
-};
-class Text
-{
-protected:
-    double position[2];
-    char str[20];
-    double color[3];
-    const double YS_PI=3.1415927;
-    int state;// on , off , dark
-public:
-    void GetPro(double pos[],double col[],char string[],int curstate)
-    {
-        position[0]=pos[0];
-        position[1]=pos[1];
-        color[0]=col[0];
-        color[1]=col[1];
-        color[2]=col[2];
-        strcpy(str, string);
-        state=curstate;
-    }
-    
-    void DrawText()
-    {
-        glColor3d(color[0],color[1],color[2]);
-        glRasterPos2d(position[0],position[1]);
-        YsGlDrawFontBitmap10x14(str);
-    }
-};
 
 void MenuBackGround()
 {
@@ -130,45 +68,33 @@ void MenuBackGround()
 
 int main()
 {
-    Player one;
-    Player two;
-
-    /**
-        IntroPage intropage;
-    Menu menu;
-    Shop shop;
-    Flash flash;
-    Game game;
-     **/
+    //Initailize two player
+    Player PlayerOne;
+    Player PlayerTwo;
+    PlayerOne.Initial();
+    PlayerTwo.Initial();
     
+    // Open window
     FsOpenWindow(0, 0, 800, 600, 1);
-
+    
+    //Get into Intro page and fetch username
     TextString UserName1, UserName2;
     Intro(&UserName1, &UserName2);
     
+    //Change user name to str, ready to pass into player class
+    const char *user1namestr=UserName1.GetPointer();
+    const char *user2namestr=UserName2.GetPointer();
     
-    UserName1.Print();
+    //pass user name into read properties
+    //PlayerOne.ReadProperties();
+    //PlayerOne.ReadProperties();
     
-    Circle circle;
-    Text text;
-    
-    double pos[2]={60,60};
-    double col[3]={0,0,256};
-    double rad=50;
-    int state=1;
-    circle.GetPro(pos,col,rad,state);
-    
-    
-    double postext[2]={200,300};
-    double coltext[3]={0,1,256};
-    char texttext[20]="Player1";
+    //do button's string
     char Shopstring[20]="Shop";
     char gamestring[]="Start a game";
     char flashstring[]="enter flash";
-
-    int statetext=1;
-    text.GetPro(postext, coltext, texttext, statetext);
     
+    //Initialize some variable for gmae status
     int status =1;
     int switchplayer=1;
     int gamebuttonstat=0;
@@ -177,85 +103,77 @@ int main()
     int shopbuttonplayer1stat=0;
     int shopbuttonplayer2stat=0;
     int money = 100;
+    
+    // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
     {
-        FsPollDevice();
+        //FsPollDevice();
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         
 
-        switch (status)
+        
+        if (status==1)//menu
         {
-            case 1://menu
-                MenuBackGround();
-                //circle.DrawCircle();
-                //text.DrawText();
+            MenuBackGround();
+            //circle.DrawCircle();
+            //text.DrawText();
+            FsPollDevice();
+            int lb1,mb1,rb1,mxm1,mym1;
+            FsGetMouseEvent(lb1,mb1,rb1,mxm1,mym1);
+            if (lb1==1)
+            {
+                printf("%d %d",mxm1,mym1);
+            }
+            flashbuttonplayer1stat=DrawButton(1, 63, 362, 251, 507, 0, 150,flashstring);
+            flashbuttonplayer2stat=DrawButton(1, 563, 359, 755, 504, 0, 150, flashstring);
+            shopbuttonplayer1stat=DrawButton(1, 30, 98, 222, 249, 0, 350,Shopstring);
+            shopbuttonplayer2stat=DrawButton(1, 575, 96, 765, 220, 700, 350, Shopstring);
+            gamebuttonstat=DrawButton(1, 300, 250,500,350,320,300,gamestring);
+            if (shopbuttonplayer1stat==1)
+            {
+                status=2;
+                switchplayer=1;
                 
-                flashbuttonplayer1stat=DrawButton(1, 0, 100, 100, 200, 0, 150,flashstring);
-                flashbuttonplayer2stat=DrawButton(1, 700, 100, 800, 200, 700, 150, flashstring);
-                shopbuttonplayer1stat=DrawButton(1, 0, 300, 100, 400, 0, 350,Shopstring);
-                shopbuttonplayer2stat=DrawButton(1, 700, 300, 800, 400, 700, 350, Shopstring);
-                gamebuttonstat=DrawButton(1, 300, 250,500,350,320,300,gamestring);
-                if (shopbuttonplayer1stat==1)
-                {
-                    status=2;
-                    switchplayer=1;
-                    
-                }
-                if (shopbuttonplayer2stat==1)
-                {
-                    status=2;
-                    switchplayer=2;
-                    
-                }
+            }
+            if (shopbuttonplayer2stat==1)
+            {
+                status=2;
+                switchplayer=2;
+                
+            }
 
-                if (flashbuttonplayer1stat==1)
-                {
-                    status=3;
-                    switchplayer=1;
-                    
-                }
-                if (flashbuttonplayer1stat==1)
-                {
-                    status=3;
-                    switchplayer=2;
-                    
-                }
-                break;
+            if (flashbuttonplayer1stat==1)
+            {
+                status=3;
+                switchplayer=1;
                 
+            }
+            if (flashbuttonplayer2stat==1)
+            {
+                status=3;
+                switchplayer=2;
                 
-                
-             
-            case 2://shop
-                Player player1;
-                player1.setMoney(100);
-                Shop shop;
-                shop.AssignWeaponCheck(player1); // Assign weapon list from player to shop
+            }
             
-                shop.Run(player1, status); // should input money
-                status=1;
-                break;
-
-              
-            
-            case 3://flashcard
-                Flash test;
-                test.Set(5, 10);
-                test.Display(status);
-                
-                break;
-             
-                
-                /**
-            case 4://game
-                //Game.game();
-            case 5://
-              **/
         }
-
         
-        
-        
-
+            
+            
+         
+        if (status==2)//shop
+        {
+            Player player1;
+            player1.setMoney(100);
+            Shop shop;
+            shop.AssignWeaponCheck(player1); // Assign weapon list from player to shop
+            shop.Run(player1, status); // should input money
+        }
+        if (status==3)//flashcard
+        {
+            Flash test;
+            test.Set(5, 10);
+            test.Display(status);
+        }
         
         FsSwapBuffers();
         FsSleep(10);
