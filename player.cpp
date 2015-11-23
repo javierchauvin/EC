@@ -61,7 +61,7 @@ void Player::movePlayer(){
     //FsPollDevice();
     int key = FsInkey();
     //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    background bg;
+    Background bg;
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
     
