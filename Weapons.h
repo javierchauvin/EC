@@ -48,6 +48,7 @@ public:
     void Move(void); //Moves the bullet based on the gravity and changes the orientation
     void SetState(bool State); //Checks the modifies the state of the bullet
 	void ChangeLife (void);
+    int GetLife(void);
 
 	//Retrive Information
 	bool GetState(void); //Return the state of the bullet

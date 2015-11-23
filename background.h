@@ -52,7 +52,7 @@ public:
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(Weapon* gun);
+    void checkcollision(Weapon &gun);
     YsRawPngDecoder decoder;
     Background();
     ~Background();

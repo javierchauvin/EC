@@ -1,5 +1,5 @@
 #ifndef Obstacle_IS_INCLUDED
-#define Obstacle_CLASS_H_IS_INCLUDED
+#define Obstacle_IS_INCLUDED
 #include "fssimplewindow.h"
 #include "yspng.h"
 #include "yspngenc.h"

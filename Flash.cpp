@@ -61,7 +61,7 @@ void Flash::GenerateCard(){
     }
 }
 
-void Flash::Display(){
+void Flash::Display(int &status){
     int ans;
     int terminate = 1;
     int j = 0, state = 0;
@@ -124,6 +124,7 @@ void Flash::Display(){
         }
         FsSleep(0);
     }
+    status=1;
 }
 
 void Flash::Add(){

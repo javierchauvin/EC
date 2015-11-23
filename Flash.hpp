@@ -12,7 +12,7 @@ public:
     ~Flash();
     void Set(int money_from, int gameCharge_from);
     void GenerateCard();
-    void Display();
+    void Display(int &status);
     void Add();
 };
 

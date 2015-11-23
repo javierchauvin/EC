@@ -300,8 +300,10 @@ void Bullet::ChangeLife (void){
 	}
 }
 
-
-
 bool Bullet::GetState(void){
 	return State;
+}
+
+int Bullet::GetLife(void){
+    return Life;
 }
