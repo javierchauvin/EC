@@ -135,7 +135,7 @@ int main()
             }
             if (gamebuttonstat==1)
             {
-                status==4;
+                status=4;
             }
             
             
