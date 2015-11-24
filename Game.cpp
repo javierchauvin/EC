@@ -10,19 +10,21 @@ void Game::Initial(void)
 }
 void Game::Run(int &status)
 {
-    auto key=FsInkey();
-    while (key!=FSKEY_ESC)
+    int terminate=0;
+    while (terminate!=1)
     {
+    FsPollDevice();
+    auto key=FsInkey();
     glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
+    if (key==FSKEY_ESC)
+    {
+        terminate=1;
+    }
     background.Run(weapon);
     weapon.Run(key);
     player.Run();
     obstacle1.Run(weapon,player);
     obstacle2.Run(weapon,player);
-    if (key==FSKEY_ESC)
-    {
-        status=1;
-    }
     FsSwapBuffers();
     FsSleep(10);
     }
