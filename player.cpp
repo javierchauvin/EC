@@ -17,7 +17,7 @@
 /* Constructor1 */
 Player::Player(){
     X = 0;
-    Y = 0;
+    Y = 550;
     money = 0;
     direction = 0;
     myCharacter = TANK; //default character
@@ -33,7 +33,7 @@ Player::Player(int initX, int initY){
 /* Destructor */
 Player::~Player(){
     X = 0;
-    Y = 0;
+    Y = 550;
     direction = 0;
     myCharacter = TANK;
 }
@@ -44,7 +44,7 @@ void Player::playerSet(int initX, int initY){
 
 void Player::Initial(){
     X = 0;
-    Y = 0;
+    Y = 550;
     direction = 0; /* 0: face right, 1: face left */
     myCharacter = TANK;
 }
@@ -56,9 +56,7 @@ void Player::Run(){
 }
 
 void Player::movePlayer(){
-    //FsPollDevice();
     int key = FsInkey();
-    //glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     Background bg;
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
@@ -69,25 +67,28 @@ void Player::movePlayer(){
             if (X < 400) {
                 if (X > 5) { /* player 1 */
                     X -= 5;
+                    //direction = 1;
                 }
             }
-            if (X > 400) {
-                if (X > 400) { /* player 2 */
-                    if (X > boundary2 + 5) {
-                        X -= 5;
-                    }
+            if (X > 400) { /* player 2 */
+                if (X > boundary2 + 5) {
+                    X -= 5;
+                    //direction = 1;
                 }
+                
             }
             break;
         case FSKEY_RIGHT:
             if (X < 400) { /* player 1 */
                 if (X < boundary1 - 5) {
                     X += 5;
+                    direction = 0;
                 }
             }
-            if (X > 400) { /* player 1 */
+            if (X > 400) { /* player 2 */
                 if (X < 795) {
                     X += 5;
+                    direction = 0;
                 }
             }
             break;
