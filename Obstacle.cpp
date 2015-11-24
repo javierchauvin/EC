@@ -151,10 +151,10 @@ void Obstacle::Move()
     else if (direction==0)
         x-=speed;
     
-    if (x<50&& direction==0) {
+    if (x<0&& direction==0) {
         direction=1;
     }
-    else if (x>500&&direction==1) {
+    else if (x>640&&direction==1) {
         direction=0;
     }
 }
