@@ -78,7 +78,7 @@ public:
     
     //Functionality
     void Initial(WeaponType Type);
-    void Run(int key);
+    void Run(int key, double x, double y);
     void DrawWeapon(void);
     void SetAngle(int Angle);
     void ChangeAngle( int Delta );
