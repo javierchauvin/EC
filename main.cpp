@@ -67,12 +67,7 @@ int main()
     //Initailize two player
     Player PlayerOne;
     Player PlayerTwo;
-    Game game;
-    game.Initial();
-    
-   // PlayerOne.Initial();
-    //PlayerTwo.Initial();
-    
+
     // Open window
     FsOpenWindow(0, 0, 800, 600, 1);
     
@@ -101,7 +96,9 @@ int main()
     int flashbuttonplayer2stat=0;
     int shopbuttonplayer1stat=0;
     int shopbuttonplayer2stat=0;
-    int money = 100;
+    
+    Game game;
+    game.Initial();
     
     // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
