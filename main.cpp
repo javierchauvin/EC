@@ -10,8 +10,7 @@
 #include <fstream>
 #include "ysglfontdata.h"
 #include <vector>
-/**********************************  above function header****/
-/**********************************  following page header****/
+
 
 
 
@@ -29,20 +28,6 @@ int  DrawButton(int onoff, double mxl,double myl, double mxh, double myh,double 
 {
     int lb,mb,rb,mxm,mym;
     FsGetMouseEvent(lb,mb,rb,mxm,mym);
-    /**
-    double dark=onoff*0.2;
-    glColor3d(1, 0.5+dark, 0.5+dark);
-    glBegin(GL_QUADS);
-    glVertex2d(mxl, myl);
-    glVertex2d(mxl, myh);
-    glVertex2d(mxh, myh);
-    glVertex2d(mxh, myl);
-    glEnd();
-    
-    glColor3d(1,1,1);
-    glRasterPos2d(textx,texty);
-    YsGlDrawFontBitmap12x16(str);
-    **/
     if((mxm<=mxh)&&(mxm>=mxl)&&(mym>=myl)&&(mym<=myh)&&(lb==1))
     {
         return 1;
@@ -111,8 +96,6 @@ int main()
         if (status==1)//menu
         {
             MenuBackGround();
-            //circle.DrawCircle();
-            //text.DrawText();
             FsPollDevice();
             int lb1,mb1,rb1,mxm1,mym1;
             FsGetMouseEvent(lb1,mb1,rb1,mxm1,mym1);
@@ -149,6 +132,10 @@ int main()
                 status=3;
                 switchplayer=2;
                 
+            }
+            if (gamebuttonstat==1)
+            {
+                status=4;
             }
             
             
