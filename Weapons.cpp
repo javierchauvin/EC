@@ -1,7 +1,8 @@
 // This file is in charge to control weapon behavior and bullet. 
 
 #include<math.h>
-#include "Weapons.h"
+#include "Game.h"
+
 #define PI 3.14159265
 
 
@@ -29,10 +30,11 @@ void Weapon::Initial(WeaponType WType){
     Bulls.Init(WType);
 }
 
-void Weapon::Run(int key, Player P){
+void Weapon::Run(int key)
+{
 
-	Position.x = P.getX();
-	Position.y = P.getY();
+	Position.x = 100;
+	Position.y = 100;
 
 	if(FSKEY_LEFT==key){
 		ChangeAngle(-1);

@@ -1,5 +1,4 @@
-
-#include "Obstacle.h"
+#include "Game.h"
 
 void Obstacle::Initial(int X,int Y,int Size,int Direction,int Speed)
 {

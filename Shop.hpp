@@ -7,7 +7,7 @@
 #include "yspng.h"
 #include "ysglfontdata.h"
 #include <string.h>
-#include "player.h"
+#include "Game.h"
 
 class WeaponText{
 public:

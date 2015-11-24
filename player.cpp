@@ -5,9 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "fssimplewindow.h"
-#include "player.h"
-#include "character.h"
-#include "background.h"
+#include "Game.h"
 
 #define TYPESOFWEAPONS 6
 #define TANK 0
@@ -165,7 +163,7 @@ void Player::drawPlayer(){
 }
 
 
-int Parse(int wordTop[],int wordLength[],int maxNumWord,char str[])
+int Parse1(int wordTop[],int wordLength[],int maxNumWord,char str[])
 {
 	int state=0;  // 0:Blank   1:Visible Letter
 	int nw=0;
@@ -245,7 +243,7 @@ void Player::ReadProperties(char *username)
 		{
 			int nWord=0;
 			int wordTop[10],wordLength[10];
-			nWord=Parse(wordTop,wordLength,10,str);
+			nWord=Parse1(wordTop,wordLength,10,str);
             char wstr[256], wlevelstr[256];
             GetWord(wstr,str,wordTop[0],wordLength[0],255);
             GetWord(wlevelstr,str,wordTop[1],wordLength[1],255);

@@ -1,4 +1,4 @@
-#include "background.h"
+#include "Game.h"
 
 
 int Parse(int wordTop[],int wordLength[],int maxNumWord,char str[])

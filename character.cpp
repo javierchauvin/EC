@@ -7,7 +7,7 @@
 //
 
 #include <math.h>
-#include "character.h"
+#include "Game.h"
 #include "fssimplewindow.h"
 
 

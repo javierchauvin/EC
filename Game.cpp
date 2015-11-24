@@ -12,7 +12,7 @@ void Game::Run(void)
 {
     auto key=FsInkey();
     background.Run(weapon);
-    weapon.Run(key,player);
+    weapon.Run(key);
     player.Run();
     obstacle1.Run(weapon,player);
     obstacle2.Run(weapon,player);

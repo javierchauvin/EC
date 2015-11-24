@@ -17,8 +17,6 @@
 
 #include "Intro.hpp"
 #include "Flash.hpp"
-#include "player.h"
-#include "character.h"
 #include "Shop.hpp"
 #include "Game.h"
 
