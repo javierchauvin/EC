@@ -229,7 +229,7 @@ public:
     Bullet bullet;
     Player player;
     void Initial(void);
-    void Run();
+    void Run(int &status);
 };
 
 #endif /* Header_h */
