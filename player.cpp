@@ -63,13 +63,14 @@ void Player::movePlayer(){
     
     switch(key)
     {
-        case FSKEY_LEFT:
-            if (X < 400) {
-                if (X > 5) { /* player 1 */
+        case FSKEY_A:
+            if (X < 400) { /* player 1 */
+                if (X > 5) {
                     X -= 5;
                     //direction = 1;
                 }
             }
+        case FSKEY_J:
             if (X > 400) { /* player 2 */
                 if (X > boundary2 + 5) {
                     X -= 5;
@@ -78,13 +79,14 @@ void Player::movePlayer(){
                 
             }
             break;
-        case FSKEY_RIGHT:
+        case FSKEY_D:
             if (X < 400) { /* player 1 */
                 if (X < boundary1 - 5) {
                     X += 5;
                     direction = 0;
                 }
             }
+        case FSKEY_L:
             if (X > 400) { /* player 2 */
                 if (X < 795) {
                     X += 5;

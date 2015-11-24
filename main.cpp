@@ -161,7 +161,7 @@ int main()
         }
         if (status==4)//run
         {
-            game.Run();
+            game.Run(status);
         }
         
         FsSwapBuffers();

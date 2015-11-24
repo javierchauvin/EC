@@ -99,6 +99,7 @@ MountainCube::MountainCube()
     x=0;
     y=0;
     state=1;
+    
 }
 
 void Background::ReadFile()
@@ -151,6 +152,7 @@ Background::Background()
 {
 	boundaryX1=200;
     boundaryX2=600;
+    CubePtr=nullptr;
 }
 
 Background::~Background()
