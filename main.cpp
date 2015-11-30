@@ -133,14 +133,7 @@ int main()
             {
                 status=4;
             }
-            
-            
-            
         }
-        
-            
-            
-         
         if (status==2)//shop
         {
             Player player1;
