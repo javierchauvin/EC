@@ -72,26 +72,26 @@ void MountainCube::MakeFromString(char str[])
 void MountainCube::draw()
 {
     
-    glShadeModel(GL_SMOOTH);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    //glShadeModel(GL_SMOOTH);
+    //glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     
     glBegin(GL_QUADS);
     glColor3ub(200,30,30);
     glVertex2i(x,y);
     
-    glColor3ub(200,30,30);
+    //glColor3ub(200,30,30);
     glVertex2i(x+50,y);
     
-    glColor3ub(0,0,0);
+    //glColor3ub(0,0,0);
     glVertex2i(x+50,y-50);
     
-    glColor3ub(0,0,0);
+    //glColor3ub(0,0,0);
     glVertex2i(x,y-50);
     
     glEnd();
     
-    glDisable(GL_BLEND);
+   // glDisable(GL_BLEND);
 
 }
 MountainCube::MountainCube()
@@ -136,14 +136,13 @@ void Background::cleanup()
 
 void Background::Initial()
 {
-    CubePtr=nullptr;
     ReadBackground();
     ReadFile();
 }
 
 void Background::Run(Weapon &gun)
 {
-    checkcollision(gun);
+//    checkcollision(gun);
     DrawBackground();
     DrawMountain();
 }
@@ -190,6 +189,7 @@ void Background::DrawMountain(void)
         if (CubePtr[i].state==1)
         {
             CubePtr[i].draw();
+            printf("%f  %f\n", CubePtr[i].GetX(),CubePtr[i].GetY());
         }
     }
 }
@@ -198,7 +198,12 @@ void Background::checkcollision(Weapon &gun)
 {
     for (int i=0;i<nCube;i++)
     {
-        if (gun.GetBullet()->x()>CubePtr[i].GetX() && gun.GetBullet()->x()< CubePtr[i].GetX()+w && gun.GetBullet()->y()<CubePtr[i].GetY() && gun.GetBullet()->y()>CubePtr[i].GetY()-h && CubePtr[i].state==1 && gun.GetBullet()->GetLife()>0)
+        if (gun.GetBullet()->x()>CubePtr[i].GetX()
+            && gun.GetBullet()->x()< CubePtr[i].GetX()+w
+            && gun.GetBullet()->y()<CubePtr[i].GetY()
+            && gun.GetBullet()->y()>CubePtr[i].GetY()-h
+            && CubePtr[i].state==1
+            && gun.GetBullet()->GetLife()>0)
         {
             CubePtr[i].state=0;
             gun.GetBullet()->ChangeLife();
