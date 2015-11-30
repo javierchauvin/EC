@@ -10,10 +10,6 @@
 #include <fstream>
 #include "ysglfontdata.h"
 #include <vector>
-
-
-
-
 #include "Intro.hpp"
 #include "Flash.hpp"
 #include "Shop.hpp"
