@@ -30,11 +30,11 @@ void Weapon::Initial(WeaponType WType){
     Bulls.Init(WType);
 }
 
-void Weapon::Run(int key, double x, double y)
+void Weapon::Run(int key, Player &player)
 {
 
-	Position.x = x;
-	Position.y = y;
+	Position.x = player.getX()+80;
+	Position.y = player.getY()-37;
 
 	if(FSKEY_LEFT==key){
 		ChangeAngle(-1);
