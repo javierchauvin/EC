@@ -132,3 +132,10 @@ void Flash::Add(){
     gameCharge ++;
 }
 
+int Flash::ReturnMoney(){
+    return money;
+}
+int Flash::ReturnGameCharge(){
+    return gameCharge;
+}
+

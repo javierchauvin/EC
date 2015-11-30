@@ -4,9 +4,9 @@ void Game::Initial(void)
 {
     background.Initial();
     weapon1.Initial(DEFAULT);//weapon type
-    player1.Initial();//x,y,direction
+    player1.Initial(0, 550);//x,y,direction
     weapon2.Initial(DEFAULT);//weapon type
-    player2.Initial();//x,y,direction
+    player2.Initial(700, 550);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
 }

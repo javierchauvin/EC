@@ -14,6 +14,8 @@ public:
     void GenerateCard();
     void Display(int &status);
     void Add();
+    int ReturnMoney();
+    int ReturnGameCharge();
 };
 
 
