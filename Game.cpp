@@ -21,7 +21,7 @@ void Game::Run(int &status)
         terminate=1;
     }
     background.Run(weapon);
-    weapon.Run(key);
+    weapon.Run(key,0,0);
     player.Run();
     obstacle1.Run(weapon,player);
     obstacle2.Run(weapon,player);
