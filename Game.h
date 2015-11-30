@@ -212,11 +212,12 @@ public:
     GLuint light;
     void Initial(int X,int Y,int Size,int Direction,int Speed);
     void read(void);
-    void Draw(double px,double py);
+    void Draw(double p1x,double p1y,double p2x,double p2y);
     void Move();
-    void CheckCollision(double x,double y);
-    bool state;
-    void Run(Weapon &weapon,Player &player);
+    void CheckCollision(double b1x,double b1y,double b2x,double b2y);
+    bool state1;
+    bool state2;
+    void Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2);
 };
 
 
@@ -227,9 +228,12 @@ public:
     Background background;
     Obstacle obstacle1;
     Obstacle obstacle2;
-    Weapon weapon;
     Bullet bullet;
-    Player player;
+
+    Weapon weapon1;
+    Player player1;
+    Weapon weapon2;
+    Player player2;
     void Initial(void);
     void Run(int &status);
 };
