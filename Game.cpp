@@ -21,7 +21,7 @@ void Game::Run(int &status)
         terminate=1;
     }
     background.Run(weapon);
-    weapon.Run(key, player.getX()+80 , player.getY()-37);
+    weapon.Run(key, player);//+80, -37
     player.Run();
     obstacle1.Run(weapon,player);
     obstacle2.Run(weapon,player);
