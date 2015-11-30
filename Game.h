@@ -75,7 +75,7 @@ public:
     int getX();
     int getY();
     int getDirection();
-    void ReadProperties(char *username);
+    void ReadProperties(const char *username);
     void SaveProperties();
     void setMyCharacter(int character);
     int getMyCharacter();
