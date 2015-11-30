@@ -55,7 +55,7 @@ int main()
     PlayerOne.setMoney(20);
     PlayerTwo.setMoney(25);
     
-    //Initialize shop
+    //Initialize shop & flash
     Shop shop;
 
     // Open window
@@ -86,8 +86,7 @@ int main()
     int flashbuttonplayer2stat=0;
     int shopbuttonplayer1stat=0;
     int shopbuttonplayer2stat=0;
-    
-    
+    int GameCharge = 0;
     
     // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
@@ -157,9 +156,19 @@ int main()
         }
         if (status==3)//flashcard
         {
-            Flash test;
-            test.Set(5, 10);
-            test.Display(status);
+            Flash flash;
+            if (switchplayer == 1){
+                flash.Set(PlayerOne.getMoney(), GameCharge);
+                flash.Display(status);
+                PlayerOne.setMoney(flash.ReturnMoney());
+                GameCharge =flash.ReturnGameCharge();
+            }
+            else if (switchplayer == 2){
+                flash.Set(PlayerTwo.getMoney(), GameCharge);
+                flash.Display(status);
+                PlayerTwo.setMoney(flash.ReturnMoney());
+                GameCharge =flash.ReturnGameCharge();
+            }
         }
         if (status==4)//run
         {
