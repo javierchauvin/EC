@@ -24,10 +24,10 @@
  author: santok@andrew.cmu.edu
  
  **/
-int  DrawButton(int onoff, double mxl,double myl, double mxh, double myh,double textx, double texty, char str[])
+int  DrawButton(int lb, double mxl,double myl, double mxh, double myh,double textx, double texty, char str[])
 {
-    int lb,mb,rb,mxm,mym;
-    FsGetMouseEvent(lb,mb,rb,mxm,mym);
+    int lb1,mb,rb,mxm,mym;
+    FsGetMouseEvent(lb1,mb,rb,mxm,mym);
     if((mxm<=mxh)&&(mxm>=mxl)&&(mym>=myl)&&(mym<=myh)&&(lb==1))
     {
         return 1;
@@ -52,6 +52,11 @@ int main()
     //Initailize two player
     Player PlayerOne;
     Player PlayerTwo;
+    PlayerOne.setMoney(20);
+    PlayerTwo.setMoney(25);
+    
+    //Initialize shop
+    Shop shop;
 
     // Open window
     FsOpenWindow(0, 0, 800, 600, 1);
@@ -82,8 +87,7 @@ int main()
     int shopbuttonplayer1stat=0;
     int shopbuttonplayer2stat=0;
     
-    Game game;
-    game.Initial();
+    
     
     // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
@@ -97,17 +101,14 @@ int main()
         {
             MenuBackGround();
             FsPollDevice();
-            int lb1,mb1,rb1,mxm1,mym1;
-            FsGetMouseEvent(lb1,mb1,rb1,mxm1,mym1);
-            if (lb1==1)
-            {
-                printf("%d %d",mxm1,mym1);
-            }
-            flashbuttonplayer1stat=DrawButton(1, 63, 362, 251, 507, 0, 150,flashstring);
-            flashbuttonplayer2stat=DrawButton(1, 563, 359, 755, 504, 0, 150, flashstring);
-            shopbuttonplayer1stat=DrawButton(1, 30, 98, 222, 249, 0, 350,Shopstring);
-            shopbuttonplayer2stat=DrawButton(1, 575, 96, 765, 220, 700, 350, Shopstring);
-            gamebuttonstat=DrawButton(1, 300, 250,500,350,320,300,gamestring);
+            int lbmain,mb,rb,mxm,mym;
+            FsGetMouseEvent(lbmain,mb,rb,mxm,mym);
+            
+            flashbuttonplayer1stat=DrawButton(lbmain, 63, 362, 251, 507, 0, 150,flashstring);
+            flashbuttonplayer2stat=DrawButton(lbmain, 563, 359, 755, 504, 0, 150, flashstring);
+            shopbuttonplayer1stat=DrawButton(lbmain, 30, 98, 222, 249, 0, 350,Shopstring);
+            shopbuttonplayer2stat=DrawButton(lbmain, 575, 96, 765, 220, 700, 350, Shopstring);
+            gamebuttonstat=DrawButton(lbmain, 300, 250,500,350,320,300,gamestring);
             if (shopbuttonplayer1stat==1)
             {
                 status=2;
@@ -137,21 +138,18 @@ int main()
             {
                 status=4;
             }
-            
-            
-            
         }
-        
-            
-            
-         
         if (status==2)//shop
         {
-            Player player1;
-            player1.setMoney(100);
-            Shop shop;
-            shop.AssignWeaponCheck(player1); // Assign weapon list from player to shop
-            shop.Run(player1, status); // should input money
+            if (switchplayer == 1){
+                shop.AssignWeaponCheck(PlayerOne); // Assign weapon list to shop
+                shop.Run(PlayerOne, status); // should input money
+            }
+            else if (switchplayer == 2){
+                shop.AssignWeaponCheck(PlayerTwo); // Assign weapon list to shop
+                shop.Run(PlayerTwo, status); // should input money
+            }
+            
         }
         if (status==3)//flashcard
         {
@@ -161,6 +159,8 @@ int main()
         }
         if (status==4)//run
         {
+            Game game;
+            game.Initial();
             game.Run(status);
         }
         
