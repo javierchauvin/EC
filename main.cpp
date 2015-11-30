@@ -70,8 +70,8 @@ int main()
     const char *user2namestr=UserName2.GetPointer();
     
     //pass user name into read properties
-    //PlayerOne.ReadProperties();
-    //PlayerOne.ReadProperties();
+    PlayerOne.ReadProperties(user1namestr);
+    PlayerTwo.ReadProperties(user2namestr);
     
     //do button's string
     char Shopstring[20]="Shop";

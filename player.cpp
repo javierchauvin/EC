@@ -226,7 +226,7 @@ void GetWord(char wd[],char str[],int wordTop,int wordLength,int bufSize)
  * and saves money in money and weapon levels in weaponList
  *
  */
-void Player::ReadProperties(char *username)
+void Player::ReadProperties(const char *username)
 {
     strncpy(userfile, username, 50);
     //take off control code
