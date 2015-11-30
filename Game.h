@@ -229,7 +229,8 @@ public:
     Obstacle obstacle2;
     Weapon weapon;
     Bullet bullet;
-    Player player;
+    Player player1;
+    Player player2;
     void Initial(void);
     void Run(int &status);
 };

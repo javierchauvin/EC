@@ -4,7 +4,7 @@ void Game::Initial(void)
 {
     background.Initial();
     weapon.Initial(DEFAULT);//weapon type
-    player.Initial();//x,y,direction
+    player1.Initial();//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
 }
@@ -21,10 +21,10 @@ void Game::Run(int &status)
         terminate=1;
     }
     background.Run(weapon);
-    weapon.Run(key, player);//+80, -37
-    player.Run();
-    obstacle1.Run(weapon,player);
-    obstacle2.Run(weapon,player);
+    weapon.Run(key, player1);//+80, -37
+    player1.Run();
+    obstacle1.Run(weapon,player1);
+    obstacle2.Run(weapon,player1);
     FsSwapBuffers();
     FsSleep(10);
     }
