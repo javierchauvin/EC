@@ -154,7 +154,7 @@ void Shop::Run(Player &player, int &status){
     int w1Temp, w2Temp, w3Temp, w4Temp, w5Temp, w6Temp;
     int state = 0; // determine whether to FsSleep
     int money = player.getMoney();
-    int minMoney = 70;
+    int minMoney = 5;
     
     while (FSKEY_ESC!=FsInkey()) {
         FsPollDevice();

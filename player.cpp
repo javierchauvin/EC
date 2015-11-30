@@ -42,10 +42,11 @@ void Player::playerSet(int initX, int initY){
     Y = initY;
 }
 
-void Player::Initial(){
-    X = 0;
-    Y = 550;
-    direction = 0; /* 0: face right, 1: face left */
+void Player::Initial(int x, int y, int dir, int Status){
+    X = x;
+    Y = y;
+    direction = dir; /* 0: face right, 1: face left */
+    status = Status;
     myCharacter = TANK;
 }
 
@@ -226,7 +227,7 @@ void GetWord(char wd[],char str[],int wordTop,int wordLength,int bufSize)
  * and saves money in money and weapon levels in weaponList
  *
  */
-void Player::ReadProperties(char *username)
+void Player::ReadProperties(const char *username)
 {
     strncpy(userfile, username, 50);
     //take off control code

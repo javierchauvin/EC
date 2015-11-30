@@ -27,6 +27,67 @@ enum WeaponType
     WATER_BALLOON,
 };
 
+class Character /* abstract class */
+{
+public:
+    Character();
+    ~Character();
+    virtual void drawCharacter(int x, int y, int direction) = 0;
+};
+
+class Tank: public Character{
+public:
+    Tank();
+    ~Tank();
+    void drawCharacter(int x, int y, int direction);
+};
+class Unicorn: public Character{
+public:
+    Unicorn();
+    ~Unicorn();
+    void drawCharacter(int x, int y, int direction);
+};
+class Einstein: public Character{
+public:
+    Einstein();
+    ~Einstein();
+    void drawCharacter(int x, int y, int direction);
+};
+
+
+#define TYPESOFWEAPONS 6
+class Player{
+private:
+    int X, Y, direction;
+    int status; //0:not my turn 1:my turn
+    int money;
+    /* weaponList[weapon#] = level
+     * level 0 means player doesn't own that weapon yet */
+    int weaponList[TYPESOFWEAPONS];
+    int myCharacter;
+    char userfile[50];
+public:
+    Player();
+    Player(int initX, int initY);
+    ~Player();
+    void playerSet(int initX, int initY);
+    void movePlayer();
+    void drawPlayer();
+    int getX();
+    int getY();
+    int getDirection();
+    void ReadProperties(const char *username);
+    void SaveProperties();
+    void setMyCharacter(int character);
+    int getMyCharacter();
+    int *getWeaponList();
+    void setWeaponList(int index, int level);
+    int getMoney();
+    void setMoney(int newMoney);
+    void Initial(int x, int y, int dir, int Status);
+    void Run();
+};
+
 class Bullet
 {
     bool State;
@@ -78,7 +139,7 @@ public:
     
     //Functionality
     void Initial(WeaponType Type);
-    void Run(int key, double x, double y);
+    void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);
     void ChangeAngle( int Delta );
@@ -137,65 +198,7 @@ public:
     ~Background();
 };
 
-class Character /* abstract class */
-{
-public:
-    Character();
-    ~Character();
-    virtual void drawCharacter(int x, int y, int direction) = 0;
-};
 
-class Tank: public Character{
-public:
-    Tank();
-    ~Tank();
-    void drawCharacter(int x, int y, int direction);
-};
-class Unicorn: public Character{
-public:
-    Unicorn();
-    ~Unicorn();
-    void drawCharacter(int x, int y, int direction);
-};
-class Einstein: public Character{
-public:
-    Einstein();
-    ~Einstein();
-    void drawCharacter(int x, int y, int direction);
-};
-
-
-#define TYPESOFWEAPONS 6
-class Player{
-private:
-    int X, Y, direction;
-    int money;
-    /* weaponList[weapon#] = level
-     * level 0 means player doesn't own that weapon yet */
-    int weaponList[TYPESOFWEAPONS];
-    int myCharacter;
-    char userfile[50];
-public:
-    Player();
-    Player(int initX, int initY);
-    ~Player();
-    void playerSet(int initX, int initY);
-    void movePlayer();
-    void drawPlayer();
-    int getX();
-    int getY();
-    int getDirection();
-    void ReadProperties(char *username);
-    void SaveProperties();
-    void setMyCharacter(int character);
-    int getMyCharacter();
-    int *getWeaponList();
-    void setWeaponList(int index, int level);
-    int getMoney();
-    void setMoney(int newMoney);
-    void Initial();
-    void Run();
-};
 
 class Obstacle
 {
@@ -210,11 +213,12 @@ public:
     GLuint light;
     void Initial(int X,int Y,int Size,int Direction,int Speed);
     void read(void);
-    void Draw(double px,double py);
+    void Draw(double p1x,double p1y,double p2x,double p2y);
     void Move();
-    void CheckCollision(double x,double y);
-    bool state;
-    void Run(Weapon &weapon,Player &player);
+    void CheckCollision(double b1x,double b1y,double b2x,double b2y);
+    bool state1;
+    bool state2;
+    void Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2);
 };
 
 
@@ -225,9 +229,12 @@ public:
     Background background;
     Obstacle obstacle1;
     Obstacle obstacle2;
-    Weapon weapon;
     Bullet bullet;
-    Player player;
+
+    Weapon weapon1;
+    Player player1;
+    Weapon weapon2;
+    Player player2;
     void Initial(void);
     void Run(int &status);
 };

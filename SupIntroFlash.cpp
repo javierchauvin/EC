@@ -232,6 +232,9 @@ void TextInput::DrawIntro(void){
 }
 void TextInput::DrawFlash(void){
     BackGroundIntro();
+	glColor3ub(255,255,153);
+    glRasterPos2d(50,75);
+    YsGlDrawFontBitmap16x20("Press ESC to exit the flashcard game!");
     glColor3ub(230,230,230);
     glRasterPos2d(150,150);
     YsGlDrawFontBitmap20x32(caption.GetPointer());
