@@ -52,6 +52,11 @@ int main()
     //Initailize two player
     Player PlayerOne;
     Player PlayerTwo;
+    PlayerOne.setMoney(20);
+    PlayerTwo.setMoney(25);
+    
+    //Initialize shop
+    Shop shop;
 
     // Open window
     FsOpenWindow(0, 0, 800, 600, 1);
@@ -138,20 +143,18 @@ int main()
                 status=4;
             }
             
-            
-            
         }
-        
-            
-            
-         
         if (status==2)//shop
         {
-            Player player1;
-            player1.setMoney(100);
-            Shop shop;
-            shop.AssignWeaponCheck(player1); // Assign weapon list from player to shop
-            shop.Run(player1, status); // should input money
+            if (switchplayer == 1){
+                shop.AssignWeaponCheck(PlayerOne); // Assign weapon list to shop
+                shop.Run(PlayerOne, status); // should input money
+            }
+            else if (switchplayer == 2){
+                shop.AssignWeaponCheck(PlayerTwo); // Assign weapon list to shop
+                shop.Run(PlayerTwo, status); // should input money
+            }
+            
         }
         if (status==3)//flashcard
         {
