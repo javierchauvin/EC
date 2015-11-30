@@ -59,6 +59,7 @@ public:
 class Player{
 private:
     int X, Y, direction;
+    int status; //0:not my turn 1:my turn
     int money;
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
@@ -83,7 +84,7 @@ public:
     void setWeaponList(int index, int level);
     int getMoney();
     void setMoney(int newMoney);
-    void Initial(int x, int y, int dir);
+    void Initial(int x, int y, int dir, int Status);
     void Run();
 };
 
