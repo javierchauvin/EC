@@ -42,10 +42,10 @@ void Player::playerSet(int initX, int initY){
     Y = initY;
 }
 
-void Player::Initial(int x, int y){
+void Player::Initial(int x, int y, int dir){
     X = x;
     Y = y;
-    direction = 0; /* 0: face right, 1: face left */
+    direction = dir; /* 0: face right, 1: face left */
     myCharacter = TANK;
 }
 
