@@ -6,6 +6,7 @@
 #include <string.h>
 #include "fssimplewindow.h"
 #include "Game.h"
+#include <fstream>
 
 #define TYPESOFWEAPONS 6
 #define TANK 0
@@ -277,8 +278,9 @@ void Player::ReadProperties(const char *username)
 	}
 	else
 	{
-		printf("Error! Could not open file.\n");
-        exit(EXIT_FAILURE);
+        std::ofstream myfile;
+        myfile.open(userfile);
+        myfile.close();
 	}
 }
 

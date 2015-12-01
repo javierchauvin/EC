@@ -84,6 +84,8 @@ int main()
     int shopbuttonplayer2stat=0;
     int GameCharge = 0;
     
+    Game game;
+    game.Initial();
     // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
     {
@@ -164,8 +166,7 @@ int main()
         }
         if (status==4)//run
         {
-            Game game;
-            game.Initial();
+            
             game.Run(status);
         }
         
@@ -173,4 +174,10 @@ int main()
         FsSleep(10);
 
     }
+    
+    
+    
+    
+    PlayerOne.SaveProperties();
+    PlayerTwo.SaveProperties();
 }
