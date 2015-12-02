@@ -51,10 +51,10 @@ void Player::Initial(int x, int y, int dir, int Status){
     myCharacter = TANK;
 }
 
-void Player::Run(){
+void Player::Run()
+{
     drawPlayer();
     movePlayer();
-    
 }
 
 void Player::movePlayer(){

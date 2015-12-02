@@ -142,7 +142,7 @@ void Background::Initial()
 
 void Background::Run(Weapon &gun)
 {
-//    checkcollision(gun);
+    checkcollision(gun);
     DrawBackground();
     DrawMountain();
 }
