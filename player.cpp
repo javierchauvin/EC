@@ -40,6 +40,10 @@ Player::~Player(){
     direction = 0;
     myCharacter = TANK;
 }
+void Player::setStatus(bool state)
+{
+    status=state;
+}
 void Player::playerSet(int initX, int initY){
     X = initX;
     Y = initY;
@@ -56,13 +60,12 @@ void Player::Initial(int x, int y, int dir, int Status){
 
 
 
-void Player::Run(int key, bool state)
+void Player::Run(int key)
 {
     drawPlayer();
-    if (state==true)
-    {
+    
     movePlayer(key);
-    }
+    
 
     setHealth();
 
@@ -150,7 +153,7 @@ void Player::setWeaponList(int index, int level){
     weaponList[index] = level;
 }
 
-int Player::getStatus(){
+bool Player::getStatus(){
     return status;
 }
 
