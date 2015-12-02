@@ -59,6 +59,7 @@ void Player::Run(int key)
 {
     drawPlayer();
     movePlayer(key);
+    setHealth();
     DrawHealth();
 }
 
@@ -145,6 +146,13 @@ void Player::setWeaponList(int index, int level){
 
 int Player::getStatus(){
     return status;
+}
+
+void Player::setHealth(){
+    if (hit == 1) {
+        health -= 1.0;
+        hit = 0;
+    }
 }
 
 /*
