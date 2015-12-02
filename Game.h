@@ -144,7 +144,7 @@ protected:
 public:
     Weapon();
     ~Weapon();
-    Weapon(WeaponType Type);
+    //Weapon(WeaponType Type);
     
     //Functionality
     void Initial(WeaponType Type, bool st);

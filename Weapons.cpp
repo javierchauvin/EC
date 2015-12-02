@@ -16,10 +16,10 @@ double D2Rad ( int degrees ){
 Weapon::Weapon(){}
 Weapon::~Weapon(){}
 
-Weapon::Weapon(/*WeaponType Type*/)
-{
-	//Initial(Type,true);
-}
+//Weapon::Weapon(void/*WeaponType Type*/)
+//{
+//	//Initial(Type,true);
+//}
 
 void Weapon::Initial(WeaponType WType, bool st){
 
