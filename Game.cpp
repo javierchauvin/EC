@@ -39,6 +39,28 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 }
 
 
-
+void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2)
+{
+    int w = 10;
+    int h = 10;
+    if (player1.getStatus() == 1) {
+        if ((weapon1.GetBullet()->x() > player1.getX()-w)
+            && (weapon1.GetBullet()->x() < player1.getY()+w)
+            && (weapon1.GetBullet()->y() > player1.getX()-h)
+            && (weapon1.GetBullet()->y() < player1.getY()+h))
+        {
+            player1.hit = 1;
+        }
+    }
+    else {
+        if ((weapon1.GetBullet()->x() > player2.getX()-w)
+            && (weapon1.GetBullet()->x() < player2.getY()+w)
+            && (weapon1.GetBullet()->y() > player2.getX()-h)
+            && (weapon1.GetBullet()->y() < player2.getY()+h))
+        {
+            player2.hit = 1;
+        }
+    }
+}
 
 
