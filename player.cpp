@@ -63,14 +63,13 @@ void Player::movePlayer(int key){
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
     
+    if (status == 1){
     switch(key)
     {
         case FSKEY_A:
-            if (X < 400) { /* player 1 */
-                if (X > 5) {
+            if ((X < 400) && (X > 5)) { /* player 1 */
                     X -= 5;
                     //direction = 1;
-                }
             }
         case FSKEY_J:
             if (X > 400) { /* player 2 */
@@ -96,6 +95,7 @@ void Player::movePlayer(int key){
                 }
             }
             break;
+    }
     }
     //FsSwapBuffers();
     //FsSleep(25);
