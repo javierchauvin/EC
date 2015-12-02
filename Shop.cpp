@@ -265,7 +265,7 @@ int  DrawShopWeapon(WeaponText w)
 {
     int lb,mb,rb,mxm,mym;
     FsGetMouseEvent(lb,mb,rb,mxm,mym);
-    glColor3d(0.7, 0.7, 0.7);
+    glColor3d(1, 1, 1);
     glBegin(GL_QUADS);
     glVertex2d(w.xl, w.yl);
     glVertex2d(w.xl, w.yh);
