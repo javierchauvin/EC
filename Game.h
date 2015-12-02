@@ -230,7 +230,6 @@ public:
     Obstacle obstacle1;
     Obstacle obstacle2;
     Bullet bullet;
-
     Weapon weapon1;
     Weapon weapon2;
     void Initial(Player &PlayerOne,Player &PlayerTwo);
