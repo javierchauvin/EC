@@ -127,6 +127,7 @@ public:
 class Weapon
 {
 protected:
+	bool State;
     WeaponType Type;
     Coordinates Position;
     int Angle; //It is in degrees
@@ -140,7 +141,7 @@ public:
     Weapon(WeaponType Type);
     
     //Functionality
-    void Initial(WeaponType Type);
+    void Initial(WeaponType Type, bool st);
     void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);
