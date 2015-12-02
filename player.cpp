@@ -51,14 +51,17 @@ void Player::Initial(int x, int y, int dir, int Status){
     myCharacter = TANK;
 }
 
-void Player::Run(){
+
+
+void Player::Run(int key)
+{
     drawPlayer();
-    movePlayer();
+    movePlayer(key);
     
 }
 
-void Player::movePlayer(){
-    int key = FsInkey();
+void Player::movePlayer(int key){
+    //int key = FsInkey();
     Background bg;
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
@@ -85,14 +88,14 @@ void Player::movePlayer(){
             if (X < 400) { /* player 1 */
                 if (X < boundary1 - 5) {
                     X += 5;
-                    direction = 0;
+                    //direction = 0;
                 }
             }
         case FSKEY_L:
             if (X > 400) { /* player 2 */
                 if (X < 795) {
                     X += 5;
-                    direction = 0;
+                    //direction = 0;
                 }
             }
             break;

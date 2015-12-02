@@ -4,7 +4,7 @@
 void BackGroundIntro()
 {
     YsRawPngDecoder decoder;
-    decoder.Decode("blackboard_final.png");
+    decoder.Decode("IntroImage.png");
     decoder.Flip();
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
     glRasterPos2d(0,decoder.hei-1);
