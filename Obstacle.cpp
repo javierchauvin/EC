@@ -227,7 +227,6 @@ void Obstacle::Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &playe
         player2.health-=0.1;
         hstate2=0;
     }
-    
     if (state1==1)
     {
         countdown+=0.9;
