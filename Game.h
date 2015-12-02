@@ -27,6 +27,8 @@ enum WeaponType
     WATER_BALLOON,
 };
 
+
+
 class Character /* abstract class */
 {
 public:
@@ -60,20 +62,22 @@ class Player{
 private:
     int X, Y, direction;
     int status; //0:not my turn 1:my turn
+    //int hit; //0:not hit
     int money;
-    int health;
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
     int myCharacter;
     char userfile[50];
 public:
+    double health;
     Player();
     Player(int initX, int initY);
     ~Player();
     void playerSet(int initX, int initY);
     void movePlayer(int key);
     void drawPlayer();
+    int hit; //0:not hit
     int getX();
     int getY();
     int getDirection();
@@ -87,7 +91,9 @@ public:
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
     void Run(int key);
+    void setHealth();
     void DrawHealth();
+    int getStatus();
 };
 
 class Bullet
@@ -127,6 +133,7 @@ public:
 class Weapon
 {
 protected:
+	bool State;
     WeaponType Type;
     Coordinates Position;
     int Angle; //It is in degrees
@@ -137,10 +144,10 @@ protected:
 public:
     Weapon();
     ~Weapon();
-    Weapon(WeaponType Type);
+    //Weapon(WeaponType Type);
     
     //Functionality
-    void Initial(WeaponType Type);
+    void Initial(WeaponType Type, bool st);
     void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);
@@ -220,6 +227,8 @@ public:
     void CheckCollision(double b1x,double b1y,double b2x,double b2y);
     bool state1;
     bool state2;
+    bool hstate1;
+    bool hstate2;
     void Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2);
 };
 
@@ -237,5 +246,7 @@ public:
     void Initial(Player &PlayerOne,Player &PlayerTwo);
     void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
+
+void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2);
 
 #endif /* Header_h */
