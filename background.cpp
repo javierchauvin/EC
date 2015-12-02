@@ -140,9 +140,9 @@ void Background::Initial()
     ReadFile();
 }
 
-void Background::Run(Weapon &gun)
+void Background::Run(Weapon &gun1, Weapon &gun2)
 {
-    checkcollision(gun);
+    checkcollision(gun1,gun2);
     DrawBackground();
     DrawMountain();
 }
@@ -193,24 +193,34 @@ void Background::DrawMountain(void)
     }
 }
 
-void Background::checkcollision(Weapon &gun)
+void Background::checkcollision(Weapon &gun1,Weapon &gun2)
 {
-    printf("%d", gun.GetBullet()->GetLife());
     for (int i=0;i<nCube;i++)
     {
-        if (gun.GetBullet()->x()>CubePtr[i].GetX()
-            && gun.GetBullet()->x()< CubePtr[i].GetX()+50
-            && gun.GetBullet()->y()<CubePtr[i].GetY()
-            && gun.GetBullet()->y()>CubePtr[i].GetY()-50
+        // weapon1
+        if (gun1.GetBullet()->x()>CubePtr[i].GetX()
+            && gun1.GetBullet()->x()< CubePtr[i].GetX()+50
+            && gun1.GetBullet()->y()<CubePtr[i].GetY()
+            && gun1.GetBullet()->y()>CubePtr[i].GetY()-50
             && CubePtr[i].state==1
-            && gun.GetBullet()->GetLife()>0
+            && gun1.GetBullet()->GetLife()>0
             )
-            
-        
         {
             CubePtr[i].state=0;
-            gun.GetBullet()->ChangeLife();
-
+            gun1.GetBullet()->ChangeLife();
+        }
+        // weapon2
+        if (gun2.GetBullet()->x()>CubePtr[i].GetX()
+            && gun2.GetBullet()->x()< CubePtr[i].GetX()+50
+            && gun2.GetBullet()->y()<CubePtr[i].GetY()
+            && gun2.GetBullet()->y()>CubePtr[i].GetY()-50
+            && CubePtr[i].state==1
+            && gun2.GetBullet()->GetLife()>0
+            )
+        {
+            CubePtr[i].state=0;
+            gun2.GetBullet()->ChangeLife();
+            
         }
     }
 }

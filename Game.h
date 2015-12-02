@@ -189,13 +189,12 @@ public:
     void cleanup();
     void DrawMountain(void);
     void Initial(void);
-    void Run(Weapon &gun);
-    bool checkcollision();
+    void Run(Weapon &gun1,Weapon &gun2);
     void DrawBackground(void);
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(Weapon &gun);
+    void checkcollision(Weapon &gun1,Weapon &gun2);
     YsRawPngDecoder decoder;
     Background();
     ~Background();
