@@ -42,6 +42,8 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
             terminate=1;
             PlayerOne.health=100;
             PlayerTwo.health=100;
+            Initial(PlayerOne, PlayerTwo);
+
             
         }
         if (PlayerTwo.health<=0)
@@ -49,6 +51,7 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
             terminate=1;
             PlayerOne.health=100;
             PlayerTwo.health=100;
+            Initial(PlayerOne, PlayerTwo);
         }
         
         //check bullet collision with player
