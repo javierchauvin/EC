@@ -12,8 +12,7 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 }
 void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 {
-    bool state1=1;
-    bool state2=0;
+   
     
     int terminate=0;
     while (terminate!=1)
@@ -25,16 +24,17 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         {
             terminate=1;
         }
-        state1=weapon1.GetWeaponState();
-        state2=weapon2.GetWeaponState();
+        PlayerOne.setStatus(weapon1.GetWeaponState());
+        PlayerTwo.setStatus(weapon2.GetWeaponState());
+        
         
 
         background.Run(weapon1,weapon2);
 
         weapon1.Run(key, PlayerOne);
-        PlayerOne.Run(key,state1);
+        PlayerOne.Run(key);
         weapon2.Run(key, PlayerTwo);
-        PlayerTwo.Run(key,state2);
+        PlayerTwo.Run(key);
         obstacle1.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         obstacle2.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         if (PlayerOne.health<=0)
@@ -64,6 +64,7 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 }
 
 
+
 void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &weapon2)
 {
     int w = 100;
@@ -75,8 +76,10 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
             && (weapon1.GetBullet()->y() < player2.getY()+h))
         {
             player2.hit = 1;
+            weapon1.GetBullet()->SetState(false);
         }
     }
+    /* player 2 */
     else {
         if ((weapon1.GetBullet()->x() > player1.getX()-w)
             && (weapon1.GetBullet()->x() < player1.getX()+w)
@@ -84,6 +87,7 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
             && (weapon1.GetBullet()->y() < player1.getY()+h))
         {
             player1.hit = 1;
+            weapon2.GetBullet()->SetState(false);
         }
     }
 }

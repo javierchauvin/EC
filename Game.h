@@ -61,7 +61,7 @@ public:
 class Player{
 private:
     int X, Y, direction;
-    int status; //0:not my turn 1:my turn
+    bool status; //0:not my turn 1:my turn
     //int hit; //0:not hit
     int money;
     /* weaponList[weapon#] = level
@@ -90,11 +90,13 @@ public:
     int getMoney();
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
-    void Run(int key, bool state);
+    void Run(int key);
 
     void setHealth();
     void DrawHealth();
-    int getStatus();
+    bool getStatus();
+    void setStatus(bool state);
+    
 };
 
 class Bullet
@@ -249,6 +251,7 @@ public:
     void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
 
-void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2);
+void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon
+                    &weapon2);
 
 #endif /* Header_h */
