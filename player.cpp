@@ -56,11 +56,16 @@ void Player::Initial(int x, int y, int dir, int Status){
 
 
 
-void Player::Run(int key)
+void Player::Run(int key, bool state)
 {
     drawPlayer();
+    if (state==true)
+    {
     movePlayer(key);
+    }
+
     setHealth();
+
     DrawHealth();
 }
 

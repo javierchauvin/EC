@@ -30,6 +30,10 @@ void Weapon::Initial(WeaponType WType, bool st){
     Level = 5; //ForNow
     Bulls.Init(WType);
 }
+bool Weapon::GetWeaponState()
+{
+    return State;
+}
 
 void Weapon::Run(int key, Player &player)
 {

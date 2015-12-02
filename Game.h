@@ -90,7 +90,8 @@ public:
     int getMoney();
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
-    void Run(int key);
+    void Run(int key, bool state);
+
     void setHealth();
     void DrawHealth();
     int getStatus();
@@ -146,6 +147,7 @@ public:
     ~Weapon();
     //Weapon(WeaponType Type);
     
+    bool GetWeaponState();
     //Functionality
     void Initial(WeaponType Type, bool st);
     void Run(int key, Player &player);
@@ -188,20 +190,20 @@ protected:
     double boundaryX2;
 public:
     int nCube;
-    int w,h;
+    int w=50;
+    int h=50;
     double GetBoundaryX1();
     double GetBoundaryX2();
     MountainCube* CubePtr;
     void cleanup();
     void DrawMountain(void);
     void Initial(void);
-    void Run(Weapon &gun);
-    bool checkcollision();
+    void Run(Weapon &gun1,Weapon &gun2);
     void DrawBackground(void);
     void ReadBackground(void);
     void MakeFromString(char str[]);
     void ReadFile();
-    void checkcollision(Weapon &gun);
+    void checkcollision(Weapon &gun1,Weapon &gun2);
     YsRawPngDecoder decoder;
     Background();
     ~Background();
