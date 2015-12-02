@@ -308,33 +308,33 @@ void Player::SaveProperties(){
 }
 
 void Player::DrawHealth(){
-//    int x, y;
-//    if (X < 400){
-//        x = 50;
-//        y = 50;
-//        for(int i=0; i<health; i++){
-//            x += i* 25;
-//            glBegin(GL_QUADS);
-//            glColor3f(1, 0, 0);
-//            glVertex2i(x-10,y+10);
-//            glVertex2i(x-10,y+10);
-//            glVertex2i(x+10,y+10);
-//            glVertex2i(x+10,y+10);
-//            glEnd();
-//        }
-//    }
-//    else if (X > 400){
-//        x = 750;
-//        y = 50;
-//        for(int i=0; i<health; i++){
-//            x -= i* 25;
-//            glBegin(GL_QUADS);
-//            glColor3f(1, 0, 0);
-//            glVertex2i(x-10,y+10);
-//            glVertex2i(x-10,y+10);
-//            glVertex2i(x+10,y+10);
-//            glVertex2i(x+10,y+10);
-//            glEnd();
-//        }
-//    }
+    int x, y;
+    if (X < 400){
+        x = 25;
+        y = 50;
+        for(int i=0; i<health; i++){
+            x += 25;
+            glBegin(GL_QUADS);
+            glColor3f(1, 0, 0);
+            glVertex2i(x-10,y+10);
+            glVertex2i(x-10,y-10);
+            glVertex2i(x+10,y-10);
+            glVertex2i(x+10,y+10);
+            glEnd();
+        }
+    }
+    else if (X > 400){
+        x = 775;
+        y = 50;
+        for(int i=0; i<health; i++){
+            x -= 25;
+            glBegin(GL_QUADS);
+            glColor3f(1, 0, 0);
+            glVertex2i(x-10,y+10);
+            glVertex2i(x-10,y-10);
+            glVertex2i(x+10,y-10);
+            glVertex2i(x+10,y+10);
+            glEnd();
+        }
+    }
 }
