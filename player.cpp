@@ -51,6 +51,7 @@ void Player::Initial(int x, int y, int dir, int Status){
     direction = dir; /* 0: face right, 1: face left */
     status = Status;
     myCharacter = TANK;
+    hit = 0;
 }
 
 
@@ -150,7 +151,7 @@ int Player::getStatus(){
 
 void Player::setHealth(){
     if (hit == 1) {
-        health -= 1.0;
+        health -= 20.0;
         hit = 0;
     }
 }

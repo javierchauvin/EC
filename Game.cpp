@@ -26,11 +26,12 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 
         background.Run(weapon1);
         weapon1.Run(key, PlayerOne);
-        PlayerOne.Run(key,);
+        PlayerOne.Run(key);
         weapon2.Run(key, PlayerTwo);
-        PlayerTwo.Run(key,state);
+        PlayerTwo.Run(key);
         obstacle1.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         obstacle2.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
+        checkCollision(PlayerOne, PlayerTwo, weapon1, weapon2);
 
         FsSwapBuffers();
         FsSleep(10);
@@ -41,24 +42,24 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 
 void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2)
 {
-    int w = 10;
-    int h = 10;
+    int w = 100;
+    int h = 200;
     if (player1.getStatus() == 1) {
-        if ((weapon1.GetBullet()->x() > player1.getX()-w)
-            && (weapon1.GetBullet()->x() < player1.getY()+w)
-            && (weapon1.GetBullet()->y() > player1.getX()-h)
-            && (weapon1.GetBullet()->y() < player1.getY()+h))
-        {
-            player1.hit = 1;
-        }
-    }
-    else {
         if ((weapon1.GetBullet()->x() > player2.getX()-w)
-            && (weapon1.GetBullet()->x() < player2.getY()+w)
-            && (weapon1.GetBullet()->y() > player2.getX()-h)
+            && (weapon1.GetBullet()->x() < player2.getX()+w)
+            && (weapon1.GetBullet()->y() > player2.getY()-h)
             && (weapon1.GetBullet()->y() < player2.getY()+h))
         {
             player2.hit = 1;
+        }
+    }
+    else {
+        if ((weapon1.GetBullet()->x() > player1.getX()-w)
+            && (weapon1.GetBullet()->x() < player1.getX()+w)
+            && (weapon1.GetBullet()->y() > player1.getY()-h)
+            && (weapon1.GetBullet()->y() < player1.getY()+h))
+        {
+            player1.hit = 1;
         }
     }
 }
