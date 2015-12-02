@@ -232,11 +232,9 @@ public:
     Bullet bullet;
 
     Weapon weapon1;
-    Player player1;
     Weapon weapon2;
-    Player player2;
-    void Initial(void);
-    void Run(int &status);
+    void Initial(Player &PlayerOne,Player &PlayerTwo);
+    void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
 
 #endif /* Header_h */

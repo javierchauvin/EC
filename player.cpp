@@ -51,7 +51,10 @@ void Player::Initial(int x, int y, int dir, int Status){
     myCharacter = TANK;
 }
 
-void Player::Run(int key){
+
+
+void Player::Run(int key)
+{
     drawPlayer();
     movePlayer(key);
     
@@ -281,6 +284,7 @@ void Player::ReadProperties(const char *username)
         std::ofstream myfile;
         myfile.open(userfile);
         myfile.close();
+        SaveProperties();
 	}
 }
 
