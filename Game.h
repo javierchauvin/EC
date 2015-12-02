@@ -251,6 +251,7 @@ public:
     void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
 
-void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2);
+void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon
+                    &weapon2);
 
 #endif /* Header_h */

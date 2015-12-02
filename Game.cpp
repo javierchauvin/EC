@@ -64,7 +64,8 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 }
 
 
-void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2)
+void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon
+                    &weapon2)
 {
     int w = 100;
     int h = 200;
