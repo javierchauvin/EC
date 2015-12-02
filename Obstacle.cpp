@@ -10,6 +10,8 @@ void Obstacle::Initial(int X,int Y,int Size,int Direction,int Speed)
     speed=Speed;
     state1=0;
     state2=0;
+    hstate1=0;
+    hstate2=0;
     countdown=0;
 }
 
@@ -196,10 +198,12 @@ void Obstacle::CheckCollision(double b1x,double b1y,double b2x,double b2y)
     if(x<=b1x && b1x<x+size && y<=b1y && b1y<y+size*0.8)
     {
         state1=1;
+        hstate1=1;
     }
     if(x<=b2x && b2x<x+size && y<=b2y && b2y<y+size*0.8)
     {
         state2=1;
+        hstate2=1;
     }
 }
 void Obstacle::Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2)
@@ -215,6 +219,15 @@ void Obstacle::Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &playe
     Draw(p1x,p1y,p2x,p2y);
     Move();
     CheckCollision(b1x,b1y,b2x,b2y);
+    if (hstate1==1) {
+        player1.health-=0.1;
+        hstate1=0;
+    }
+    if (hstate2==1) {
+        player2.health-=0.1;
+        hstate2=0;
+    }
+    
     if (state1==1)
     {
         countdown+=0.9;
