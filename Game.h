@@ -149,7 +149,6 @@ public:
     ~Weapon();
     //Weapon(WeaponType Type);
     
-    bool GetWeaponState();
     //Functionality
     void Initial(WeaponType Type, bool st);
     void Run(int key, Player &player);
@@ -163,6 +162,8 @@ public:
     int GetLevel(void);
     int GetBullets(void);
     void ReduceBullet(void);
+	void SetState(bool st);
+	bool GetWeaponState( void );
     double y(void)const; //Return position y
     double x(void)const; //Return position x
     Coordinates Pos(void); // Return coordinates od position // to call Bullet.Pos.x()
@@ -192,8 +193,6 @@ protected:
     double boundaryX2;
 public:
     int nCube;
-    int w=50;
-    int h=50;
     double GetBoundaryX1();
     double GetBoundaryX2();
     MountainCube* CubePtr;

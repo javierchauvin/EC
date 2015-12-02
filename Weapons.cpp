@@ -64,6 +64,7 @@ void Weapon::Shot(Coordinates BulletInitPos){
 	//Bullet B;
 	//B.Init(Type);
 	//Bull.push_back(Type);
+	Bulls.SetState(true);
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
 }
 
@@ -158,11 +159,15 @@ Bullet* Weapon::GetBullet(void){
 	return &Bulls;
 }
 
+void Weapon::SetState(bool st){
+	State = st;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Bullet Class
 
 Bullet::Bullet(){
-	State = true;
+	State = false;
 	Grav = 9.8; // It can be varied for various weapons
 	Type = DEFAULT;
 	InitSpeed = 100;
@@ -183,6 +188,7 @@ void Bullet::Init(WeaponType Type){
 	Position.y = 0;
 	Velocity.x = 0;
 	Velocity.y = 0;
+	State = false;
 
 	switch(Type){
 		case NINE_MM:
@@ -204,10 +210,9 @@ void Bullet::Init(WeaponType Type){
 			break;
 
 		case DEFAULT:
-			State = true;
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			Life = 10;
+			Life = 1;
 			InitSpeed = 500;
 		break;
     }

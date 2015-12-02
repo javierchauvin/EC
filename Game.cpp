@@ -31,6 +31,15 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 
         background.Run(weapon1,weapon2);
 
+		if (state1 && weapon1.GetBullet()->GetState()){
+			weapon1.SetState( false );
+			weapon2.SetState( true );
+		}
+		if (state2 && weapon2.GetBullet()->GetState()){
+			weapon1.SetState( true );
+			weapon2.SetState( false );
+		}
+
         weapon1.Run(key, PlayerOne);
         PlayerOne.Run(key);
         weapon2.Run(key, PlayerTwo);
