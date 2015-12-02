@@ -67,7 +67,7 @@ private:
     int myCharacter;
     char userfile[50];
 public:
-    int health;
+    double health;
     Player();
     Player(int initX, int initY);
     ~Player();
