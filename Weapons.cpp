@@ -51,7 +51,7 @@ void Weapon::Run(int key, Player &player)
 		Bulls.Draw();
 	}
 	DrawWeapon();
-	FsPollDevice();
+	//FsPollDevice();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){

@@ -15,24 +15,24 @@ void Game::Run(int &status)
     int terminate=0;
     while (terminate!=1)
     {
-    FsPollDevice();
-    auto key=FsInkey();
-    glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
-    if (key==FSKEY_ESC)
-    {
-        terminate=1;
-    }
+        FsPollDevice();
+        auto key=FsInkey();
+        glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
+        if (key==FSKEY_ESC)
+        {
+            terminate=1;
+        }
 
-    background.Run(weapon1);
-    weapon1.Run(key, player1);
-    player1.Run(key);
-    weapon2.Run(key, player2);
-    player2.Run(key);
-    obstacle1.Run(weapon1,player1,weapon2,player2);
-    obstacle2.Run(weapon1,player1,weapon2,player2);
+        background.Run(weapon1);
+        weapon1.Run(key, player1);
+        player1.Run(key);
+        weapon2.Run(key, player2);
+        player2.Run(key);
+        obstacle1.Run(weapon1,player1,weapon2,player2);
+        obstacle2.Run(weapon1,player1,weapon2,player2);
 
-    FsSwapBuffers();
-    FsSleep(10);
+        FsSwapBuffers();
+        FsSleep(10);
     }
     status=1;
 }
