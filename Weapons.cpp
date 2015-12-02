@@ -196,7 +196,9 @@ void Bullet::Init(WeaponType Type){
 			State = true;
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			InitSpeed = 100;
+			InitSpeed = 500;
+			Position.x = 0;
+			Position.y = 0;
 			Velocity.x = 0;
 			Velocity.y = 0;
 		break;
