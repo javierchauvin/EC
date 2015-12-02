@@ -284,6 +284,7 @@ void Player::ReadProperties(const char *username)
         std::ofstream myfile;
         myfile.open(userfile);
         myfile.close();
+        SaveProperties();
 	}
 }
 
