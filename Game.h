@@ -27,6 +27,8 @@ enum WeaponType
     WATER_BALLOON,
 };
 
+
+
 class Character /* abstract class */
 {
 public:
@@ -60,6 +62,7 @@ class Player{
 private:
     int X, Y, direction;
     int status; //0:not my turn 1:my turn
+    //int hit; //0:not hit
     int money;
     int health;
     /* weaponList[weapon#] = level
@@ -74,6 +77,7 @@ public:
     void playerSet(int initX, int initY);
     void movePlayer(int key);
     void drawPlayer();
+    int hit; //0:not hit
     int getX();
     int getY();
     int getDirection();
@@ -88,6 +92,7 @@ public:
     void Initial(int x, int y, int dir, int Status);
     void Run(int key);
     void DrawHealth();
+    int getStatus();
 };
 
 class Bullet
@@ -237,5 +242,7 @@ public:
     void Initial(Player &PlayerOne,Player &PlayerTwo);
     void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
+
+void checkCollision(Player &player1, Player &player2, Weapon weapon1, Weapon weapon2);
 
 #endif /* Header_h */

@@ -143,6 +143,10 @@ void Player::setWeaponList(int index, int level){
     weaponList[index] = level;
 }
 
+int Player::getStatus(){
+    return status;
+}
+
 /*
  * drawPlayer - draws player's character
  */
