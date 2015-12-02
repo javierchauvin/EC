@@ -16,13 +16,14 @@ double D2Rad ( int degrees ){
 Weapon::Weapon(){}
 Weapon::~Weapon(){}
 
-Weapon::Weapon(WeaponType Type)
+Weapon::Weapon(/*WeaponType Type*/)
 {
-	Initial(Type);
+	//Initial(Type,true);
 }
 
-void Weapon::Initial(WeaponType WType){
+void Weapon::Initial(WeaponType WType, bool st){
 
+	State = st;
 	Type = WType;
     Angle = 0; 
     NumberOfBullets = 10;//For now 
@@ -32,26 +33,26 @@ void Weapon::Initial(WeaponType WType){
 
 void Weapon::Run(int key, Player &player)
 {
+	if (State){
+		Position.x = player.getX()+80;
+		Position.y = player.getY()-37;
 
-	Position.x = player.getX()+80;
-	Position.y = player.getY()-37;
+		if(FSKEY_LEFT==key){
+			ChangeAngle(-10);
+		}
+		if(FSKEY_RIGHT==key){
+			ChangeAngle(10);	
+		}
+		if(FSKEY_SPACE==key){
+			Shot(Position);
+		}
 
-	if(FSKEY_LEFT==key){
-		ChangeAngle(-10);
+		if(Bulls.GetState()){
+			Bulls.Move();
+			Bulls.Draw();
+		}
+		DrawWeapon();
 	}
-	if(FSKEY_RIGHT==key){
-		ChangeAngle(10);	
-	}
-	if(FSKEY_SPACE==key){
-		Shot(Position);
-	}
-
-	if(Bulls.GetState()){
-		Bulls.Move();
-		Bulls.Draw();
-	}
-	DrawWeapon();
-	//FsPollDevice();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){
@@ -173,6 +174,12 @@ Bullet::Bullet(WeaponType Type) {
 }
 
 void Bullet::Init(WeaponType Type){
+
+	Position.x = 0;
+	Position.y = 0;
+	Velocity.x = 0;
+	Velocity.y = 0;
+
 	switch(Type){
 		case NINE_MM:
 			 break;
@@ -196,11 +203,8 @@ void Bullet::Init(WeaponType Type){
 			State = true;
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
+			Life = 10;
 			InitSpeed = 500;
-			Position.x = 0;
-			Position.y = 0;
-			Velocity.x = 0;
-			Velocity.y = 0;
 		break;
     }
 }

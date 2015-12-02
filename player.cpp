@@ -20,7 +20,7 @@ Player::Player(){
     X = 0;
     Y = 550;
     money = 0;
-    health = 5;
+    health = 100.0;
     direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
@@ -36,7 +36,7 @@ Player::Player(int initX, int initY){
 Player::~Player(){
     X = 0;
     Y = 550;
-    health = 5;
+    health = 100.0;
     direction = 0;
     myCharacter = TANK;
 }
@@ -283,6 +283,7 @@ void Player::ReadProperties(const char *username)
         std::ofstream myfile;
         myfile.open(userfile);
         myfile.close();
+        money = 20;
         SaveProperties();
 	}
 }
@@ -310,13 +311,13 @@ void Player::DrawHealth(){
         x = 25;
         y = 50;
         for(int i=0; i<health; i++){
-            x += 25;
+            x += 2;
             glBegin(GL_QUADS);
             glColor3f(1, 0, 0);
-            glVertex2i(x-10,y+10);
-            glVertex2i(x-10,y-10);
-            glVertex2i(x+10,y-10);
-            glVertex2i(x+10,y+10);
+            glVertex2i(x-1,y+10);
+            glVertex2i(x-1,y-10);
+            glVertex2i(x+1,y-10);
+            glVertex2i(x+1,y+10);
             glEnd();
         }
     }
@@ -324,13 +325,13 @@ void Player::DrawHealth(){
         x = 775;
         y = 50;
         for(int i=0; i<health; i++){
-            x -= 25;
+            x -= 2;
             glBegin(GL_QUADS);
             glColor3f(1, 0, 0);
-            glVertex2i(x-10,y+10);
-            glVertex2i(x-10,y-10);
-            glVertex2i(x+10,y-10);
-            glVertex2i(x+10,y+10);
+            glVertex2i(x-1,y+10);
+            glVertex2i(x-1,y-10);
+            glVertex2i(x+1,y-10);
+            glVertex2i(x+1,y+10);
             glEnd();
         }
     }
