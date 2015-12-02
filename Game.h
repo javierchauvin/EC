@@ -179,7 +179,8 @@ protected:
     double boundaryX2;
 public:
     int nCube;
-    int w,h;
+    int w=50;
+    int h=50;
     double GetBoundaryX1();
     double GetBoundaryX2();
     MountainCube* CubePtr;
