@@ -85,7 +85,7 @@ int main()
     int GameCharge = 0;
     
     Game game;
-    game.Initial();
+    game.Initial(PlayerOne,PlayerTwo);
     // enter while loop, depending on "status"
     while(FSKEY_ESC!=FsInkey())
     {
@@ -167,7 +167,7 @@ int main()
         if (status==4)//run
         {
             
-            game.Run(status);
+            game.Run(status,PlayerOne,PlayerTwo);
         }
         
         FsSwapBuffers();
