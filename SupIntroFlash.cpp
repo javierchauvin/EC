@@ -231,7 +231,7 @@ void TextInput::DrawIntro(void){
     }
 }
 void TextInput::DrawFlash(void){
-    BackGroundIntro();
+    BackGroundFlash();
 	glColor3ub(255,255,153);
     glRasterPos2d(50,75);
     YsGlDrawFontBitmap16x20("Press ESC to exit the flashcard game!");
