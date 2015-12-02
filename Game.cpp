@@ -22,16 +22,23 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         {
             terminate=1;
         }
-        
 
         background.Run(weapon1,weapon2);
+
         weapon1.Run(key, PlayerOne);
         PlayerOne.Run(key);
         weapon2.Run(key, PlayerTwo);
         PlayerTwo.Run(key);
         obstacle1.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         obstacle2.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
-
+        if (PlayerOne.health<=0)
+        {
+            terminate=1;
+        }
+        if (PlayerTwo.health<=0)
+        {
+            terminate=1;
+        }
         FsSwapBuffers();
         FsSleep(10);
     }

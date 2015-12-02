@@ -220,11 +220,11 @@ void Obstacle::Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &playe
     Move();
     CheckCollision(b1x,b1y,b2x,b2y);
     if (hstate1==1) {
-        player1.health-=0.5;
+        player1.health-=1.5;
         hstate1=0;
     }
     if (hstate2==1) {
-        player2.health-=0.5;
+        player2.health-=1.5;
         hstate2=0;
     }
     if (state1==1)
