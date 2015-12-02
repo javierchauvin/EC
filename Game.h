@@ -71,7 +71,7 @@ public:
     Player(int initX, int initY);
     ~Player();
     void playerSet(int initX, int initY);
-    void movePlayer();
+    void movePlayer(int key);
     void drawPlayer();
     int getX();
     int getY();
@@ -85,7 +85,7 @@ public:
     int getMoney();
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
-    void Run();
+    void Run(int key);
 };
 
 class Bullet
