@@ -144,6 +144,7 @@ protected:
     int Level; //(could be from 1 to 5)
     Bullet Bulls;
     //std::vector<Bullet> Bull;
+	GLuint Weapon_Picture;
 public:
     Weapon();
     ~Weapon();
@@ -157,6 +158,7 @@ public:
     void ChangeAngle( int Delta );
     void Move(Coordinates Delta); //Add delta to actual position.
     void Shot(Coordinates BulletInitPos);
+	void Read_Image();
     
     //Get information
     int GetLevel(void);
