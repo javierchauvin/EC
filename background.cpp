@@ -189,7 +189,7 @@ void Background::DrawMountain(void)
         if (CubePtr[i].state==1)
         {
             CubePtr[i].draw();
-            printf("%f  %f\n", CubePtr[i].GetX(),CubePtr[i].GetY());
+           // printf("%f  %f\n", CubePtr[i].GetX(),CubePtr[i].GetY());
         }
     }
 }
