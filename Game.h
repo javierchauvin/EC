@@ -61,13 +61,13 @@ private:
     int X, Y, direction;
     int status; //0:not my turn 1:my turn
     int money;
-    int health;
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
     int myCharacter;
     char userfile[50];
 public:
+    int health;
     Player();
     Player(int initX, int initY);
     ~Player();
@@ -220,6 +220,8 @@ public:
     void CheckCollision(double b1x,double b1y,double b2x,double b2y);
     bool state1;
     bool state2;
+    bool hstate1;
+    bool hstate2;
     void Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2);
 };
 
