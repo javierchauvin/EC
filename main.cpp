@@ -48,8 +48,6 @@ int main()
     //Initailize two player
     Player PlayerOne;
     Player PlayerTwo;
-    PlayerOne.setMoney(20);
-    PlayerTwo.setMoney(25);
     
     //Initialize shop & flash
     Shop shop;
