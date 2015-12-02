@@ -40,10 +40,15 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         if (PlayerOne.health<=0)
         {
             terminate=1;
+            PlayerOne.health=100;
+            PlayerTwo.health=100;
+            
         }
         if (PlayerTwo.health<=0)
         {
             terminate=1;
+            PlayerOne.health=100;
+            PlayerTwo.health=100;
         }
         
         //check bullet collision with player
