@@ -37,10 +37,10 @@ void Weapon::Run(int key, Player &player)
 	Position.y = player.getY()-37;
 
 	if(FSKEY_LEFT==key){
-		ChangeAngle(-1);
+		ChangeAngle(-10);
 	}
 	if(FSKEY_RIGHT==key){
-		ChangeAngle(1);	
+		ChangeAngle(10);	
 	}
 	if(FSKEY_SPACE==key){
 		Shot(Position);
