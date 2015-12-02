@@ -20,6 +20,7 @@ Player::Player(){
     X = 0;
     Y = 550;
     money = 0;
+    health = 5;
     direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
@@ -35,6 +36,7 @@ Player::Player(int initX, int initY){
 Player::~Player(){
     X = 0;
     Y = 550;
+    health = 5;
     direction = 0;
     myCharacter = TANK;
 }
@@ -57,7 +59,7 @@ void Player::Run(int key)
 {
     drawPlayer();
     movePlayer(key);
-    
+    DrawHealth();
 }
 
 void Player::movePlayer(int key){
@@ -296,4 +298,36 @@ void Player::SaveProperties(){
     }
     fclose(fp);
     
+}
+
+void Player::DrawHealth(){
+//    int x, y;
+//    if (X < 400){
+//        x = 50;
+//        y = 50;
+//        for(int i=0; i<health; i++){
+//            x += i* 25;
+//            glBegin(GL_QUADS);
+//            glColor3f(1, 0, 0);
+//            glVertex2i(x-10,y+10);
+//            glVertex2i(x-10,y+10);
+//            glVertex2i(x+10,y+10);
+//            glVertex2i(x+10,y+10);
+//            glEnd();
+//        }
+//    }
+//    else if (X > 400){
+//        x = 750;
+//        y = 50;
+//        for(int i=0; i<health; i++){
+//            x -= i* 25;
+//            glBegin(GL_QUADS);
+//            glColor3f(1, 0, 0);
+//            glVertex2i(x-10,y+10);
+//            glVertex2i(x-10,y+10);
+//            glVertex2i(x+10,y+10);
+//            glVertex2i(x+10,y+10);
+//            glEnd();
+//        }
+//    }
 }
