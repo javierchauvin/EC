@@ -61,6 +61,7 @@ private:
     int X, Y, direction;
     int status; //0:not my turn 1:my turn
     int money;
+    int health;
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
@@ -86,6 +87,7 @@ public:
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
     void Run(int key);
+    void DrawHealth();
 };
 
 class Bullet
@@ -232,11 +234,9 @@ public:
     Bullet bullet;
 
     Weapon weapon1;
-    Player player1;
     Weapon weapon2;
-    Player player2;
-    void Initial(void);
-    void Run(int &status);
+    void Initial(Player &PlayerOne,Player &PlayerTwo);
+    void Run(int &status,Player &PlayerOne,Player &PlayerTwo);
 };
 
 #endif /* Header_h */

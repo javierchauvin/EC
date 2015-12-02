@@ -20,6 +20,7 @@ Player::Player(){
     X = 0;
     Y = 550;
     money = 0;
+    health = 5;
     direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
@@ -35,6 +36,7 @@ Player::Player(int initX, int initY){
 Player::~Player(){
     X = 0;
     Y = 550;
+    health = 5;
     direction = 0;
     myCharacter = TANK;
 }
@@ -57,7 +59,7 @@ void Player::Run(int key)
 {
     drawPlayer();
     movePlayer(key);
-    
+    DrawHealth();
 }
 
 void Player::movePlayer(int key){
@@ -66,42 +68,35 @@ void Player::movePlayer(int key){
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
     
-    switch(key)
-    {
-        case FSKEY_A:
-            if (X < 400) { /* player 1 */
-                if (X > 5) {
-                    X -= 5;
-                    //direction = 1;
+    if (status == 1){
+        switch(key)
+        {
+            case FSKEY_A:
+                if ((X < 400) && (X > 5)) { /* player 1 */
+                        X -= 5;
                 }
-            }
-        case FSKEY_J:
-            if (X > 400) { /* player 2 */
-                if (X > boundary2 + 5) {
-                    X -= 5;
-                    //direction = 1;
+            case FSKEY_J:
+                if (X > 400) { /* player 2 */
+                    if (X > boundary2 + 5) {
+                        X -= 5;
+                    }
+                    
                 }
-                
-            }
-            break;
-        case FSKEY_D:
-            if (X < 400) { /* player 1 */
-                if (X < boundary1 - 5) {
-                    X += 5;
-                    //direction = 0;
+                break;
+            case FSKEY_D:
+                if (X < 400) { /* player 1 */
+                    if (X < boundary1 - 5) {
+                        X += 5;
+                    }
                 }
-            }
-        case FSKEY_L:
-            if (X > 400) { /* player 2 */
-                if (X < 795) {
-                    X += 5;
-                    //direction = 0;
+            case FSKEY_L:
+                if (X > 400) { /* player 2 */
+                    if (X < 795) {
+                    }
                 }
-            }
-            break;
+                break;
+        }
     }
-    //FsSwapBuffers();
-    //FsSleep(25);
 }
 
 int Player::getX(){
@@ -303,4 +298,36 @@ void Player::SaveProperties(){
     }
     fclose(fp);
     
+}
+
+void Player::DrawHealth(){
+    int x, y;
+    if (X < 400){
+        x = 25;
+        y = 50;
+        for(int i=0; i<health; i++){
+            x += 25;
+            glBegin(GL_QUADS);
+            glColor3f(1, 0, 0);
+            glVertex2i(x-10,y+10);
+            glVertex2i(x-10,y-10);
+            glVertex2i(x+10,y-10);
+            glVertex2i(x+10,y+10);
+            glEnd();
+        }
+    }
+    else if (X > 400){
+        x = 775;
+        y = 50;
+        for(int i=0; i<health; i++){
+            x -= 25;
+            glBegin(GL_QUADS);
+            glColor3f(1, 0, 0);
+            glVertex2i(x-10,y+10);
+            glVertex2i(x-10,y-10);
+            glVertex2i(x+10,y-10);
+            glVertex2i(x+10,y+10);
+            glEnd();
+        }
+    }
 }
