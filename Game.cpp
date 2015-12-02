@@ -26,9 +26,9 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 
         background.Run(weapon1,weapon2);
         weapon1.Run(key, PlayerOne);
-        PlayerOne.Run(key,);
+        PlayerOne.Run(key);
         weapon2.Run(key, PlayerTwo);
-        PlayerTwo.Run(key,state);
+        PlayerTwo.Run(key);
         obstacle1.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         obstacle2.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
 
