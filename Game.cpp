@@ -12,6 +12,9 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 }
 void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 {
+    bool state1=1;
+    bool state2=0;
+    
     int terminate=0;
     while (terminate!=1)
     {
@@ -22,13 +25,17 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         {
             terminate=1;
         }
+        state1=weapon1.GetWeaponState();
+        state2=weapon2.GetWeaponState();
+        
+        
         
 
         background.Run(weapon1);
         weapon1.Run(key, PlayerOne);
-        PlayerOne.Run(key,);
+        PlayerOne.Run(key,state1);
         weapon2.Run(key, PlayerTwo);
-        PlayerTwo.Run(key,state);
+        PlayerTwo.Run(key,state2);
         obstacle1.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
         obstacle2.Run(weapon1,PlayerOne,weapon2,PlayerTwo);
 

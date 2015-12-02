@@ -90,7 +90,7 @@ public:
     int getMoney();
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
-    void Run(int key);
+    void Run(int key, bool state);
     void DrawHealth();
     int getStatus();
 };
@@ -145,6 +145,7 @@ public:
     ~Weapon();
     //Weapon(WeaponType Type);
     
+    bool GetWeaponState();
     //Functionality
     void Initial(WeaponType Type, bool st);
     void Run(int key, Player &player);
