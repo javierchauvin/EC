@@ -85,7 +85,7 @@ void Weapon::Read_Image()
 	switch (Type)
 	{
 	case DEFAULT:
-		sprintf(fn1, "CANNON.png");
+		sprintf(fn1, "BANANA.png");
 		break;
 	case NINE_MM:
 		sprintf(fn1, "NINE_MM.png");
