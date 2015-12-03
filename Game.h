@@ -124,6 +124,8 @@ public:
     void SetState(bool State); //Checks the modifies the state of the bullet
     void ChangeLife (void);
     int GetLife(void);
+	void CheckScreen(void);
+	void ChangeSpeed(int Delta);
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet

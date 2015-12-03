@@ -60,12 +60,20 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_SPACE==key){
 			Shot(Position);
 		}
+		if(FSKEY_S==key){
+			Bulls.ChangeSpeed(30);
+		}
+		if(FSKEY_D==key){
+			Bulls.ChangeSpeed(-30);
+		}
 
 		if(Bulls.GetState()){
+			Bulls.CheckScreen();
 			Bulls.Move();
 			Bulls.Draw();
 		}
 	}
+	DrawWeapon();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){
@@ -434,4 +442,19 @@ bool Bullet::GetState(void){
 
 int Bullet::GetLife(void){
     return Life;
+}
+
+void Bullet::CheckScreen(void){
+	if (Position.x < 0 || 800 < Position.x ||
+		Position.y < 0 || 600 < Position.y){
+		
+		State = false;
+	}
+}
+
+void Bullet::ChangeSpeed(int Delta){
+	
+	if( 0 < Delta || 0 < InitSpeed ){
+		InitSpeed += Delta;
+	}
 }
