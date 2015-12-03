@@ -110,7 +110,7 @@ void Weapon::Run(int key, Player &player)
 	}
 	else
 	{
-		Position.x = player.getX()-85;
+		Position.x = player.getX()-45;
 		Position.y = player.getY()-15;
 	}
 
@@ -157,7 +157,7 @@ void Weapon::Read_Image()
 	switch (Type)
 	{
 	case DEFAULT:
-		sprintf(fn1, "BANANA.png");
+		sprintf(fn1, "CANNON.png");
 		break;
 	case NINE_MM:
 		sprintf(fn1, "NINE_MM.png");
@@ -270,32 +270,32 @@ void Weapon::DrawWeapon(void)
 	if (Position.x < 400)
 	{
 		glTexCoord2d(0.0, 0.0);
-		glVertex2i(Position.x, Position.y);
+		glVertex2d(Position.x+size*sin(Angle*PI/180), Position.y-size*cos(Angle*PI/180));
 
 		glTexCoord2d(1.0, 0.0);
-		glVertex2i(Position.x + size, Position.y);
+		glVertex2d(Position.x + size*sin(Angle*PI / 180)+size*cos(Angle*PI/180), Position.y - size*cos(Angle*PI / 180)+size*sin(Angle*PI/180));
 
 		glTexCoord2d(1.0, 1.0);
-		glVertex2i(Position.x + size, Position.y + size);
+		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
 
 		glTexCoord2d(0.0, 1.0);
-		glVertex2i(Position.x, Position.y + size);
+		glVertex2d(Position.x, Position.y);
 		glEnd();
 		glDisable(GL_BLEND);
 	}
 	else
 	{
 		glTexCoord2d(1.0, 0.0);
-		glVertex2i(Position.x, Position.y);
+		glVertex2d(Position.x - size*sin(Angle*PI / 180) + size*cos(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180) + size*sin(Angle*PI / 180));
 
-		glTexCoord2d(0.0, 0.0);
-		glVertex2i(Position.x + size, Position.y);
+	glTexCoord2d(0.0, 0.0);
+		glVertex2d(Position.x - size*sin(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180));
 
 		glTexCoord2d(0.0, 1.0);
-		glVertex2i(Position.x + size, Position.y + size);
+		glVertex2d(Position.x, Position.y);
 
 		glTexCoord2d(1.0, 1.0);
-		glVertex2i(Position.x, Position.y + size);
+		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
 		glEnd();
 		glDisable(GL_BLEND);
 	}
