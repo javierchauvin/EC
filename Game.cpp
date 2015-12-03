@@ -3,9 +3,9 @@
 void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
-    weapon1.Initial(NINE_MM,true);//weapon type
+    weapon1.Initial(NINE_MM,true,PlayerOne);//weapon type
     PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
-    weapon2.Initial(DEFAULT,false);//weapon type
+    weapon2.Initial(DEFAULT,false,PlayerTwo);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
@@ -24,34 +24,34 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         }
         switch (key) {
             case FSKEY_1:
-                weapon1.SetWeapon(DEFAULT);
+                weapon1.SetWeapon(DEFAULT,PlayerOne);
                 break;
             case FSKEY_2:
-                weapon1.SetWeapon(NINE_MM);
+                weapon1.SetWeapon(NINE_MM,PlayerOne);
                 break;
             case FSKEY_3:
-                weapon1.SetWeapon(CANNON);
+                weapon1.SetWeapon(CANNON,PlayerOne);
                 break;
             case FSKEY_4:
-                weapon1.SetWeapon(LAND_ROCKET);
+                weapon1.SetWeapon(LAND_ROCKET,PlayerOne);
                 break;
             case FSKEY_5:
-                weapon1.SetWeapon(NUCLEAR_ROCKET);
+                weapon1.SetWeapon(NUCLEAR_ROCKET,PlayerOne);
                 break;
             case FSKEY_6:
-                weapon2.SetWeapon(DEFAULT);
+                weapon2.SetWeapon(DEFAULT,PlayerTwo);
                 break;
             case FSKEY_7:
-                weapon2.SetWeapon(NINE_MM);
+                weapon2.SetWeapon(NINE_MM,PlayerTwo);
                 break;
             case FSKEY_8:
-                weapon2.SetWeapon(CANNON);
+                weapon2.SetWeapon(CANNON,PlayerTwo);
                 break;
             case FSKEY_9:
-                weapon2.SetWeapon(LAND_ROCKET);
+                weapon2.SetWeapon(LAND_ROCKET,PlayerTwo);
                 break;
             case FSKEY_0:
-                weapon2.SetWeapon(NUCLEAR_ROCKET);
+                weapon2.SetWeapon(NUCLEAR_ROCKET,PlayerTwo);
                 break;
             default:
                 break;

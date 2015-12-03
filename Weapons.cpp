@@ -21,21 +21,81 @@ Weapon::~Weapon(){}
 //	//Initial(Type,true);
 //}
 
-void Weapon::Initial(WeaponType WType, bool st){
+void Weapon::Initial(WeaponType WType, bool st,Player player){
 
+    switch (Type)
+    {
+        case DEFAULT:
+            WeaponTypeNum=0;
+            break;
+        case NINE_MM:
+            WeaponTypeNum=1;
+            break;
+        case CANNON:
+            WeaponTypeNum=2;
+            break;
+        case LAND_ROCKET:
+            WeaponTypeNum=3;
+            break;
+        case NUCLEAR_ROCKET:
+            WeaponTypeNum=4;
+            break;
+        case CAT:
+            WeaponTypeNum=5;
+            break;
+        case WATER_BALLOON:
+            WeaponTypeNum=6;
+            break;
+        default:
+            WeaponTypeNum=7;
+            break;
+    }
 	State = st;
 	Type = WType;
+    int *WeaponList=player.getWeaponList();
+    Read_Image();
 	Read_Image();
     Angle = 0; 
     NumberOfBullets = 10;//For now 
-    Level = 5; //ForNow
+    Level = WeaponList[WeaponTypeNum] ; //ForNow
     Bulls.Init(WType);
 }
-void Weapon::SetWeapon(WeaponType WType){
+void Weapon::SetWeapon(WeaponType WType, Player player){
+    switch (Type)
+    {
+        case DEFAULT:
+            WeaponTypeNum=0;
+            break;
+        case NINE_MM:
+            WeaponTypeNum=1;
+            break;
+        case CANNON:
+            WeaponTypeNum=2;
+            break;
+        case LAND_ROCKET:
+            WeaponTypeNum=3;
+            break;
+        case NUCLEAR_ROCKET:
+            WeaponTypeNum=4;
+            break;
+        case CAT:
+            WeaponTypeNum=5;
+            break;
+        case WATER_BALLOON:
+            WeaponTypeNum=6;
+            break;
+        default:
+            WeaponTypeNum=7;
+            break;
+    }
+
     Type = WType;
+    int *WeaponList=player.getWeaponList();
+
     Read_Image();
     NumberOfBullets = 10;//For now
-    Level = 5; //ForNow
+    Level = WeaponList[WeaponTypeNum]; //ForNow
+    printf("LEVEL= %d",Level);
     Bulls.Init(WType);
 }
 

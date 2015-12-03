@@ -24,7 +24,7 @@ Player::Player(){
     direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
-        weaponList[i] = 0; //default level is 0
+        weaponList[i] = 1; //default level is 0
     }
 }
 /* Constructor2 */

@@ -146,6 +146,7 @@ class Weapon
 protected:
 	bool State;
     WeaponType Type;
+    int WeaponTypeNum;
     Coordinates Position;
     int Angle; //It is in degrees
     int NumberOfBullets;
@@ -159,8 +160,8 @@ public:
     //Weapon(WeaponType Type);
     
     //Functionality
-    void Initial(WeaponType Type, bool st);
-    void SetWeapon(WeaponType Type);
+    void Initial(WeaponType Type, bool st,Player player);
+    void SetWeapon(WeaponType Type,Player player);
     void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);
