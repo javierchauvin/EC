@@ -30,30 +30,6 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 
 		bool bulstate1 = weapon1.GetBullet()->GetState();
 		bool bulstate2 = weapon2.GetBullet()->GetState();
-		//if(state1 && bulstate1){
-		//	state1 = false;
-		//	state2 = true;
-		//	printf("s1: %d b1:%d - s2: %d b2:%d\n",state1,bulstate1,state2,bulstate2);
-		//}
-		//if(state2 && bulstate2){
-		//	state1 = true;
-		//	state2 = false;
-		//	printf("s1: %d b1:%d - s2: %d b2:%d\n",state1,bulstate1,state2,bulstate2);
-		//}
-
-		//if (weapon1.GetWeaponState() && weapon1.GetBullet()->GetState()){
-		//	weapon1.SetState( false );
-		//	weapon2.SetState( true );
-		//}
-		//if (weapon2.GetWeaponState() && weapon2.GetBullet()->GetState()){
-		//	weapon1.SetState( true );
-		//	weapon2.SetState( false );
-		//}
-
-		//if (Bulls.GetIsShoot() && !Bulls.GetState()){
-		//	State = false;
-		//	Bulls.Shoot(false);
-		//}
 		
 		if (weapon1.GetBullet()->GetIsShoot() && !weapon1.GetBullet()->GetState() ){
 			weapon1.SetState(false);

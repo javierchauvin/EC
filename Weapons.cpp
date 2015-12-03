@@ -51,11 +51,6 @@ void Weapon::Run(int key, Player &player)
 	DrawWeapon();
 	if (State){
 
-		//if (Bulls.GetIsShoot() && !Bulls.GetState()){
-		//	State = false;
-		//	Bulls.Shoot(false);
-		//}
-
 		if(FSKEY_LEFT==key){
 			ChangeAngle(-10);
 		}
@@ -83,9 +78,6 @@ void Weapon::Run(int key, Player &player)
 
 void Weapon::Shot(Coordinates BulletInitPos){
 
-	//Bullet B;
-	//B.Init(Type);
-	//Bull.push_back(Type);
 	Bulls.SetState(true);
 	Bulls.SetLife();
 	Bulls.Shoot( true );
