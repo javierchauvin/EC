@@ -17,7 +17,7 @@
 
 /* Constructor1 */
 Player::Player(){
-    X = 0;
+    X = 50;
     Y = 550;
     money = 0;
     health = 100.0;
@@ -34,7 +34,7 @@ Player::Player(int initX, int initY){
 }
 /* Destructor */
 Player::~Player(){
-    X = 0;
+    X = 50;
     Y = 550;
     health = 100.0;
     direction = 0;
