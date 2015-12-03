@@ -83,7 +83,7 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
             && (weapon1.GetBullet()->x() < player2.getX()+w)
             && (weapon1.GetBullet()->y() > player2.getY()-h)
             && (weapon1.GetBullet()->y() < player2.getY()+h)
-            && (weapon1.GetBullet()->x() < 400))
+            && (weapon1.GetBullet()->x() > 400))
         {
             player2.hit = 1;
             weapon1.GetBullet()->SetState(false);
@@ -95,7 +95,7 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
             && (weapon2.GetBullet()->x() < player1.getX()+w)
             && (weapon2.GetBullet()->y() > player1.getY()-h)
             && (weapon2.GetBullet()->y() < player1.getY()+h)
-            && (weapon2.GetBullet()->x() > 400))
+            && (weapon2.GetBullet()->x() < 400))
         {
             player1.hit = 1;
             weapon2.GetBullet()->SetState(false);
