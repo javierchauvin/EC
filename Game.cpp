@@ -5,7 +5,7 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
     background.Initial();
     weapon1.Initial(NINE_MM,true);//weapon type
     PlayerOne.Initial(0, 550, 0, 1);//x,y,direction
-    weapon2.Initial(CANNON,false);//weapon type
+    weapon2.Initial(NINE_MM,false);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
