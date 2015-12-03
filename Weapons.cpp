@@ -51,6 +51,11 @@ void Weapon::Run(int key, Player &player)
 	DrawWeapon();
 	if (State){
 
+		//if (Bulls.GetIsShoot() && !Bulls.GetState()){
+		//	State = false;
+		//	Bulls.Shoot(false);
+		//}
+
 		if(FSKEY_LEFT==key){
 			ChangeAngle(-10);
 		}
@@ -60,12 +65,20 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_SPACE==key){
 			Shot(Position);
 		}
+		if(FSKEY_S==key){
+			Bulls.ChangeSpeed(30);
+		}
+		if(FSKEY_D==key){
+			Bulls.ChangeSpeed(-30);
+		}
 
 		if(Bulls.GetState()){
+			Bulls.CheckScreen();
 			Bulls.Move();
 			Bulls.Draw();
 		}
 	}
+	DrawWeapon();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){
@@ -74,6 +87,8 @@ void Weapon::Shot(Coordinates BulletInitPos){
 	//B.Init(Type);
 	//Bull.push_back(Type);
 	Bulls.SetState(true);
+	Bulls.SetLife();
+	Bulls.Shoot( true );
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
 }
 
@@ -278,6 +293,8 @@ Bullet::Bullet(){
 	InitSpeed = 100;
 	Velocity.x = 0;
 	Velocity.y = 0;
+	LifeInitValue = 10;
+	Life = LifeInitValue;
 }
 Bullet::~Bullet() {}
 
@@ -294,6 +311,7 @@ void Bullet::Init(WeaponType Type){
 	Velocity.x = 0;
 	Velocity.y = 0;
 	State = false;
+	IsShoot = false;
 
 	switch(Type){
 		case NINE_MM:
@@ -317,7 +335,8 @@ void Bullet::Init(WeaponType Type){
 		case DEFAULT:
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			Life = 1;
+			LifeInitValue = 10;
+			Life = LifeInitValue;
 			InitSpeed = 500;
 		break;
     }
@@ -428,10 +447,38 @@ void Bullet::ChangeLife (void){
 	}
 }
 
+void Bullet::SetLife( void ){
+	Life = LifeInitValue;
+}
+
 bool Bullet::GetState(void){
 	return State;
 }
 
 int Bullet::GetLife(void){
     return Life;
+}
+
+void Bullet::CheckScreen(void){
+	if (Position.x < 0 || 800 < Position.x ||
+		Position.y < 0 || 600 < Position.y){
+		
+		State = false;
+	}
+}
+
+void Bullet::ChangeSpeed(int Delta){
+	
+	if( 0 < Delta || 0 < InitSpeed ){
+		InitSpeed += Delta;
+	}
+}
+
+void Bullet::Shoot (bool IsS){
+	IsShoot = IsS;
+}
+
+
+bool Bullet::GetIsShoot(void){
+	return IsShoot;
 }

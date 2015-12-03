@@ -102,11 +102,13 @@ public:
 class Bullet
 {
     bool State;
+	bool IsShoot;
     double Grav; // It can be varied for various weapons
     int InitSpeed; //The speed of the bullet.
     WeaponType Type; // This will cover geometry of the bullet, particle
     //(line, circle or missile) or line(light line)
     int Life;
+	int LifeInitValue; 
     Coordinates Position;
     Coordinates Velocity; //(to take the direction)
     int Angle;
@@ -124,6 +126,11 @@ public:
     void SetState(bool State); //Checks the modifies the state of the bullet
     void ChangeLife (void);
     int GetLife(void);
+	void CheckScreen(void);
+	void ChangeSpeed(int Delta);
+	void SetLife( void );
+	void Shoot (bool IsS);
+	bool GetIsShoot (void);
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet
