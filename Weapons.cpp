@@ -82,6 +82,7 @@ void Weapon::Shot(Coordinates BulletInitPos){
 	//B.Init(Type);
 	//Bull.push_back(Type);
 	Bulls.SetState(true);
+	Bulls.SetLife();
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
 }
 
@@ -325,7 +326,8 @@ void Bullet::Init(WeaponType Type){
 		case DEFAULT:
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			Life = 1;
+			LifeInitValue = 10;
+			Life = LifeInitValue;
 			InitSpeed = 500;
 		break;
     }
@@ -436,6 +438,10 @@ void Bullet::ChangeLife (void){
 	}
 }
 
+void Bullet::SetLife( void ){
+	Life = LifeInitValue;
+}
+
 bool Bullet::GetState(void){
 	return State;
 }
@@ -458,3 +464,4 @@ void Bullet::ChangeSpeed(int Delta){
 		InitSpeed += Delta;
 	}
 }
+

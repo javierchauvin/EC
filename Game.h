@@ -107,6 +107,7 @@ class Bullet
     WeaponType Type; // This will cover geometry of the bullet, particle
     //(line, circle or missile) or line(light line)
     int Life;
+	int LifeInitValue; 
     Coordinates Position;
     Coordinates Velocity; //(to take the direction)
     int Angle;
@@ -126,6 +127,7 @@ public:
     int GetLife(void);
 	void CheckScreen(void);
 	void ChangeSpeed(int Delta);
+	void SetLife( void );
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet
