@@ -40,13 +40,13 @@ void Weapon::Run(int key, Player &player)
 {
 	if(player.getX()<400)
 	{
-		Position.x = player.getX()+80;
-		Position.y = player.getY()-37;
+		Position.x = player.getX()+45;
+		Position.y = player.getY()-15;
 	}
 	else
 	{
-		Position.x = player.getX()-80;
-		Position.y = player.getY()-37;
+		Position.x = player.getX()-85;
+		Position.y = player.getY()-15;
 	}
 	DrawWeapon();
 	if (State){
@@ -195,19 +195,38 @@ void Weapon::DrawWeapon(void)
 
 	glBegin(GL_QUADS);
 
-	glTexCoord2d(0.0, 0.0);
-	glVertex2i(Position.x, Position.y);
+	if (Position.x < 400)
+	{
+		glTexCoord2d(0.0, 0.0);
+		glVertex2i(Position.x, Position.y);
 
-	glTexCoord2d(1.0, 0.0);
-	glVertex2i(Position.x + size, Position.y);
+		glTexCoord2d(1.0, 0.0);
+		glVertex2i(Position.x + size, Position.y);
 
-	glTexCoord2d(1.0, 1.0);
-	glVertex2i(Position.x + size, Position.y + size);
+		glTexCoord2d(1.0, 1.0);
+		glVertex2i(Position.x + size, Position.y + size);
 
-	glTexCoord2d(0.0, 1.0);
-	glVertex2i(Position.x, Position.y + size);
-	glEnd();
-	glDisable(GL_BLEND);
+		glTexCoord2d(0.0, 1.0);
+		glVertex2i(Position.x, Position.y + size);
+		glEnd();
+		glDisable(GL_BLEND);
+	}
+	else
+	{
+		glTexCoord2d(1.0, 0.0);
+		glVertex2i(Position.x, Position.y);
+
+		glTexCoord2d(0.0, 0.0);
+		glVertex2i(Position.x + size, Position.y);
+
+		glTexCoord2d(0.0, 1.0);
+		glVertex2i(Position.x + size, Position.y + size);
+
+		glTexCoord2d(1.0, 1.0);
+		glVertex2i(Position.x, Position.y + size);
+		glEnd();
+		glDisable(GL_BLEND);
+	}
 
 }
 
