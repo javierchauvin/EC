@@ -67,6 +67,7 @@ private:
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
+    int weapontype;
     int myCharacter;
     char userfile[50];
 public:
@@ -128,9 +129,10 @@ public:
     int GetLife(void);
 	void CheckScreen(void);
 	void ChangeSpeed(int Delta);
-	void SetLife( void );
+	void SetLife( int Level );
 	void Shoot (bool IsS);
 	bool GetIsShoot (void);
+	void SetType( WeaponType Type );
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet
@@ -145,6 +147,7 @@ class Weapon
 protected:
 	bool State;
     WeaponType Type;
+    int WeaponTypeNum;
     Coordinates Position;
     int Angle; //It is in degrees
     int NumberOfBullets;
@@ -158,7 +161,8 @@ public:
     //Weapon(WeaponType Type);
     
     //Functionality
-    void Initial(WeaponType Type, bool st);
+    void Initial(WeaponType Type, bool st,Player &player);
+    void SetWeapon(WeaponType Type,Player &player);
     void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);
@@ -166,6 +170,7 @@ public:
     void Move(Coordinates Delta); //Add delta to actual position.
     void Shot(Coordinates BulletInitPos);
 	void Read_Image();
+	void Check( WeaponType Type, int Lev );
     
     //Get information
     int GetLevel(void);

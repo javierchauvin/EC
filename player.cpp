@@ -24,7 +24,7 @@ Player::Player(){
     direction = 0;
     myCharacter = TANK; //default character
     for (int i = 0; i < TYPESOFWEAPONS; i++) {
-        weaponList[i] = 0; //default level is 0
+        weaponList[i] = 1; //default level is 0
     }
 }
 /* Constructor2 */
@@ -85,6 +85,7 @@ void Player::movePlayer(int key){
                 if ((X < 400) && (X > 5)) { /* player 1 */
                         X -= 5;
                 }
+                break;
             case FSKEY_J:
                 if (X > 400) { /* player 2 */
                     if (X > boundary2 + 5) {
@@ -99,9 +100,11 @@ void Player::movePlayer(int key){
                         X += 5;
                     }
                 }
+                break;
             case FSKEY_L:
                 if (X > 400) { /* player 2 */
                     if (X < 795) {
+                        X += 5;
                     }
                 }
                 break;

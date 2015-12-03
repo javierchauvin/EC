@@ -16,21 +16,86 @@ double D2Rad ( int degrees ){
 Weapon::Weapon(){}
 Weapon::~Weapon(){}
 
-//Weapon::Weapon(void/*WeaponType Type*/)
-//{
-//	//Initial(Type,true);
-//}
+void Weapon::Initial(WeaponType WType, bool st,Player &player){
 
-void Weapon::Initial(WeaponType WType, bool st){
-
+    switch (WType)
+    {
+        case DEFAULT:
+            WeaponTypeNum=0;
+            break;
+        case NINE_MM:
+            WeaponTypeNum=1;
+            break;
+        case CANNON:
+            WeaponTypeNum=2;
+            break;
+        case LAND_ROCKET:
+            WeaponTypeNum=3;
+            break;
+        case NUCLEAR_ROCKET:
+            WeaponTypeNum=4;
+            break;
+        case CAT:
+            WeaponTypeNum=5;
+            break;
+        case WATER_BALLOON:
+            WeaponTypeNum=6;
+            break;
+        default:
+            WeaponTypeNum=7;
+            break;
+    }
 	State = st;
 	Type = WType;
+    int *WeaponList=player.getWeaponList();
+    Read_Image();
 	Read_Image();
     Angle = 0; 
     NumberOfBullets = 10;//For now 
-    Level = 5; //ForNow
+    Level = WeaponList[WeaponTypeNum] ; //ForNow
     Bulls.Init(WType);
+	Bulls.SetLife(Level);
 }
+void Weapon::SetWeapon(WeaponType WType, Player &player){
+    switch (WType)
+    {
+        case DEFAULT:
+            WeaponTypeNum=0;
+            break;
+        case NINE_MM:
+            WeaponTypeNum=1;
+            break;
+        case CANNON:
+            WeaponTypeNum=2;
+            break;
+        case LAND_ROCKET:
+            WeaponTypeNum=3;
+            break;
+        case NUCLEAR_ROCKET:
+            WeaponTypeNum=4;
+            break;
+        case CAT:
+            WeaponTypeNum=5;
+            break;
+        case WATER_BALLOON:
+            WeaponTypeNum=6;
+            break;
+        default:
+            WeaponTypeNum=7;
+            break;
+    }
+
+    Type = WType;
+    int *WeaponList=player.getWeaponList();
+
+    Read_Image();
+    NumberOfBullets = 10;//For now
+    Level = WeaponList[WeaponTypeNum]; //ForNow
+    printf("Weapon %d LEVEL= %d\n",(WeaponTypeNum+1),Level);
+    Bulls.Init(WType);
+	Bulls.SetLife(Level);
+}
+
 bool Weapon::GetWeaponState()
 {
     return State;
@@ -45,10 +110,10 @@ void Weapon::Run(int key, Player &player)
 	}
 	else
 	{
-		Position.x = player.getX()-85;
+		Position.x = player.getX()-45;
 		Position.y = player.getY()-15;
 	}
-	DrawWeapon();
+
 	if (State){
 
 		if(FSKEY_LEFT==key){
@@ -60,10 +125,10 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_SPACE==key){
 			Shot(Position);
 		}
-		if(FSKEY_S==key){
+		if(FSKEY_W==key){
 			Bulls.ChangeSpeed(30);
 		}
-		if(FSKEY_D==key){
+		if(FSKEY_S==key){
 			Bulls.ChangeSpeed(-30);
 		}
 
@@ -73,13 +138,13 @@ void Weapon::Run(int key, Player &player)
 			Bulls.Draw();
 		}
 	}
+
 	DrawWeapon();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){
 
 	Bulls.SetState(true);
-	Bulls.SetLife();
 	Bulls.Shoot( true );
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
 }
@@ -92,7 +157,7 @@ void Weapon::Read_Image()
 	switch (Type)
 	{
 	case DEFAULT:
-		sprintf(fn1, "BANANA.png");
+		sprintf(fn1, "CANNON.png");
 		break;
 	case NINE_MM:
 		sprintf(fn1, "NINE_MM.png");
@@ -205,32 +270,32 @@ void Weapon::DrawWeapon(void)
 	if (Position.x < 400)
 	{
 		glTexCoord2d(0.0, 0.0);
-		glVertex2i(Position.x, Position.y);
+		glVertex2d(Position.x+size*sin(Angle*PI/180), Position.y-size*cos(Angle*PI/180));
 
 		glTexCoord2d(1.0, 0.0);
-		glVertex2i(Position.x + size, Position.y);
+		glVertex2d(Position.x + size*sin(Angle*PI / 180)+size*cos(Angle*PI/180), Position.y - size*cos(Angle*PI / 180)+size*sin(Angle*PI/180));
 
 		glTexCoord2d(1.0, 1.0);
-		glVertex2i(Position.x + size, Position.y + size);
+		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
 
 		glTexCoord2d(0.0, 1.0);
-		glVertex2i(Position.x, Position.y + size);
+		glVertex2d(Position.x, Position.y);
 		glEnd();
 		glDisable(GL_BLEND);
 	}
 	else
 	{
 		glTexCoord2d(1.0, 0.0);
-		glVertex2i(Position.x, Position.y);
+		glVertex2d(Position.x - size*sin(Angle*PI / 180) + size*cos(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180) + size*sin(Angle*PI / 180));
 
-		glTexCoord2d(0.0, 0.0);
-		glVertex2i(Position.x + size, Position.y);
+	glTexCoord2d(0.0, 0.0);
+		glVertex2d(Position.x - size*sin(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180));
 
 		glTexCoord2d(0.0, 1.0);
-		glVertex2i(Position.x + size, Position.y + size);
+		glVertex2d(Position.x, Position.y);
 
 		glTexCoord2d(1.0, 1.0);
-		glVertex2i(Position.x, Position.y + size);
+		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
 		glEnd();
 		glDisable(GL_BLEND);
 	}
@@ -282,7 +347,7 @@ Bullet::Bullet(){
 	State = false;
 	Grav = 9.8; // It can be varied for various weapons
 	Type = DEFAULT;
-	InitSpeed = 100;
+	InitSpeed = 500;
 	Velocity.x = 0;
 	Velocity.y = 0;
 	LifeInitValue = 10;
@@ -304,31 +369,52 @@ void Bullet::Init(WeaponType Type){
 	Velocity.y = 0;
 	State = false;
 	IsShoot = false;
+	SetType(Type);
+	Life = LifeInitValue;
+}
 
+void Bullet::SetType( WeaponType Type ){
+	
 	switch(Type){
 		case NINE_MM:
-			 break;
+			Type = NINE_MM;
+			Grav = 9.8; 
+			InitSpeed = 500;
+			break;
 
 		case CANNON:
+			Type = CANNON;
+			Grav = 12; 
+			InitSpeed = 600;
 			break;
 
 		case LAND_ROCKET:
+			Type = LAND_ROCKET;
+			Grav = 6; 
+			InitSpeed = 700;
 			break;
 
 		case NUCLEAR_ROCKET:
+			Type = NUCLEAR_ROCKET;
+			Grav = 5; 
+			InitSpeed = 800;
 			break;
 
 		case CAT:
+			Type = CAT;
+			Grav = 3; 
+			InitSpeed = 300;
 			break;
 
 		case WATER_BALLOON:
+			Type = WATER_BALLOON;
+			Grav = 7; 
+			InitSpeed = 400;
 			break;
 
 		case DEFAULT:
-			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			LifeInitValue = 10;
-			Life = LifeInitValue;
+			Grav = 9.8; // It can be varied for various weapons
 			InitSpeed = 500;
 		break;
     }
@@ -439,8 +525,8 @@ void Bullet::ChangeLife (void){
 	}
 }
 
-void Bullet::SetLife( void ){
-	Life = LifeInitValue;
+void Bullet::SetLife( int level ){
+	LifeInitValue = (int)1.5*level;
 }
 
 bool Bullet::GetState(void){
@@ -468,9 +554,10 @@ void Bullet::ChangeSpeed(int Delta){
 
 void Bullet::Shoot (bool IsS){
 	IsShoot = IsS;
+	Life = LifeInitValue;
 }
-
 
 bool Bullet::GetIsShoot(void){
 	return IsShoot;
 }
+
