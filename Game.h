@@ -102,6 +102,7 @@ public:
 class Bullet
 {
     bool State;
+	bool IsShoot;
     double Grav; // It can be varied for various weapons
     int InitSpeed; //The speed of the bullet.
     WeaponType Type; // This will cover geometry of the bullet, particle
@@ -128,6 +129,8 @@ public:
 	void CheckScreen(void);
 	void ChangeSpeed(int Delta);
 	void SetLife( void );
+	void Shoot (bool IsS);
+	bool GetIsShoot (void);
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet

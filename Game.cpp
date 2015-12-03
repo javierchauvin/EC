@@ -12,8 +12,6 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 }
 void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 {
-   
-    
     int terminate=0;
     while (terminate!=1)
     {
@@ -43,13 +41,31 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 		//	printf("s1: %d b1:%d - s2: %d b2:%d\n",state1,bulstate1,state2,bulstate2);
 		//}
 
-		if (weapon1.GetWeaponState() && weapon1.GetBullet()->GetState()){
-			weapon1.SetState( false );
-			weapon2.SetState( true );
+		//if (weapon1.GetWeaponState() && weapon1.GetBullet()->GetState()){
+		//	weapon1.SetState( false );
+		//	weapon2.SetState( true );
+		//}
+		//if (weapon2.GetWeaponState() && weapon2.GetBullet()->GetState()){
+		//	weapon1.SetState( true );
+		//	weapon2.SetState( false );
+		//}
+
+		//if (Bulls.GetIsShoot() && !Bulls.GetState()){
+		//	State = false;
+		//	Bulls.Shoot(false);
+		//}
+		
+		if (weapon1.GetBullet()->GetIsShoot() && !weapon1.GetBullet()->GetState() ){
+			weapon1.SetState(false);
+			weapon1.GetBullet()->Shoot(false);
+			
+			weapon2.SetState(true);
 		}
-		if (weapon2.GetWeaponState() && weapon2.GetBullet()->GetState()){
-			weapon1.SetState( true );
-			weapon2.SetState( false );
+		if (weapon2.GetBullet()->GetIsShoot() && !weapon2.GetBullet()->GetState() ){
+			weapon2.SetState(false);
+			weapon2.GetBullet()->Shoot(false);
+			
+			weapon1.SetState(true);
 		}
 
         weapon1.Run(key, PlayerOne);
