@@ -15,6 +15,18 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
     int terminate=0;
     while (terminate!=1)
     {
+//        weapon1.check(player1.type);
+//        {
+//            switch (player1.type) {
+//                case weapon1:
+//                    WeaponType=weapon1;
+//                    Weaponlevel=weapon1level;
+//                    break;
+//                    
+//                default:
+//                    break;
+//            }
+//        }
         FsPollDevice();
         auto key=FsInkey();
         glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
