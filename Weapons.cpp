@@ -21,9 +21,9 @@ Weapon::~Weapon(){}
 //	//Initial(Type,true);
 //}
 
-void Weapon::Initial(WeaponType WType, bool st,Player player){
+void Weapon::Initial(WeaponType WType, bool st,Player &player){
 
-    switch (Type)
+    switch (WType)
     {
         case DEFAULT:
             WeaponTypeNum=0;
@@ -60,8 +60,8 @@ void Weapon::Initial(WeaponType WType, bool st,Player player){
     Level = WeaponList[WeaponTypeNum] ; //ForNow
     Bulls.Init(WType);
 }
-void Weapon::SetWeapon(WeaponType WType, Player player){
-    switch (Type)
+void Weapon::SetWeapon(WeaponType WType, Player &player){
+    switch (WType)
     {
         case DEFAULT:
             WeaponTypeNum=0;
@@ -95,7 +95,7 @@ void Weapon::SetWeapon(WeaponType WType, Player player){
     Read_Image();
     NumberOfBullets = 10;//For now
     Level = WeaponList[WeaponTypeNum]; //ForNow
-    printf("LEVEL= %d",Level);
+    printf("Weapon %d LEVEL= %d\n",WeaponTypeNum,Level);
     Bulls.Init(WType);
 }
 
@@ -396,10 +396,10 @@ void Bullet::Init(WeaponType Type){
 
 		case DEFAULT:
 			Grav = 9.8; // It can be varied for various weapons
-			Type = DEFAULT;
 			LifeInitValue = 10;
 			Life = LifeInitValue;
 			InitSpeed = 500;
+            Type = DEFAULT;
 		break;
     }
 }

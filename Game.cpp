@@ -3,7 +3,7 @@
 void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
-    weapon1.Initial(NINE_MM,true,PlayerOne);//weapon type
+    weapon1.Initial(DEFAULT,true,PlayerOne);//weapon type
     PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
     weapon2.Initial(DEFAULT,false,PlayerTwo);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
