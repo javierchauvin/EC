@@ -24,12 +24,11 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         {
             terminate=1;
         }
+
         PlayerOne.setStatus(weapon1.GetWeaponState());
         PlayerTwo.setStatus(weapon2.GetWeaponState());
-        //PlayerOne.setStatus(weapon1.GetBullet()->GetState());
-        //PlayerTwo.setStatus(weapon2.GetBullet()->GetState());
-        
 
+        
         background.Run(weapon1,weapon2);
 
 		if (weapon1.GetWeaponState() && weapon1.GetBullet()->GetState()){

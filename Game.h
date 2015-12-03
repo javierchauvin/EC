@@ -237,8 +237,6 @@ public:
     void Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &player2);
 };
 
-
-
 class Game
 {
 public:
