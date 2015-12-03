@@ -26,6 +26,8 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         }
         //PlayerOne.setStatus(weapon1.GetWeaponState());
         //PlayerTwo.setStatus(weapon2.GetWeaponState());
+//        PlayerOne.setStatus(weapon1.GetBullet()->GetState());
+//        PlayerTwo.setStatus(weapon2.GetBullet()->GetState());
         
         background.Run(weapon1,weapon2);
 
