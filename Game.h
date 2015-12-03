@@ -129,7 +129,7 @@ public:
     int GetLife(void);
 	void CheckScreen(void);
 	void ChangeSpeed(int Delta);
-	void SetLife( void );
+	void SetLife( int Level );
 	void Shoot (bool IsS);
 	bool GetIsShoot (void);
 	void SetType( WeaponType Type );
