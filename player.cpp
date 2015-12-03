@@ -158,7 +158,7 @@ bool Player::getStatus(){
 }
 
 void Player::setHealth(){
-    if (hit == 1) {
+    if ((status == 0) && (hit == 1)) {
         health -= 20.0;
         hit = 0;
     }
