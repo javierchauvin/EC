@@ -4,7 +4,7 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
     weapon1.Initial(NINE_MM,true);//weapon type
-    PlayerOne.Initial(0, 550, 0, 1);//x,y,direction
+    PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
     weapon2.Initial(NINE_MM,false);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
@@ -83,19 +83,19 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
             && (weapon1.GetBullet()->x() < player2.getX()+w)
             && (weapon1.GetBullet()->y() > player2.getY()-h)
             && (weapon1.GetBullet()->y() < player2.getY()+h)
-            && (weapon1.GetBullet()->x() < 400))
+            && (weapon1.GetBullet()->x() > 400))
         {
             player2.hit = 1;
             weapon1.GetBullet()->SetState(false);
         }
     }
     /* player 2 */
-    else {
-        if ((weapon1.GetBullet()->x() > player1.getX()-w)
-            && (weapon1.GetBullet()->x() < player1.getX()+w)
-            && (weapon1.GetBullet()->y() > player1.getY()-h)
-            && (weapon1.GetBullet()->y() < player1.getY()+h)
-            && (weapon1.GetBullet()->x() > 400))
+    else if (player2.getStatus() == 1) {
+        if ((weapon2.GetBullet()->x() > player1.getX()-w)
+            && (weapon2.GetBullet()->x() < player1.getX()+w)
+            && (weapon2.GetBullet()->y() > player1.getY()-h)
+            && (weapon2.GetBullet()->y() < player1.getY()+h)
+            && (weapon2.GetBullet()->x() < 400))
         {
             player1.hit = 1;
             weapon2.GetBullet()->SetState(false);
