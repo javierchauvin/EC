@@ -38,9 +38,18 @@ bool Weapon::GetWeaponState()
 
 void Weapon::Run(int key, Player &player)
 {
-	if (State){
+	if(player.getX()<400)
+	{
 		Position.x = player.getX()+80;
 		Position.y = player.getY()-37;
+	}
+	else
+	{
+		Position.x = player.getX()-80;
+		Position.y = player.getY()-37;
+	}
+	DrawWeapon();
+	if (State){
 
 		if(FSKEY_LEFT==key){
 			ChangeAngle(-10);
@@ -56,7 +65,6 @@ void Weapon::Run(int key, Player &player)
 			Bulls.Move();
 			Bulls.Draw();
 		}
-		DrawWeapon();
 	}
 }
 
@@ -164,7 +172,7 @@ void Weapon::DrawWeapon(void)
 
 	*/
 
-	int wid = 800, hei = 600; int size = 100;
+	int wid = 800, hei = 600; int size = 40;
 	glViewport(0, 0, wid, hei);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
