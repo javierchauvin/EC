@@ -377,29 +377,45 @@ void Bullet::SetType( WeaponType Type ){
 	
 	switch(Type){
 		case NINE_MM:
+			Type = NINE_MM;
+			Grav = 9.8; 
+			InitSpeed = 500;
 			break;
 
 		case CANNON:
+			Type = CANNON;
+			Grav = 12; 
+			InitSpeed = 600;
 			break;
 
 		case LAND_ROCKET:
+			Type = LAND_ROCKET;
+			Grav = 6; 
+			InitSpeed = 700;
 			break;
 
 		case NUCLEAR_ROCKET:
+			Type = NUCLEAR_ROCKET;
+			Grav = 5; 
+			InitSpeed = 800;
 			break;
 
 		case CAT:
+			Type = CAT;
+			Grav = 3; 
+			InitSpeed = 300;
 			break;
 
 		case WATER_BALLOON:
+			Type = WATER_BALLOON;
+			Grav = 7; 
+			InitSpeed = 400;
 			break;
 
 		case DEFAULT:
 			Type = DEFAULT;
 			Grav = 9.8; // It can be varied for various weapons
-			LifeInitValue = 1;
 			InitSpeed = 500;
-            Type = DEFAULT;
 		break;
     }
 }
