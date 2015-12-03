@@ -16,11 +16,6 @@ double D2Rad ( int degrees ){
 Weapon::Weapon(){}
 Weapon::~Weapon(){}
 
-//Weapon::Weapon(void/*WeaponType Type*/)
-//{
-//	//Initial(Type,true);
-//}
-
 void Weapon::Initial(WeaponType WType, bool st,Player &player){
 
     switch (WType)
@@ -118,7 +113,7 @@ void Weapon::Run(int key, Player &player)
 		Position.x = player.getX()-85;
 		Position.y = player.getY()-15;
 	}
-	DrawWeapon();
+
 	if (State){
 
 		if(FSKEY_LEFT==key){
@@ -143,6 +138,7 @@ void Weapon::Run(int key, Player &player)
 			Bulls.Draw();
 		}
 	}
+
 	DrawWeapon();
 }
 
@@ -352,7 +348,7 @@ Bullet::Bullet(){
 	State = false;
 	Grav = 9.8; // It can be varied for various weapons
 	Type = DEFAULT;
-	InitSpeed = 100;
+	InitSpeed = 500;
 	Velocity.x = 0;
 	Velocity.y = 0;
 	LifeInitValue = 10;
@@ -374,10 +370,15 @@ void Bullet::Init(WeaponType Type){
 	Velocity.y = 0;
 	State = false;
 	IsShoot = false;
+	SetType(Type);
+	Life = LifeInitValue;
+}
 
+void Bullet::SetType( WeaponType Type ){
+	
 	switch(Type){
 		case NINE_MM:
-			 break;
+			break;
 
 		case CANNON:
 			break;
@@ -396,8 +397,8 @@ void Bullet::Init(WeaponType Type){
 
 		case DEFAULT:
 			Grav = 9.8; // It can be varied for various weapons
-			LifeInitValue = 10;
-			Life = LifeInitValue;
+			Type = DEFAULT;
+			LifeInitValue = 1;
 			InitSpeed = 500;
             Type = DEFAULT;
 		break;
@@ -540,7 +541,7 @@ void Bullet::Shoot (bool IsS){
 	IsShoot = IsS;
 }
 
-
 bool Bullet::GetIsShoot(void){
 	return IsShoot;
 }
+
