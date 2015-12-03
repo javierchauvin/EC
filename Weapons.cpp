@@ -95,7 +95,7 @@ void Weapon::SetWeapon(WeaponType WType, Player &player){
     Read_Image();
     NumberOfBullets = 10;//For now
     Level = WeaponList[WeaponTypeNum]; //ForNow
-    printf("Weapon %d LEVEL= %d\n",WeaponTypeNum,Level);
+    printf("Weapon %d LEVEL= %d\n",(WeaponTypeNum+1),Level);
     Bulls.Init(WType);
 }
 
