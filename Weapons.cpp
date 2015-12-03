@@ -25,6 +25,7 @@ void Weapon::Initial(WeaponType WType, bool st){
 
 	State = st;
 	Type = WType;
+	Read_Image();
     Angle = 0; 
     NumberOfBullets = 10;//For now 
     Level = 5; //ForNow
@@ -64,7 +65,66 @@ void Weapon::Shot(Coordinates BulletInitPos){
 	//Bullet B;
 	//B.Init(Type);
 	//Bull.push_back(Type);
+	Bulls.SetState(true);
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
+}
+
+void Weapon::Read_Image()
+{
+	char fn1[256] = "CANNON.png";
+
+
+	switch (Type)
+	{
+	case DEFAULT:
+		sprintf(fn1, "CANNON.png");
+		break;
+	case NINE_MM:
+		sprintf(fn1, "NINE_MM.png");
+		break;
+	case CANNON:
+		sprintf(fn1, "CANNON.png");
+		break;
+	case LAND_ROCKET:
+		sprintf(fn1, "LAND_ROCKET.png");
+		break;
+	case NUCLEAR_ROCKET:
+		sprintf(fn1, "NUCLEAR_ROCKET.png");
+		break;
+	case CAT:
+		sprintf(fn1, "CAT.png");
+		break;
+	case WATER_BALLOON:
+		sprintf(fn1, "WATER_BALLOON.png");
+		break;
+	default:
+		sprintf(fn1, "NINE_MM.png");
+		break;
+	}
+
+	YsRawPngDecoder png;
+	png.Decode(fn1);
+
+	GLuint texId;
+	glGenTextures(1, &texId);  // Reserve one texture identifier
+	glBindTexture(GL_TEXTURE_2D, texId);  // Making the texture identifier current (or bring it to the deck)
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+	glTexImage2D
+		(GL_TEXTURE_2D,
+			0,    // Level of detail
+			GL_RGBA,
+			png.wid,
+			png.hei,
+			0,    // Border width, but not supported and needs to be 0.
+			GL_RGBA,
+			GL_UNSIGNED_BYTE,
+			png.rgba);
+	Weapon_Picture = texId;
 }
 
 void Weapon::ChangeAngle( int Delta ){
@@ -80,48 +140,67 @@ void Weapon::ChangeAngle( int Delta ){
 
 void Weapon::DrawWeapon(void)
 {
-	switch(Type){
-	case NINE_MM:
-	break;
+	//Old code
+	/*
+	const double TubeLong = 20;
 
-	case CANNON:
-		break;
+	Coordinates Center;
+	Center.x = Position.x;
+	Center.y = Position.y;
 
-	case LAND_ROCKET:
-		break;
+	Coordinates End;
+	End.x = Center.x + cos(D2Rad(Angle)) * TubeLong;
+	End.y = Center.y + sin(D2Rad(Angle)) * TubeLong;
 
-	case NUCLEAR_ROCKET:
-		break;
 
-	case CAT:
-		break;
+	//coor2scr(&Center);
+	//coor2scr(&End);
 
-	case WATER_BALLOON:{
-		break;
-	}
+	glColor3ub(0,0,255);
+	glBegin(GL_LINES);
+	glVertex2d( Center.x, Center.y );
+	glVertex2d( End.x, End.y );
+	glEnd();
 
-	case DEFAULT:{
-		const double TubeLong = 20; 
+	*/
 
-		Coordinates Center;
-		Center.x = Position.x;
-		Center.y = Position.y;
+	int wid = 800, hei = 600; int size = 100;
+	glViewport(0, 0, wid, hei);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, (float)wid - 1, (float)hei - 1, 0, -1, 1);
 
-		Coordinates End;
-		End.x = Center.x + cos(D2Rad(Angle)) * TubeLong;
-		End.y = Center.y + sin(D2Rad(Angle)) * TubeLong;
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
-		//coor2scr(&Center);
-		//coor2scr(&End);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-		glColor3ub(0,0,255);
-		glBegin(GL_LINES);
-		glVertex2d( Center.x, Center.y ); 
-		glVertex2d( End.x, End.y );  
-		glEnd();
-		break;
-		}
-	}
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glColor4d(1.0, 1.0, 1.0, 1.0);
+
+
+	//first
+	//    if (state==0) {
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, Weapon_Picture);
+
+	glBegin(GL_QUADS);
+
+	glTexCoord2d(0.0, 0.0);
+	glVertex2i(Position.x, Position.y);
+
+	glTexCoord2d(1.0, 0.0);
+	glVertex2i(Position.x + size, Position.y);
+
+	glTexCoord2d(1.0, 1.0);
+	glVertex2i(Position.x + size, Position.y + size);
+
+	glTexCoord2d(0.0, 1.0);
+	glVertex2i(Position.x, Position.y + size);
+	glEnd();
+	glDisable(GL_BLEND);
+
 }
 
 void Weapon::SetAngle(int Angle)
@@ -158,11 +237,15 @@ Bullet* Weapon::GetBullet(void){
 	return &Bulls;
 }
 
+void Weapon::SetState(bool st){
+	State = st;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Bullet Class
 
 Bullet::Bullet(){
-	State = true;
+	State = false;
 	Grav = 9.8; // It can be varied for various weapons
 	Type = DEFAULT;
 	InitSpeed = 100;
@@ -183,6 +266,7 @@ void Bullet::Init(WeaponType Type){
 	Position.y = 0;
 	Velocity.x = 0;
 	Velocity.y = 0;
+	State = false;
 
 	switch(Type){
 		case NINE_MM:
@@ -204,10 +288,9 @@ void Bullet::Init(WeaponType Type){
 			break;
 
 		case DEFAULT:
-			State = true;
 			Grav = 9.8; // It can be varied for various weapons
 			Type = DEFAULT;
-			Life = 10;
+			Life = 1;
 			InitSpeed = 500;
 		break;
     }

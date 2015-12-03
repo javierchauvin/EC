@@ -3,9 +3,9 @@
 void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
-    weapon1.Initial(DEFAULT,true);//weapon type
+    weapon1.Initial(NINE_MM,true);//weapon type
     PlayerOne.Initial(0, 550, 0, 1);//x,y,direction
-    weapon2.Initial(DEFAULT,false);//weapon type
+    weapon2.Initial(CANNON,false);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
@@ -31,6 +31,15 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
         
 
         background.Run(weapon1,weapon2);
+
+		if (weapon1.GetWeaponState() && weapon1.GetBullet()->GetState()){
+			weapon1.SetState( false );
+			weapon2.SetState( true );
+		}
+		if (weapon2.GetWeaponState() && weapon2.GetBullet()->GetState()){
+			weapon1.SetState( true );
+			weapon2.SetState( false );
+		}
 
         weapon1.Run(key, PlayerOne);
         PlayerOne.Run(key);
@@ -65,8 +74,8 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
 }
 
 
-void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon
-                    &weapon2)
+
+void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &weapon2)
 {
     int w = 100;
     int h = 200;
