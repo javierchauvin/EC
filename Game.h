@@ -129,9 +129,10 @@ public:
     int GetLife(void);
 	void CheckScreen(void);
 	void ChangeSpeed(int Delta);
-	void SetLife( void );
+	void SetLife( int Level );
 	void Shoot (bool IsS);
 	bool GetIsShoot (void);
+	void SetType( WeaponType Type );
     
     //Retrive Information
     bool GetState(void); //Return the state of the bullet
@@ -169,6 +170,7 @@ public:
     void Move(Coordinates Delta); //Add delta to actual position.
     void Shot(Coordinates BulletInitPos);
 	void Read_Image();
+	void Check( WeaponType Type, int Lev );
     
     //Get information
     int GetLevel(void);

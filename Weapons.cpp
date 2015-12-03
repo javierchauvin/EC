@@ -16,11 +16,6 @@ double D2Rad ( int degrees ){
 Weapon::Weapon(){}
 Weapon::~Weapon(){}
 
-//Weapon::Weapon(void/*WeaponType Type*/)
-//{
-//	//Initial(Type,true);
-//}
-
 void Weapon::Initial(WeaponType WType, bool st,Player &player){
 
     switch (WType)
@@ -59,6 +54,7 @@ void Weapon::Initial(WeaponType WType, bool st,Player &player){
     NumberOfBullets = 10;//For now 
     Level = WeaponList[WeaponTypeNum] ; //ForNow
     Bulls.Init(WType);
+	Bulls.SetLife(Level);
 }
 void Weapon::SetWeapon(WeaponType WType, Player &player){
     switch (WType)
@@ -97,9 +93,8 @@ void Weapon::SetWeapon(WeaponType WType, Player &player){
     Level = WeaponList[WeaponTypeNum]; //ForNow
     printf("Weapon %d LEVEL= %d\n",(WeaponTypeNum+1),Level);
     Bulls.Init(WType);
+	Bulls.SetLife(Level);
 }
-
-
 
 bool Weapon::GetWeaponState()
 {
@@ -118,7 +113,7 @@ void Weapon::Run(int key, Player &player)
 		Position.x = player.getX()-85;
 		Position.y = player.getY()-15;
 	}
-	DrawWeapon();
+
 	if (State){
 
 		if(FSKEY_LEFT==key){
@@ -130,10 +125,10 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_SPACE==key){
 			Shot(Position);
 		}
-		if(FSKEY_S==key){
+		if(FSKEY_W==key){
 			Bulls.ChangeSpeed(30);
 		}
-		if(FSKEY_D==key){
+		if(FSKEY_S==key){
 			Bulls.ChangeSpeed(-30);
 		}
 
@@ -143,13 +138,13 @@ void Weapon::Run(int key, Player &player)
 			Bulls.Draw();
 		}
 	}
+
 	DrawWeapon();
 }
 
 void Weapon::Shot(Coordinates BulletInitPos){
 
 	Bulls.SetState(true);
-	Bulls.SetLife();
 	Bulls.Shoot( true );
 	Bulls.GetInitialVelocity(BulletInitPos,Angle);
 }
@@ -352,7 +347,7 @@ Bullet::Bullet(){
 	State = false;
 	Grav = 9.8; // It can be varied for various weapons
 	Type = DEFAULT;
-	InitSpeed = 100;
+	InitSpeed = 500;
 	Velocity.x = 0;
 	Velocity.y = 0;
 	LifeInitValue = 10;
@@ -374,10 +369,15 @@ void Bullet::Init(WeaponType Type){
 	Velocity.y = 0;
 	State = false;
 	IsShoot = false;
+	SetType(Type);
+	Life = LifeInitValue;
+}
 
+void Bullet::SetType( WeaponType Type ){
+	
 	switch(Type){
 		case NINE_MM:
-			 break;
+			break;
 
 		case CANNON:
 			break;
@@ -395,9 +395,9 @@ void Bullet::Init(WeaponType Type){
 			break;
 
 		case DEFAULT:
+			Type = DEFAULT;
 			Grav = 9.8; // It can be varied for various weapons
-			LifeInitValue = 10;
-			Life = LifeInitValue;
+			LifeInitValue = 1;
 			InitSpeed = 500;
             Type = DEFAULT;
 		break;
@@ -509,8 +509,8 @@ void Bullet::ChangeLife (void){
 	}
 }
 
-void Bullet::SetLife( void ){
-	Life = LifeInitValue;
+void Bullet::SetLife( int level ){
+	LifeInitValue = (int)1.5*level;
 }
 
 bool Bullet::GetState(void){
@@ -538,9 +538,10 @@ void Bullet::ChangeSpeed(int Delta){
 
 void Bullet::Shoot (bool IsS){
 	IsShoot = IsS;
+	Life = LifeInitValue;
 }
-
 
 bool Bullet::GetIsShoot(void){
 	return IsShoot;
 }
+
