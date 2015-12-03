@@ -284,6 +284,7 @@ void Bullet::Move(void) {
 
 //Checks the modifies the state of the bullet
 void Bullet::SetState(bool State) {
+
     this->State = State;
     //reset bullet position to default values
     if (State == false){
