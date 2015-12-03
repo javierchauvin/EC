@@ -90,12 +90,12 @@ void checkCollision(Player &player1, Player &player2, Weapon &weapon1, Weapon &w
         }
     }
     /* player 2 */
-    else {
-        if ((weapon1.GetBullet()->x() > player1.getX()-w)
-            && (weapon1.GetBullet()->x() < player1.getX()+w)
-            && (weapon1.GetBullet()->y() > player1.getY()-h)
-            && (weapon1.GetBullet()->y() < player1.getY()+h)
-            && (weapon1.GetBullet()->x() > 400))
+    else if (player2.getStatus() == 1) {
+        if ((weapon2.GetBullet()->x() > player1.getX()-w)
+            && (weapon2.GetBullet()->x() < player1.getX()+w)
+            && (weapon2.GetBullet()->y() > player1.getY()-h)
+            && (weapon2.GetBullet()->y() < player1.getY()+h)
+            && (weapon2.GetBullet()->x() > 400))
         {
             player1.hit = 1;
             weapon2.GetBullet()->SetState(false);
