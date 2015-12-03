@@ -67,6 +67,7 @@ private:
     /* weaponList[weapon#] = level
      * level 0 means player doesn't own that weapon yet */
     int weaponList[TYPESOFWEAPONS];
+    int weapontype;
     int myCharacter;
     char userfile[50];
 public:
@@ -159,6 +160,7 @@ public:
     
     //Functionality
     void Initial(WeaponType Type, bool st);
+    void SetWeapon(WeaponType Type);
     void Run(int key, Player &player);
     void DrawWeapon(void);
     void SetAngle(int Angle);

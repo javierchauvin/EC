@@ -31,6 +31,16 @@ void Weapon::Initial(WeaponType WType, bool st){
     Level = 5; //ForNow
     Bulls.Init(WType);
 }
+void Weapon::SetWeapon(WeaponType WType){
+    Type = WType;
+    Read_Image();
+    NumberOfBullets = 10;//For now
+    Level = 5; //ForNow
+    Bulls.Init(WType);
+}
+
+
+
 bool Weapon::GetWeaponState()
 {
     return State;

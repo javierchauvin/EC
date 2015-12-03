@@ -3,7 +3,7 @@
 void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
-    weapon1.Initial(DEFAULT,true);//weapon type
+    weapon1.Initial(NINE_MM,true);//weapon type
     PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
     weapon2.Initial(DEFAULT,false);//weapon type
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
@@ -16,12 +16,47 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
     while (terminate!=1)
     {
         FsPollDevice();
-        auto key=FsInkey();
+        int key=FsInkey();
         glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);
         if (key==FSKEY_ESC)
         {
             terminate=1;
         }
+        switch (key) {
+            case FSKEY_1:
+                weapon1.SetWeapon(DEFAULT);
+                break;
+            case FSKEY_2:
+                weapon1.SetWeapon(NINE_MM);
+                break;
+            case FSKEY_3:
+                weapon1.SetWeapon(CANNON);
+                break;
+            case FSKEY_4:
+                weapon1.SetWeapon(LAND_ROCKET);
+                break;
+            case FSKEY_5:
+                weapon1.SetWeapon(NUCLEAR_ROCKET);
+                break;
+            case FSKEY_6:
+                weapon2.SetWeapon(DEFAULT);
+                break;
+            case FSKEY_7:
+                weapon2.SetWeapon(NINE_MM);
+                break;
+            case FSKEY_8:
+                weapon2.SetWeapon(CANNON);
+                break;
+            case FSKEY_9:
+                weapon2.SetWeapon(LAND_ROCKET);
+                break;
+            case FSKEY_0:
+                weapon2.SetWeapon(NUCLEAR_ROCKET);
+                break;
+            default:
+                break;
+        }
+        
 
         PlayerOne.setStatus(weapon1.GetWeaponState());
         PlayerTwo.setStatus(weapon2.GetWeaponState());
