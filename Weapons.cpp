@@ -351,7 +351,7 @@ void Bullet::SetType( WeaponType Type ){
 		case NINE_MM:
 			Type = NINE_MM;
 			Grav = 9.8; 
-			InitSpeed = 500;
+			InitSpeed = 400;
 			LifeInitValue *= 1;
 			break;
 
@@ -364,15 +364,15 @@ void Bullet::SetType( WeaponType Type ){
 
 		case LAND_ROCKET:
 			Type = LAND_ROCKET;
-			Grav = 6; 
-			InitSpeed = 700;
+			Grav = 60;
+			InitSpeed = 250;
 			LifeInitValue *= 1.8;
 			break;
 
 		case NUCLEAR_ROCKET:
 			Type = NUCLEAR_ROCKET;
-			Grav = 5; 
-			InitSpeed = 800;
+			Grav = 10;
+			InitSpeed = 200;
 			LifeInitValue *= 2;
 			break;
 
@@ -392,8 +392,8 @@ void Bullet::SetType( WeaponType Type ){
 
 		case DEFAULT:
 			Type = DEFAULT;
-			Grav = 9.8; // It can be varied for various weapons
-			InitSpeed = 500;
+			Grav = 45; // It can be varied for various weapons
+			InitSpeed = 200;
 			LifeInitValue *= 1;
 		break;
     }
