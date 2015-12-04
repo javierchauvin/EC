@@ -116,10 +116,10 @@ void Weapon::Run(int key, Player &player)
 
 	if (State){
 
-		if(FSKEY_LEFT==key){
+		if(FSKEY_DOWN==key){
 			ChangeAngle(-10);
 		}
-		if(FSKEY_RIGHT==key){
+		if(FSKEY_UP==key){
 			ChangeAngle(10);	
 		}
 		if(FSKEY_SPACE==key){
