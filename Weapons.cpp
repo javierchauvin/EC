@@ -123,7 +123,7 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_UP==key){
 			ChangeAngle(10);	
 		}
-		if(FSKEY_SPACE==key){
+		if(FSKEY_SPACE==key && !Bulls.GetState()){
 			Shot(Position);
 		}
 		if(FSKEY_W==key){
@@ -353,43 +353,53 @@ void Bullet::SetType( WeaponType Type ){
 		case NINE_MM:
 			this->Type = NINE_MM;
 			Grav = 9.8; 
-			InitSpeed = 500;
+			InitSpeed = 400;
+			LifeInitValue *= 1;
 			break;
 
 		case CANNON:
 			this->Type = CANNON;
 			Grav = 20; 
 			InitSpeed = 600;
+			Type = CANNON;
+			Grav = 50; 
+			InitSpeed = 200;
+			LifeInitValue *= 3;
 			break;
 
 		case LAND_ROCKET:
 			this->Type = LAND_ROCKET;
-			Grav = 6; 
-			InitSpeed = 700;
+			Grav = 60;
+			InitSpeed = 250;
+			LifeInitValue *= 1.8;
 			break;
 
 		case NUCLEAR_ROCKET:
 			this->Type = NUCLEAR_ROCKET;
-			Grav = 5; 
-			InitSpeed = 800;
+			Grav = 10;
+			InitSpeed = 200;
+			LifeInitValue *= 2;
 			break;
 
 		case CAT:
 			this->Type = CAT;
 			Grav = 3; 
 			InitSpeed = 300;
+			LifeInitValue *= 1;
 			break;
 
 		case WATER_BALLOON:
 			this->Type = WATER_BALLOON;
 			Grav = 7; 
 			InitSpeed = 400;
+			LifeInitValue *= 1;
 			break;
 
 		case DEFAULT:
 			this->Type = DEFAULT;
-			Grav = 9.8; // It can be varied for various weapons
-			InitSpeed = 500;
+			Grav = 45; // It can be varied for various weapons
+			InitSpeed = 200;
+			LifeInitValue *= 1;
 		break;
     }
 }
