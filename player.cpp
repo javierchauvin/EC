@@ -78,37 +78,37 @@ void Player::movePlayer(int key){
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
     
-    if (status == 1){
+    if ((status == 1) && (X < 400)){ /* player 1*/
         switch(key)
         {
-            case FSKEY_A:
-                if ((X < 400) && (X > 5)) { /* player 1 */
+            case FSKEY_LEFT:
+                if (X > 5) { /* player 1 */
                         X -= 5;
                 }
                 break;
-            case FSKEY_J:
-                if (X > 400) { /* player 2 */
-                    if (X > boundary2 + 5) {
-                        X -= 5;
-                    }
-                    
-                }
-                break;
-            case FSKEY_D:
-                if (X < 400) { /* player 1 */
-                    if (X < boundary1 - 5) {
+            case FSKEY_RIGHT:
+                if (X < (boundary1 - 5)) { /* player 1 */
                         X += 5;
-                    }
-                }
-                break;
-            case FSKEY_L:
-                if (X > 400) { /* player 2 */
-                    if (X < 795) {
-                        X += 5;
-                    }
                 }
                 break;
         }
+    }
+    
+    if ((status == 1) && (X > 400)){ /* player 2*/
+        switch(key)
+        {
+            case FSKEY_LEFT:
+                if (X > boundary2 + 5) {
+                    X -= 5;
+                }
+                break;
+            case FSKEY_RIGHT:
+                if (X < 795) {
+                    X += 5;
+                }
+                break;
+        }
+        
     }
 }
 
