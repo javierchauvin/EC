@@ -24,8 +24,7 @@ void Obstacle::read()
     YsRawPngDecoder png[2];
     png[0].Decode(fn1);
     png[1].Decode(fn2);
-    //gl
-    //FsOpenWindow(16,16,800,600,1);
+
     GLuint texId[2];
     // glGenTextures(2,texId);  // You can also reserve two texture identifies with one call this way
     glGenTextures(1,&texId[0]);  // Reserve one texture identifier
@@ -220,11 +219,11 @@ void Obstacle::Run(Weapon &weapon1,Player &player1,Weapon &weapon2,Player &playe
     Move();
     CheckCollision(b1x,b1y,b2x,b2y);
     if (hstate1==1) {
-        player1.health-=0.3;
+        player1.health-=0.2;
         hstate1=0;
     }
     if (hstate2==1) {
-        player2.health-=0.3;
+        player2.health-=0.2;
         hstate2=0;
     }
     if (state1==1)
