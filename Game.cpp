@@ -3,9 +3,9 @@
 void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
-    weapon1.Initial(CANNON,true,PlayerOne);//weapon type
+    weapon1.Initial(DEFAULT,true,PlayerOne);//weapon type
     PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
-    weapon2.Initial(CANNON,false,PlayerTwo);//weapon type
+    weapon2.Initial(DEFAULT,false,PlayerTwo);//weapon type
 	weapon2.SetAngle(180);
     PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
@@ -16,18 +16,6 @@ void Game::Run(int &status,Player &PlayerOne,Player &PlayerTwo)
     int terminate=0;
     while (terminate!=1)
     {
-//        weapon1.check(player1.type);
-//        {
-//            switch (player1.type) {
-//                case weapon1:
-//                    WeaponType=weapon1;
-//                    Weaponlevel=weapon1level;
-//                    break;
-//                    
-//                default:
-//                    break;
-//            }
-//        }
         FsPollDevice();
         int key=FsInkey();
         glClear(GL_DEPTH_BUFFER_BIT|GL_COLOR_BUFFER_BIT);

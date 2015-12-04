@@ -92,7 +92,7 @@ public:
     void setMoney(int newMoney);
     void Initial(int x, int y, int dir, int Status);
     void Run(int key);
-
+    void DrawMyTurn();
     void setHealth();
     void DrawHealth();
     bool getStatus();

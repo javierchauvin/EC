@@ -70,6 +70,8 @@ void Player::Run(int key)
     setHealth();
 
     DrawHealth();
+    
+    DrawMyTurn();
 }
 
 void Player::movePlayer(int key){
@@ -355,4 +357,31 @@ void Player::DrawHealth(){
             glEnd();
         }
     }
+}
+
+void Player::DrawMyTurn(){
+    int x, y;
+    if ((status == 1) && (X < 400)){ //player 1
+        x = 15;
+        y = 10;
+        glBegin(GL_QUADS);
+        glColor3f(1, 1, 0);
+        glVertex2i(x-5,y+5);
+        glVertex2i(x-5,y-5);
+        glVertex2i(x+5,y-5);
+        glVertex2i(x+5,y+5);
+        glEnd();
+    }
+    else if ((status == 1) && (X > 400)){ //player 2
+        x = 785;
+        y = 10;
+        glBegin(GL_QUADS);
+        glColor3f(1, 1, 0);
+        glVertex2i(x-5,y+5);
+        glVertex2i(x-5,y-5);
+        glVertex2i(x+5,y-5);
+        glVertex2i(x+5,y+5);
+        glEnd();
+    }
+    
 }
