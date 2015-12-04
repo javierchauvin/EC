@@ -70,6 +70,8 @@ void Player::Run(int key)
     setHealth();
 
     DrawHealth();
+    
+    DrawMyTurn();
 }
 
 void Player::movePlayer(int key){
@@ -78,37 +80,37 @@ void Player::movePlayer(int key){
     int boundary1 = bg.GetBoundaryX1();
     int boundary2 = bg.GetBoundaryX2();
     
-    if (status == 1){
+    if ((status == 1) && (X < 400)){ /* player 1*/
         switch(key)
         {
-            case FSKEY_A:
-                if ((X < 400) && (X > 5)) { /* player 1 */
+            case FSKEY_LEFT:
+                if (X > 5) { /* player 1 */
                         X -= 5;
                 }
                 break;
-            case FSKEY_J:
-                if (X > 400) { /* player 2 */
-                    if (X > boundary2 + 5) {
-                        X -= 5;
-                    }
-                    
-                }
-                break;
-            case FSKEY_D:
-                if (X < 400) { /* player 1 */
-                    if (X < boundary1 - 5) {
+            case FSKEY_RIGHT:
+                if (X < (boundary1 - 5)) { /* player 1 */
                         X += 5;
-                    }
-                }
-                break;
-            case FSKEY_L:
-                if (X > 400) { /* player 2 */
-                    if (X < 795) {
-                        X += 5;
-                    }
                 }
                 break;
         }
+    }
+    
+    if ((status == 1) && (X > 400)){ /* player 2*/
+        switch(key)
+        {
+            case FSKEY_LEFT:
+                if (X > boundary2 + 5) {
+                    X -= 5;
+                }
+                break;
+            case FSKEY_RIGHT:
+                if (X < 795) {
+                    X += 5;
+                }
+                break;
+        }
+        
     }
 }
 
@@ -355,4 +357,31 @@ void Player::DrawHealth(){
             glEnd();
         }
     }
+}
+
+void Player::DrawMyTurn(){
+    int x, y;
+    if ((status == 1) && (X < 400)){ //player 1
+        x = 15;
+        y = 10;
+        glBegin(GL_QUADS);
+        glColor3f(1, 1, 0);
+        glVertex2i(x-5,y+5);
+        glVertex2i(x-5,y-5);
+        glVertex2i(x+5,y-5);
+        glVertex2i(x+5,y+5);
+        glEnd();
+    }
+    else if ((status == 1) && (X > 400)){ //player 2
+        x = 785;
+        y = 10;
+        glBegin(GL_QUADS);
+        glColor3f(1, 1, 0);
+        glVertex2i(x-5,y+5);
+        glVertex2i(x-5,y-5);
+        glVertex2i(x+5,y-5);
+        glVertex2i(x+5,y+5);
+        glEnd();
+    }
+    
 }
