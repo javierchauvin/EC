@@ -384,7 +384,7 @@ void Bullet::SetType( WeaponType Type ){
 
 		case CANNON:
 			Type = CANNON;
-			Grav = 12; 
+			Grav = 20; 
 			InitSpeed = 600;
 			break;
 
