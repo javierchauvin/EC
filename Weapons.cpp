@@ -86,6 +86,7 @@ void Weapon::SetWeapon(WeaponType WType, Player &player){
     }
 
     Type = WType;
+	Bulls.SetType(WType);
     int *WeaponList=player.getWeaponList();
 
     Read_Image();
@@ -122,7 +123,7 @@ void Weapon::Run(int key, Player &player)
 		if(FSKEY_UP==key){
 			ChangeAngle(10);	
 		}
-		if(FSKEY_SPACE==key && !Bulls.GetState()){
+		if(FSKEY_SPACE==key){
 			Shot(Position);
 		}
 		if(FSKEY_W==key){
@@ -152,6 +153,7 @@ void Weapon::Shot(Coordinates BulletInitPos){
 void Weapon::Read_Image()
 {
 	char fn1[256] = "CANNON.png";
+
 
 	switch (Type)
 	{
@@ -349,52 +351,45 @@ void Bullet::SetType( WeaponType Type ){
 	
 	switch(Type){
 		case NINE_MM:
-			Type = NINE_MM;
+			this->Type = NINE_MM;
 			Grav = 9.8; 
 			InitSpeed = 500;
-			LifeInitValue *= 1;
 			break;
 
 		case CANNON:
-			Type = CANNON;
-			Grav = 50; 
-			InitSpeed = 200;
-			LifeInitValue *= 3;
+			this->Type = CANNON;
+			Grav = 20; 
+			InitSpeed = 600;
 			break;
 
 		case LAND_ROCKET:
-			Type = LAND_ROCKET;
+			this->Type = LAND_ROCKET;
 			Grav = 6; 
 			InitSpeed = 700;
-			LifeInitValue *= 1.8;
 			break;
 
 		case NUCLEAR_ROCKET:
-			Type = NUCLEAR_ROCKET;
+			this->Type = NUCLEAR_ROCKET;
 			Grav = 5; 
 			InitSpeed = 800;
-			LifeInitValue *= 2;
 			break;
 
 		case CAT:
-			Type = CAT;
+			this->Type = CAT;
 			Grav = 3; 
 			InitSpeed = 300;
-			LifeInitValue *= 1;
 			break;
 
 		case WATER_BALLOON:
-			Type = WATER_BALLOON;
+			this->Type = WATER_BALLOON;
 			Grav = 7; 
 			InitSpeed = 400;
-			LifeInitValue *= 1;
 			break;
 
 		case DEFAULT:
-			Type = DEFAULT;
+			this->Type = DEFAULT;
 			Grav = 9.8; // It can be varied for various weapons
 			InitSpeed = 500;
-			LifeInitValue *= 1;
 		break;
     }
 }
@@ -409,32 +404,125 @@ void Bullet::GetInitialVelocity(Coordinates Pos, int Inclination) {
 
 void Bullet::Draw(void) {
 
+	double x = Position.x;
+	double y = Position.y;
+	double r;
+
 		switch(Type){
 		case NINE_MM:
+			
+			r = 3; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(0, 0, 0);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			 break;
 
 		case CANNON:
+			r = 8; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(144, 120, 130);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			break;
 
 		case LAND_ROCKET:
+			r = 12; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(148, 20, 20);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			break;
 
 		case NUCLEAR_ROCKET:
+			r = 15; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(210, 16, 196);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			break;
 
 		case CAT:
+			r = 3; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(28, 198, 56);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			break;
 
 		case WATER_BALLOON:
+			r = 3; //Fixed size for now- will change this later based on weapon type
+
+			glColor3ub(67, 33, 193);
+			if (State) {
+				glBegin(GL_TRIANGLE_FAN);
+				for (int a = 0; a < 64; ++a)
+				{
+					const double radian = PI*2.0*(double)a / 64.0;
+					const double c = cos(radian);
+					const double s = sin(radian);
+
+					glVertex2d(x + c*r, y + s*r);
+				}
+				glEnd();
+			}
 			break;
 
 		case DEFAULT:
-			double x = Position.x;
-			double y = Position.y;
-			double r = 4; //Fixed size for now- will change this later based on weapon type
+			r = 3; //Fixed size for now- will change this later based on weapon type
 
 			glColor3ub(255,0,0);
-			if (State){
+			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
 				for (int a = 0; a < 64; ++a)
 				{
