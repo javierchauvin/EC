@@ -95,9 +95,9 @@ void Flash::Display(int &status){
                 glColor3ub(230,230,230);
                 glRasterPos2d(150,350);
                 YsGlDrawFontBitmap20x32(money_dis);
-                glColor3ub(230,230,230);
-                glRasterPos2d(150,400);
-                YsGlDrawFontBitmap20x32(gc_dis);
+//                glColor3ub(230,230,230);
+//                glRasterPos2d(150,400);
+//                YsGlDrawFontBitmap20x32(gc_dis);
             }
             else{
                 state = 1; // "state" for prolong fssleep
@@ -111,9 +111,9 @@ void Flash::Display(int &status){
                 glColor3ub(230,230,230);
                 glRasterPos2d(150,350);
                 YsGlDrawFontBitmap20x32(money_dis);
-                glColor3ub(230,230,230);
-                glRasterPos2d(150,400);
-                YsGlDrawFontBitmap20x32(gc_dis);
+//                glColor3ub(230,230,230);
+//                glRasterPos2d(150,400);
+//                YsGlDrawFontBitmap20x32(gc_dis);
             }
         }
         j++;
