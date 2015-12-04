@@ -222,6 +222,42 @@ void Weapon::ChangeAngle( int Delta ){
 void Weapon::DrawWeapon(void)
 {
 	int wid = 800, hei = 600; int size = 40;
+
+	int sizex, sizey;
+	switch (Type)
+	{
+	case DEFAULT:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case NINE_MM:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case CANNON:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case LAND_ROCKET:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case NUCLEAR_ROCKET:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case CAT:
+		sizex = 40;
+		sizey = 40;
+		break;
+	case WATER_BALLOON:
+		sizex = 40;
+		sizey = 40;
+		break;
+	default:
+		break;
+	}
+
 	glViewport(0, 0, wid, hei);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -355,6 +391,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 9.8; 
 			InitSpeed = 400;
 			LifeInitValue *= 1;
+			Radius = LifeInitValue;
 			break;
 
 		case CANNON:
@@ -365,6 +402,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 50; 
 			InitSpeed = 200;
 			LifeInitValue *= 3;
+			Radius = LifeInitValue;
 			break;
 
 		case LAND_ROCKET:
@@ -372,6 +410,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 60;
 			InitSpeed = 250;
 			LifeInitValue *= 1.8;
+			Radius = LifeInitValue;
 			break;
 
 		case NUCLEAR_ROCKET:
@@ -379,6 +418,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 10;
 			InitSpeed = 200;
 			LifeInitValue *= 2;
+			Radius = LifeInitValue;
 			break;
 
 		case CAT:
@@ -386,6 +426,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 3; 
 			InitSpeed = 300;
 			LifeInitValue *= 1;
+			Radius = LifeInitValue;
 			break;
 
 		case WATER_BALLOON:
@@ -393,6 +434,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 7; 
 			InitSpeed = 400;
 			LifeInitValue *= 1;
+			Radius = LifeInitValue;
 			break;
 
 		case DEFAULT:
@@ -400,6 +442,7 @@ void Bullet::SetType( WeaponType Type ){
 			Grav = 45; // It can be varied for various weapons
 			InitSpeed = 200;
 			LifeInitValue *= 1;
+			Radius = LifeInitValue;
 		break;
     }
 }
@@ -418,11 +461,17 @@ void Bullet::Draw(void) {
 	double y = Position.y;
 	double r;
 
+	if (this->Radius < 3)
+	{
+		r = 3;
+	}
+	else
+	{
+		r = Radius;
+	}
+
 		switch(Type){
 		case NINE_MM:
-			
-			r = 3; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(0, 0, 0);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -439,8 +488,6 @@ void Bullet::Draw(void) {
 			 break;
 
 		case CANNON:
-			r = 8; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(144, 120, 130);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -457,8 +504,6 @@ void Bullet::Draw(void) {
 			break;
 
 		case LAND_ROCKET:
-			r = 12; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(148, 20, 20);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -475,8 +520,6 @@ void Bullet::Draw(void) {
 			break;
 
 		case NUCLEAR_ROCKET:
-			r = 15; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(210, 16, 196);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -493,8 +536,6 @@ void Bullet::Draw(void) {
 			break;
 
 		case CAT:
-			r = 3; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(28, 198, 56);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -511,8 +552,6 @@ void Bullet::Draw(void) {
 			break;
 
 		case WATER_BALLOON:
-			r = 3; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(67, 33, 193);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -529,8 +568,6 @@ void Bullet::Draw(void) {
 			break;
 
 		case DEFAULT:
-			r = 3; //Fixed size for now- will change this later based on weapon type
-
 			glColor3ub(255,0,0);
 			if (State) {
 				glBegin(GL_TRIANGLE_FAN);
@@ -593,7 +630,12 @@ Coordinates Bullet::Pos(void){
 // Return coordinates od position // to call Bullet.Pos.y() 
 Coordinates Bullet::Vel(void){
     return Velocity;
-} 
+}
+
+double Bullet::GetRadius(void)
+{
+	return Radius;
+}
 
 void Bullet::ChangeLife (void){
 	Life -= 1;

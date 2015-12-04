@@ -113,6 +113,7 @@ class Bullet
     Coordinates Position;
     Coordinates Velocity; //(to take the direction)
     int Angle;
+	int Radius;
 public:
     Bullet();
     ~Bullet();
@@ -140,6 +141,7 @@ public:
     double x(void)const; //Return position x
     Coordinates Pos(void); // Return coordinates od position // to call Bullet.Pos.x()
     Coordinates Vel(void); // Return coordinates od position // to call Bullet.Pos.y()
+	double GetRadius(void); //Return the radius of the bullet
 };
 
 class Weapon
