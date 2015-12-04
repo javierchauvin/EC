@@ -119,8 +119,8 @@ void Obstacle::Draw(double p1x,double p1y,double p2x,double p2y)
         
         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
         
-        //        glEnable(GL_BLEND);
-        //        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
         glColor4d(1.0,1.0,1.0,1.0);
         
         glEnable(GL_TEXTURE_2D);
@@ -139,7 +139,7 @@ void Obstacle::Draw(double p1x,double p1y,double p2x,double p2y)
         glTexCoord2d(0.0,1.0);
         glVertex2i(p1x,p1y+size);
         glEnd();
-        //        glDisable(GL_BLEND);
+                glDisable(GL_BLEND);
         
     }
     if (state2==1) {
@@ -151,8 +151,8 @@ void Obstacle::Draw(double p1x,double p1y,double p2x,double p2y)
         
         glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
         
-        //        glEnable(GL_BLEND);
-        //        glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
         glColor4d(1.0,1.0,1.0,1.0);
         
         glEnable(GL_TEXTURE_2D);
@@ -171,7 +171,7 @@ void Obstacle::Draw(double p1x,double p1y,double p2x,double p2y)
         glTexCoord2d(0.0,1.0);
         glVertex2i(p2x,p2y+size);
         glEnd();
-        //        glDisable(GL_BLEND);
+                glDisable(GL_BLEND);
         
     }
 }

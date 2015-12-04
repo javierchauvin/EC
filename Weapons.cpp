@@ -220,30 +220,6 @@ void Weapon::ChangeAngle( int Delta ){
 
 void Weapon::DrawWeapon(void)
 {
-	//Old code
-	/*
-	const double TubeLong = 20;
-
-	Coordinates Center;
-	Center.x = Position.x;
-	Center.y = Position.y;
-
-	Coordinates End;
-	End.x = Center.x + cos(D2Rad(Angle)) * TubeLong;
-	End.y = Center.y + sin(D2Rad(Angle)) * TubeLong;
-
-
-	//coor2scr(&Center);
-	//coor2scr(&End);
-
-	glColor3ub(0,0,255);
-	glBegin(GL_LINES);
-	glVertex2d( Center.x, Center.y );
-	glVertex2d( End.x, End.y );
-	glEnd();
-
-	*/
-
 	int wid = 800, hei = 600; int size = 40;
 	glViewport(0, 0, wid, hei);
 	glMatrixMode(GL_PROJECTION);
@@ -259,9 +235,6 @@ void Weapon::DrawWeapon(void)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glColor4d(1.0, 1.0, 1.0, 1.0);
 
-
-	//first
-	//    if (state==0) {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, Weapon_Picture);
 
