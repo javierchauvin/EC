@@ -78,20 +78,21 @@ void MountainCube::draw()
     
     glBegin(GL_QUADS);
     glColor3ub(0,100,100);
+
     glVertex2i(x,y);
     
     glColor3ub(0,100,100);
     glVertex2i(x+50,y);
-    
+
     glColor3ub(70,130,5);
     glVertex2i(x+50,y-50);
-    
+
     glColor3ub(70,130,5);
     glVertex2i(x,y-50);
     
     glEnd();
     
-  //  glDisable(GL_BLEND);
+    glDisable(GL_BLEND);
 
 }
 MountainCube::MountainCube()
