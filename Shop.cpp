@@ -36,12 +36,12 @@ Shop::Shop(){
     w4Check = 0;
     w5Check = 0;
     w6Check = 0;
-    char w1Char[] = "weapon1";
-    char w2Char[] = "weapon2";
-    char w3Char[] = "weapon3";
-    char w4Char[] = "weapon4";
-    char w5Char[] = "weapon5";
-    char w6Char[] = "weapon6";
+    char w1Char[] = "DEFAULT";
+    char w2Char[] = "NINE MM";
+    char w3Char[] = "CANNON";
+    char w4Char[] = "LAND ROCKET";
+    char w5Char[] = "NUCLEAR ROCKET";
+    char w6Char[] = "HIDDEN";
     w1.Set(150, 180, 105, w1Char);
     w2.Set(150, 480, 105, w2Char);
     w3.Set(150, 180, 265, w3Char);
@@ -105,12 +105,12 @@ void Shop::DrawMoney(int money){
 
 // Draw weaponlist
 void Shop::DrawWeaponList(){
-    char w1[20] = "weapon1: ";
-    char w2[20] = "weapon2: ";
-    char w3[20] = "weapon3: ";
-    char w4[20] = "weapon4: ";
-    char w5[20] = "weapon5: ";
-    char w6[20] = "weapon6: ";
+    char w1[20] = "DEFAULT: ";
+    char w2[20] = "NINE MM: ";
+    char w3[20] = "CANNON: ";
+    char w4[20] = "LAND ROCKET: ";
+    char w5[20] = "NUCLEAR ROCKET: ";
+    char w6[20] = "HIDDEN: ";
     char temp[10];
     sprintf(temp, "%d", w1Check);
     strncat(w1, temp, 10);
@@ -127,17 +127,17 @@ void Shop::DrawWeaponList(){
     
     glColor3d(0,0,0);
     glRasterPos2d(30, 100);
-    YsGlDrawFontBitmap10x14(w1);
+    YsGlDrawFontBitmap8x12(w1);
     glRasterPos2d(30, 130);
-    YsGlDrawFontBitmap10x14(w2);
+    YsGlDrawFontBitmap8x12(w2);
     glRasterPos2d(30, 160);
-    YsGlDrawFontBitmap10x14(w3);
+    YsGlDrawFontBitmap8x12(w3);
     glRasterPos2d(30, 190);
-    YsGlDrawFontBitmap10x14(w4);
+    YsGlDrawFontBitmap8x12(w4);
     glRasterPos2d(30, 220);
-    YsGlDrawFontBitmap10x14(w5);
+    YsGlDrawFontBitmap8x12(w5);
     glRasterPos2d(30, 250);
-    YsGlDrawFontBitmap10x14(w6);
+    YsGlDrawFontBitmap8x12(w6);
 }
 
 // assign shopping result to Player
@@ -265,7 +265,7 @@ int  DrawShopWeapon(WeaponText w)
 {
     int lb,mb,rb,mxm,mym;
     FsGetMouseEvent(lb,mb,rb,mxm,mym);
-    glColor3d(1, 1, 1);
+    glColor3d(0.4, 0.7, 0.7);
     glBegin(GL_QUADS);
     glVertex2d(w.xl, w.yl);
     glVertex2d(w.xl, w.yh);
@@ -275,7 +275,7 @@ int  DrawShopWeapon(WeaponText w)
     
     glColor3d(0,0,0);
     glRasterPos2d(w.x,w.y);
-    YsGlDrawFontBitmap20x28(w.name);
+    YsGlDrawFontBitmap10x14(w.name);
     
     if((mxm<=w.xh)&&(mxm>=w.xl)&&(mym>=w.yl)&&(mym<=w.yh)&&(lb==1))
     {
