@@ -199,10 +199,10 @@ void Background::checkcollision(Weapon &gun1,Weapon &gun2)
     for (int i=0;i<nCube;i++)
     {
         // weapon1
-        if (gun1.GetBullet()->x()>CubePtr[i].GetX()
+        if (gun1.GetBullet()->x()>CubePtr[i].GetX()-gun1.GetBullet()->GetRadius()
             && gun1.GetBullet()->x()< CubePtr[i].GetX()+50
-            && gun1.GetBullet()->y()<CubePtr[i].GetY()
-            && gun1.GetBullet()->y()>CubePtr[i].GetY()-50
+            && gun1.GetBullet()->y()<CubePtr[i].GetY()+gun1.GetBullet()->GetRadius()
+            && gun1.GetBullet()->y()>CubePtr[i].GetY()-50-gun1.GetBullet()->GetRadius()
             && CubePtr[i].state==1
             && gun1.GetBullet()->GetLife()>0
             )
@@ -211,10 +211,10 @@ void Background::checkcollision(Weapon &gun1,Weapon &gun2)
             gun1.GetBullet()->ChangeLife();
         }
         // weapon2
-        if (gun2.GetBullet()->x()>CubePtr[i].GetX()
+        if (gun2.GetBullet()->x()>CubePtr[i].GetX()-gun1.GetBullet()->GetRadius()
             && gun2.GetBullet()->x()< CubePtr[i].GetX()+50
-            && gun2.GetBullet()->y()<CubePtr[i].GetY()
-            && gun2.GetBullet()->y()>CubePtr[i].GetY()-50
+            && gun2.GetBullet()->y()<CubePtr[i].GetY()+gun1.GetBullet()->GetRadius()
+            && gun2.GetBullet()->y()>CubePtr[i].GetY()-50-gun1.GetBullet()->GetRadius()
             && CubePtr[i].state==1
             && gun2.GetBullet()->GetLife()>0
             )
