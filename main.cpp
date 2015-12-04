@@ -54,7 +54,9 @@ int main()
 
     // Open window
     FsOpenWindow(0, 0, 800, 600, 1);
-    
+    glShadeModel(GL_SMOOTH);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
     //Get into Intro page and fetch username
     TextString UserName1, UserName2;
     Intro(&UserName1, &UserName2);

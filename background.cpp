@@ -72,26 +72,26 @@ void MountainCube::MakeFromString(char str[])
 void MountainCube::draw()
 {
     
-    //glShadeModel(GL_SMOOTH);
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+    
+
+
     
     glBegin(GL_QUADS);
-    glColor3ub(200,30,30);
+    glColor3ub(0,100,100);
     glVertex2i(x,y);
     
-    //glColor3ub(200,30,30);
+    glColor3ub(0,100,100);
     glVertex2i(x+50,y);
     
-    //glColor3ub(0,0,0);
+    glColor3ub(70,130,5);
     glVertex2i(x+50,y-50);
     
-    //glColor3ub(0,0,0);
+    glColor3ub(70,130,5);
     glVertex2i(x,y-50);
     
     glEnd();
     
-   // glDisable(GL_BLEND);
+  //  glDisable(GL_BLEND);
 
 }
 MountainCube::MountainCube()
@@ -184,7 +184,7 @@ double Background::GetBoundaryX2()
 
 void Background::DrawMountain(void)
 {
-    for (int i=0;i<nCube;i++)
+    for (int i=nCube-1;i>=0;i--)
     {
         if (CubePtr[i].state==1)
         {
