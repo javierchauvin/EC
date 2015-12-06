@@ -4,10 +4,10 @@ void Game::Initial(Player &PlayerOne,Player &PlayerTwo)
 {
     background.Initial();
     weapon1.Initial(DEFAULT,true,PlayerOne);//weapon type
-    PlayerOne.Initial(50, 550, 0, 1);//x,y,direction
+    PlayerOne.Initial(50, 540, 0, 1);//x,y,direction
     weapon2.Initial(DEFAULT,false,PlayerTwo);//weapon type
 	weapon2.SetAngle(180);
-    PlayerTwo.Initial(700, 550, 1, 0);//x,y,direction
+    PlayerTwo.Initial(700, 540, 1, 0);//x,y,direction
     obstacle1.Initial(200, 30, 150, 1, 1);//x,y,size,direction,speed
     obstacle2.Initial(100, 150, 100, 0, 2);//x,y,size,direction,speed
 }
