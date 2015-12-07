@@ -223,40 +223,42 @@ void Weapon::DrawWeapon(void)
 {
 	int wid = 800, hei = 600; int size = 40;
 
-	int sizex, sizey;
+	double sizex, sizey;
+	double aspect;
+
 	switch (Type)
 	{
 	case DEFAULT:
-		sizex = 40;
-		sizey = 40;
+		sizex = 20;
+		aspect = 0.4;
 		break;
 	case NINE_MM:
 		sizex = 40;
-		sizey = 40;
+		aspect = 1;
 		break;
 	case CANNON:
-		sizex = 40;
-		sizey = 40;
+		sizex = 60;
+		aspect = 600 / 124;
 		break;
 	case LAND_ROCKET:
-		sizex = 40;
-		sizey = 40;
+		sizex = 70;
+	aspect = 469 / 157;
 		break;
 	case NUCLEAR_ROCKET:
-		sizex = 40;
-		sizey = 40;
+		sizex = 90;
+		aspect = 256 / 128;
 		break;
 	case CAT:
 		sizex = 40;
-		sizey = 40;
 		break;
 	case WATER_BALLOON:
 		sizex = 40;
-		sizey = 40;
 		break;
 	default:
 		break;
 	}
+
+	sizey = sizex/aspect;
 
 	glViewport(0, 0, wid, hei);
 	glMatrixMode(GL_PROJECTION);
@@ -280,35 +282,36 @@ void Weapon::DrawWeapon(void)
 	if (Position.x < 400)
 	{
 		glTexCoord2d(0.0, 0.0);
-		glVertex2d(Position.x+size*sin(Angle*PI/180), Position.y-size*cos(Angle*PI/180));
+		glVertex2d(Position.x+sizey*sin(Angle*PI/180)/2, Position.y-sizey*cos(Angle*PI/180)/2);
 
 		glTexCoord2d(1.0, 0.0);
-		glVertex2d(Position.x + size*sin(Angle*PI / 180)+size*cos(Angle*PI/180), Position.y - size*cos(Angle*PI / 180)+size*sin(Angle*PI/180));
+		glVertex2d(Position.x + sizey*sin(Angle*PI / 180)/2+sizex*cos(Angle*PI/180), Position.y - sizey*cos(Angle*PI / 180)/2+sizex*sin(Angle*PI/180));
 
-		glTexCoord2d(1.0, 1.0);
-		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
+		glTexCoord2d(1.0, 1);
+		glVertex2d(Position.x + sizex*cos(Angle*PI / 180)-sizey*sin(Angle*PI/180)/2, Position.y + sizex*sin(Angle*PI / 180)+sizey*cos(Angle*PI/180)/2);
 
-		glTexCoord2d(0.0, 1.0);
-		glVertex2d(Position.x, Position.y);
+		glTexCoord2d(0.0, 1);
+		glVertex2d(Position.x - sizey*sin(Angle*PI / 180) / 2, Position.y + sizey*cos(Angle*PI / 180) / 2);
 		glEnd();
 		glDisable(GL_BLEND);
 	}
 	else
 	{
 		glTexCoord2d(1.0, 0.0);
-		glVertex2d(Position.x - size*sin(Angle*PI / 180) + size*cos(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180) + size*sin(Angle*PI / 180));
+		glVertex2d(Position.x - sizey*sin(Angle*PI / 180)/2 + sizex*cos(Angle*PI / 180), Position.y + sizey*cos(Angle*PI / 180)/2 + sizex*sin(Angle*PI / 180));
 
-	glTexCoord2d(0.0, 0.0);
-		glVertex2d(Position.x - size*sin(Angle*PI / 180), Position.y + size*cos(Angle*PI / 180));
+		glTexCoord2d(0.0, 0.0);
+		glVertex2d(Position.x - sizey*sin(Angle*PI / 180)/2, Position.y + sizey*cos(Angle*PI / 180)/2);
 
-		glTexCoord2d(0.0, 1.0);
-		glVertex2d(Position.x, Position.y);
+		glTexCoord2d(0.0, 1);
+		glVertex2d(Position.x + sizey*sin(Angle*PI / 180) / 2, Position.y - sizey*cos(Angle*PI / 180) / 2);
 
-		glTexCoord2d(1.0, 1.0);
-		glVertex2d(Position.x + size*cos(Angle*PI / 180), Position.y + size*sin(Angle*PI / 180));
+		glTexCoord2d(1.0, 1);
+		glVertex2d(Position.x + sizey*sin(Angle*PI / 180) / 2 + sizex*cos(Angle*PI / 180), Position.y - sizey*cos(Angle*PI / 180) / 2 + sizex*sin(Angle*PI / 180));
 		glEnd();
 		glDisable(GL_BLEND);
 	}
+	glDisable(GL_TEXTURE_2D);
 
 }
 

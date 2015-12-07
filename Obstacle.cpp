@@ -173,6 +173,7 @@ void Obstacle::Draw(double p1x,double p1y,double p2x,double p2y)
                 glDisable(GL_BLEND);
         
     }
+	glDisable(GL_TEXTURE_2D);
 }
 
 
