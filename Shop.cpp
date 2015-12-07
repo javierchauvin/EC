@@ -19,9 +19,9 @@ void WeaponText::Set(double length, double xOut, double yOut, char WeaponName[])
     x = xOut;
     y = yOut;
     xl = x-10;
-    yl = y-30;
+    yl = y-50;
     xh = x+length;
-    yh = y+10;
+    yh = y+30;
 }
 
 // ===================
@@ -265,17 +265,17 @@ int  DrawShopWeapon(WeaponText w)
 {
     int lb,mb,rb,mxm,mym;
     FsGetMouseEvent(lb,mb,rb,mxm,mym);
-    glColor3d(0.4, 0.7, 0.7);
-    glBegin(GL_QUADS);
-    glVertex2d(w.xl, w.yl);
-    glVertex2d(w.xl, w.yh);
-    glVertex2d(w.xh, w.yh);
-    glVertex2d(w.xh, w.yl);
-    glEnd();
+    //glColor3d(0.4, 0.7, 0.7);
+    //glBegin(GL_QUADS);
+    //glVertex2d(w.xl, w.yl);
+    //glVertex2d(w.xl, w.yh);
+    //glVertex2d(w.xh, w.yh);
+    //glVertex2d(w.xh, w.yl);
+    //glEnd();
     
-    glColor3d(0,0,0);
-    glRasterPos2d(w.x,w.y);
-    YsGlDrawFontBitmap10x14(w.name);
+    //glColor3d(0,0,0);
+    //glRasterPos2d(w.x,w.y);
+    //YsGlDrawFontBitmap10x14(w.name);
     
     if((mxm<=w.xh)&&(mxm>=w.xl)&&(mym>=w.yl)&&(mym<=w.yh)&&(lb==1))
     {
