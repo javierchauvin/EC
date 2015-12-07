@@ -669,7 +669,7 @@ void Bullet::CheckScreen(void){
 
 void Bullet::ChangeSpeed(int Delta){
 	
-	if( 0 < Delta || 0 < InitSpeed ){
+	if( 0 < Delta || 50 < InitSpeed ){
 		InitSpeed += Delta;
 	}
 }
